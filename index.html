@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trio de Estudos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&display=swap">
+<style>
+  :root{
+    --bg:#f4f1ec; --surface:#ffffff; --surface-2:#faf8f4; --ink:#241f1a; --muted:#6d665c;
+    --line:#e6e0d6; --line-2:#efeae2; --shadow:0 1px 2px rgba(40,32,20,.06),0 8px 24px rgba(40,32,20,.06);
+    --ok:#1f8a53; --ok-bg:#e7f5ec; --no:#c23d54; --no-bg:#fbe9ec;
+    --accent:#4c6ef0; --accent-ink:#2f45a8; --accent-soft:#eaf0ff; --on-accent:#ffffff;
+    --geo:#1f8a5b; --geo-soft:#e6f5ec; --geo-ink:#136141;
+    --qui:#7a45cf; --qui-soft:#f0e9fb; --qui-ink:#5a2fa3;
+    --his:#c06a24; --his-soft:#fbeede; --his-ink:#8f4e15;
+    --radius:16px; --radius-sm:11px; --maxw:820px;
+    color-scheme:light;
+  }
+  :root:not([data-theme="light"]){}
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#17151a; --surface:#221f26; --surface-2:#1c1a20; --ink:#f0ece5; --muted:#a49c90;
+      --line:#332f39; --line-2:#2a2730; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+      --ok:#4cc082; --ok-bg:#153025; --no:#f0788d; --no-bg:#331a20;
+      --accent:#8aa2ff; --accent-ink:#b3c2ff; --accent-soft:#20253a; --on-accent:#17151a;
+      --geo:#4cc082; --geo-soft:#132a20; --geo-ink:#8fe0b3;
+      --qui:#b58bff; --qui-soft:#241a34; --qui-ink:#d3bcff;
+      --his:#e59a55; --his-soft:#2f2213; --his-ink:#f2bd86;
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17151a; --surface:#221f26; --surface-2:#1c1a20; --ink:#f0ece5; --muted:#a49c90;
+    --line:#332f39; --line-2:#2a2730; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    --ok:#4cc082; --ok-bg:#153025; --no:#f0788d; --no-bg:#331a20;
+    --accent:#8aa2ff; --accent-ink:#b3c2ff; --accent-soft:#20253a; --on-accent:#17151a;
+    --geo:#4cc082; --geo-soft:#132a20; --geo-ink:#8fe0b3;
+    --qui:#b58bff; --qui-soft:#241a34; --qui-ink:#d3bcff;
+    --his:#e59a55; --his-soft:#2f2213; --his-ink:#f2bd86;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Nunito Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4,.display{font-family:"Baloo 2","Nunito Sans",system-ui,sans-serif;line-height:1.18;text-wrap:balance;margin:0}
+  p{margin:0 0 .9em}
+  a{color:var(--accent-ink)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:20px}
+  .screen{min-height:100%}
+  [hidden]{display:none!important}
+
+  /* ---------- HOME ---------- */
+  #home{padding-block:clamp(34px,7vw,70px) 60px}
+  .hero{text-align:center;margin-bottom:38px}
+  .kicker{display:inline-block;font-weight:800;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent-ink);background:var(--accent-soft);padding:6px 14px;border-radius:999px;margin-bottom:18px}
+  .hero h1{font-size:clamp(2.1rem,6.5vw,3.3rem);font-weight:800;letter-spacing:-.01em}
+  .hero p{color:var(--muted);max-width:46ch;margin:14px auto 0;font-size:1.05rem}
+  .pick{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+  @media(max-width:720px){.pick{grid-template-columns:1fr}}
+  .card{position:relative;text-align:left;cursor:pointer;border:1px solid var(--line);
+    background:var(--surface);border-radius:var(--radius);padding:24px 22px 22px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:12px;transition:transform .16s ease,box-shadow .16s ease,border-color .16s;font:inherit;color:inherit}
+  .card:hover{transform:translateY(-4px);box-shadow:0 6px 14px rgba(40,32,20,.09),0 20px 40px rgba(40,32,20,.10);border-color:var(--ca)}
+  .card:focus-visible{outline:3px solid var(--ca);outline-offset:3px}
+  .card .badge{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:var(--ca-soft);color:var(--ca-ink)}
+  .card .badge svg{width:28px;height:28px}
+  .card h3{font-size:1.5rem;font-weight:800}
+  .card .top{font-size:.72rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--ca-ink)}
+  .card ul{margin:2px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+  .card li{font-size:.82rem;color:var(--muted);background:var(--surface-2);border:1px solid var(--line-2);border-radius:999px;padding:3px 10px}
+  .card .go{margin-top:6px;display:inline-flex;align-items:center;gap:7px;font-weight:800;color:var(--ca-ink)}
+  .card .go svg{width:17px;height:17px}
+  .card[data-go="geo"]{--ca:var(--geo);--ca-soft:var(--geo-soft);--ca-ink:var(--geo-ink)}
+  .card[data-go="qui"]{--ca:var(--qui);--ca-soft:var(--qui-soft);--ca-ink:var(--qui-ink)}
+  .card[data-go="his"]{--ca:var(--his);--ca-soft:var(--his-soft);--ca-ink:var(--his-ink)}
+  .home-note{margin-top:34px;text-align:center;color:var(--muted);font-size:.9rem}
+
+  /* ---------- STUDY ---------- */
+  #study{padding-bottom:70px}
+  .topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--surface) 88%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .topbar-in{max-width:var(--maxw);margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+  .iconbtn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface);
+    color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-weight:700;font-size:.9rem;cursor:pointer}
+  .iconbtn:hover{border-color:var(--accent)}
+  .iconbtn svg{width:16px;height:16px}
+  .topbar .now{display:flex;align-items:center;gap:9px;font-family:"Baloo 2",sans-serif;font-weight:700;font-size:1.05rem}
+  .dot{width:12px;height:12px;border-radius:4px;background:var(--accent)}
+  .topbar .spacer{flex:1}
+  .chips{display:flex;gap:8px;overflow-x:auto;max-width:var(--maxw);margin:0 auto;padding:10px 16px 12px;scrollbar-width:thin}
+  .chip{white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--muted);
+    border-radius:999px;padding:6px 13px;font:inherit;font-weight:700;font-size:.85rem;cursor:pointer}
+  .chip:hover{color:var(--ink);border-color:var(--accent)}
+
+  [data-subject="geo"]{--accent:var(--geo);--accent-ink:var(--geo-ink);--accent-soft:var(--geo-soft)}
+  [data-subject="qui"]{--accent:var(--qui);--accent-ink:var(--qui-ink);--accent-soft:var(--qui-soft)}
+  [data-subject="his"]{--accent:var(--his);--accent-ink:var(--his-ink);--accent-soft:var(--his-soft)}
+
+  .subj-head{padding:30px 0 6px}
+  .subj-head .kicker{margin-bottom:14px}
+  .subj-head h2{font-size:clamp(1.8rem,5vw,2.5rem);font-weight:800;letter-spacing:-.01em}
+  .subj-head p.lead{color:var(--muted);font-size:1.04rem;margin-top:10px}
+
+  section.block{padding-block:26px;border-top:1px solid var(--line-2)}
+  section.block:first-of-type{border-top:none}
+  .block h3{font-size:1.5rem;font-weight:700;margin-bottom:6px;display:flex;gap:10px;align-items:baseline}
+  .block h3 .n{font-size:.78rem;font-weight:800;color:var(--accent-ink);background:var(--accent-soft);
+    padding:3px 9px;border-radius:8px;letter-spacing:.04em;flex:none;transform:translateY(-2px)}
+  .block h4{font-size:1.08rem;font-weight:800;margin:18px 0 4px;color:var(--ink)}
+
+  .callout{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius-sm);padding:15px 17px;margin:16px 0;box-shadow:var(--shadow)}
+  .callout .lab{font-size:.72rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:5px}
+  .callout.tip{border-left-color:var(--ok)}
+  .callout.tip .lab{color:var(--ok)}
+  .ex{background:var(--surface-2);border:1px dashed var(--line);border-radius:var(--radius-sm);padding:14px 16px;margin:14px 0}
+  .ex .lab{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  b,strong{font-weight:800}
+  .hl{background:var(--accent-soft);color:var(--accent-ink);padding:1px 5px;border-radius:5px;font-weight:700}
+  ul.list{margin:.4em 0 1em;padding-left:1.15em}
+  ul.list li{margin:.35em 0}
+  .facts{list-style:none;margin:.5em 0 1em;padding:0;display:grid;gap:8px}
+  .facts li{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--radius-sm);padding:11px 14px}
+  .facts li .k{flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:9px}
+
+  table.tbl{width:100%;border-collapse:collapse;margin:14px 0;font-size:.95rem;background:var(--surface);
+    border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden}
+  table.tbl th,table.tbl td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top}
+  table.tbl th{background:var(--accent-soft);color:var(--accent-ink);font-weight:800;font-size:.8rem;letter-spacing:.03em;text-transform:uppercase}
+  table.tbl tr:last-child td{border-bottom:none}
+  .tbl-wrap{overflow-x:auto}
+
+  /* video */
+  .video{margin:18px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .video .frame{position:relative;aspect-ratio:16/9;background:#000}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video .cap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:11px 15px}
+  .video .cap .t{font-weight:800;font-size:.96rem}
+  .video .cap .c{color:var(--muted);font-size:.82rem;font-weight:600}
+  .video .cap a{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.85rem;text-decoration:none;
+    color:var(--accent-ink);background:var(--accent-soft);padding:6px 12px;border-radius:999px}
+  .video .cap a svg{width:14px;height:14px}
+
+  /* quiz (inline checagem) */
+  .quiz{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px;margin:20px 0;box-shadow:var(--shadow)}
+  .quiz .qlab{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:800;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--accent-ink);background:var(--accent-soft);padding:5px 11px;border-radius:999px;margin-bottom:11px}
+  .quiz .qlab svg{width:14px;height:14px}
+  .quiz .q{font-weight:700;margin-bottom:13px;font-size:1.03rem}
+  .opts{display:grid;gap:9px}
+  .opt{text-align:left;font:inherit;font-size:.97rem;background:var(--surface-2);border:1.5px solid var(--line);
+    color:var(--ink);border-radius:var(--radius-sm);padding:11px 14px;cursor:pointer;display:flex;gap:10px;align-items:flex-start;transition:border-color .12s,background .12s}
+  .opt:hover:not(:disabled){border-color:var(--accent)}
+  .opt .ol{flex:none;font-weight:800;color:var(--accent-ink)}
+  .opt:disabled{cursor:default}
+  .opt.correct{background:var(--ok-bg);border-color:var(--ok)}
+  .opt.correct .ol{color:var(--ok)}
+  .opt.wrong{background:var(--no-bg);border-color:var(--no)}
+  .opt.wrong .ol{color:var(--no)}
+  .fb{margin-top:13px;padding:12px 14px;border-radius:var(--radius-sm);font-size:.94rem;display:none}
+  .fb.show{display:block}
+  .fb.right{background:var(--ok-bg);color:var(--ink);border:1px solid var(--ok)}
+  .fb.rong{background:var(--no-bg);color:var(--ink);border:1px solid var(--no)}
+  .fb .v{font-weight:800}
+  .fb.right .v{color:var(--ok)}.fb.rong .v{color:var(--no)}
+
+  /* exam */
+  .exam-wrap{margin-top:14px;background:var(--surface);border:2px solid var(--accent);border-radius:var(--radius);padding:22px 20px;box-shadow:var(--shadow)}
+  .exam-wrap h3{border:none;margin-bottom:2px}
+  .exam-intro{color:var(--muted);font-size:.95rem;margin-bottom:6px}
+  .exam .q{border-top:1px solid var(--line-2);padding-top:18px;margin-top:18px}
+  .exam .q:first-child{border-top:none;margin-top:8px}
+  .exam .q .qt{font-weight:700;margin-bottom:10px}
+  .exam .q .qt .num{color:var(--accent-ink);font-weight:800}
+  .exam label.o{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1.5px solid var(--line);
+    background:var(--surface-2);border-radius:var(--radius-sm);margin:7px 0;cursor:pointer;font-size:.96rem}
+  .exam label.o:hover{border-color:var(--accent)}
+  .exam label.o input{margin-top:5px;accent-color:var(--accent)}
+  .exam label.o.correct{background:var(--ok-bg);border-color:var(--ok)}
+  .exam label.o.wrong{background:var(--no-bg);border-color:var(--no)}
+  .exam .qfb{display:none;margin-top:8px;font-size:.9rem;color:var(--muted);padding-left:2px}
+  .exam .qfb.show{display:block}
+  .exam .qfb b{color:var(--ink)}
+  .exam-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .btn{font:inherit;font-weight:800;border-radius:999px;padding:12px 22px;cursor:pointer;border:1.5px solid transparent}
+  .btn.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+  .btn.primary:hover{filter:brightness(1.06)}
+  .btn.ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--accent)}
+  .result{display:none;margin-top:20px;border-radius:var(--radius);padding:20px;border:1px solid var(--line);background:var(--surface-2);text-align:center}
+  .result.show{display:block}
+  .result .score{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:3.2rem;line-height:1}
+  .result .of{color:var(--muted);font-weight:700}
+  .result .msg{margin-top:8px;font-weight:700}
+  .result .bar{height:12px;border-radius:999px;background:var(--line);overflow:hidden;margin:16px auto 4px;max-width:340px}
+  .result .bar>i{display:block;height:100%;border-radius:999px;background:var(--accent);width:0;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+  .result .hits{color:var(--muted);font-size:.92rem;margin-top:6px}
+  .result[data-grade="high"] .score{color:var(--ok)} .result[data-grade="high"] .bar>i{background:var(--ok)}
+  .result[data-grade="mid"] .score{color:var(--his)} .result[data-grade="mid"] .bar>i{background:var(--his)}
+  .result[data-grade="low"] .score{color:var(--no)} .result[data-grade="low"] .bar>i{background:var(--no)}
+
+  footer.foot{border-top:1px solid var(--line);margin-top:40px;padding:22px 0;color:var(--muted);font-size:.85rem;text-align:center}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+
+<div id="app">
+
+  <!-- ===================== HOME ===================== -->
+  <section id="home" class="screen">
+    <div class="wrap">
+      <div class="hero">
+        <span class="kicker">Apostila interativa de estudos</span>
+        <h1>Trio de Estudos</h1>
+        <p>Escolha a matéria que vai estudar agora. Cada uma tem explicação simples, vídeos, checagens rápidas ao longo do caminho e um teste final que dá sua nota de 0 a 10.</p>
+      </div>
+      <div class="pick">
+        <button class="card" data-go="geo">
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg></span>
+          <span class="top">Geografia</span>
+          <h3>Região Centro-Oeste</h3>
+          <ul><li>Relevo &amp; rios</li><li>Clima</li><li>Cerrado</li><li>Povoamento</li><li>Agronegócio</li></ul>
+          <span class="go">Começar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+        <button class="card" data-go="qui">
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 8.5A2 2 0 0 0 6.8 21h10.4a2 2 0 0 0 1.8-3.5L14 9V3"/><path d="M7.5 15h9"/></svg></span>
+          <span class="top">Química</span>
+          <h3>Biocombustíveis</h3>
+          <ul><li>Renováveis</li><li>Efeito estufa</li><li>Etanol</li><li>Biodiesel</li></ul>
+          <span class="go">Começar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+        <button class="card" data-go="his">
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v3H6.5A2.5 2.5 0 0 1 4 20.5z"/></svg></span>
+          <span class="top">História</span>
+          <h3>Invasões no Brasil</h3>
+          <ul><li>França Antártica</li><li>França Equinocial</li><li>Holandeses</li></ul>
+          <span class="go">Começar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+      </div>
+      <p class="home-note">Feito para estudar com calma e testar o que aprendeu. Dá para trocar de matéria a qualquer momento pelo botão no topo.</p>
+    </div>
+  </section>
+
+  <!-- ===================== STUDY ===================== -->
+  <section id="study" class="screen" hidden>
+    <div class="topbar">
+      <div class="topbar-in">
+        <button class="iconbtn" id="homeBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg> Matérias</button>
+        <div class="now"><span class="dot"></span><span id="nowName">Matéria</span></div>
+        <span class="spacer"></span>
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="wrap">
+
+      <!-- ============ GEOGRAFIA ============ -->
+      <div class="subject-panel" data-subject="geo" id="panel-geo">
+        <div class="subj-head">
+          <span class="kicker">Geografia · Região Centro-Oeste</span>
+          <h2>A Região Centro-Oeste do Brasil</h2>
+          <p class="lead">É a região do meio do mapa do Brasil, onde fica a capital do país. Vamos entender onde ela está, como é a natureza dela e por que virou a maior produtora de soja do Brasil.</p>
+        </div>
+
+        <section class="block" id="geo-1">
+          <h3><span class="n">1</span> Onde fica e como é</h3>
+          <p>A Região Centro-Oeste é formada por <b>3 estados</b> mais o <b>Distrito Federal</b> (onde fica Brasília, a capital do Brasil):</p>
+          <ul class="facts">
+            <li><span class="k"></span><span><b>Mato Grosso (MT)</b> — capital <b>Cuiabá</b></span></li>
+            <li><span class="k"></span><span><b>Mato Grosso do Sul (MS)</b> — capital <b>Campo Grande</b></span></li>
+            <li><span class="k"></span><span><b>Goiás (GO)</b> — capital <b>Goiânia</b></span></li>
+            <li><span class="k"></span><span><b>Distrito Federal (DF)</b> — cidade de <b>Brasília</b></span></li>
+          </ul>
+          <div class="callout">
+            <div class="lab">O detalhe mais cobrado em prova</div>
+            <p style="margin:0">É a <span class="hl">única região do Brasil que não é banhada pelo oceano</span> (fica toda no interior). E é a única que faz fronteira com dois países vizinhos: <b>Paraguai</b> e <b>Bolívia</b>.</p>
+          </div>
+          <ul class="list">
+            <li>É a <b>2ª maior região em tamanho</b> (só perde para a Norte).</li>
+            <li>Mas é a <b>menos povoada</b>: tem cerca de 16 milhões de habitantes (Censo 2022) e <b>baixa densidade demográfica</b> — aproximadamente 10 habitantes por km². <i>(vale conferir o número exato no IBGE.)</i></li>
+          </ul>
+          <div class="callout tip">
+            <div class="lab">Macete para lembrar os estados</div>
+            <p style="margin:0"><b>"Os 2 Matos e o Goiás, com o DF no meio."</b> → Mato Grosso, Mato Grosso do Sul, Goiás + Distrito Federal.</p>
+          </div>
+
+          <div class="video" data-subject="geo">
+            <div class="frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/kt596ObFiLc" title="Região Centro-Oeste - Brasil Escola" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            <div class="cap"><div><div class="t">Região Centro-Oeste — visão geral</div><div class="c">Canal: Brasil Escola</div></div>
+              <a href="https://www.youtube.com/watch?v=kt596ObFiLc" target="_blank" rel="noopener">YouTube <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+          </div>
+
+          <div class="quiz" data-answer="c" data-explain="O Centro-Oeste é a única região totalmente no interior do país, sem litoral. Por isso faz fronteira com Paraguai e Bolívia.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">Qual característica é só do Centro-Oeste?</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>É a região mais populosa do Brasil.</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Tem o maior litoral do país.</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>É a única região que não é banhada pelo oceano.</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Não faz fronteira com nenhum país.</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="geo-2">
+          <h3><span class="n">2</span> Relevo e rios (hidrografia)</h3>
+          <p>O <b>relevo</b> é a "forma" do terreno: se é alto, baixo, plano ou cheio de morros. No Centro-Oeste predominam:</p>
+          <ul class="list">
+            <li><b>Planaltos</b> — terrenos altos e mais antigos.</li>
+            <li><b>Chapadas</b> — áreas altas com o <b>topo plano, igual a uma mesa</b>, e beiradas em degrau. Ex.: Chapada dos Guimarães (MT), Chapada dos Veadeiros (GO).</li>
+            <li><b>Planície do Pantanal</b> — terreno baixo e plano que <b>alaga</b> na época das chuvas. É a <span class="hl">maior planície alagável do mundo</span>.</li>
+          </ul>
+          <h4>Por que chamam o Centro-Oeste de "Caixa d'água do Brasil"?</h4>
+          <p>Porque as áreas altas funcionam como um <b>divisor de águas</b>: a chuva que cai ali escorre para vários lados e <b>alimenta grandes bacias hidrográficas</b> do Brasil (a Amazônica, a do Tocantins-Araguaia e a Platina). Como os rios descem de lugares altos, formam muitas <b>quedas d'água</b> — ótimas para gerar energia (hidrelétricas).</p>
+          <ul class="facts">
+            <li><span class="k"></span><span><b>Rio Paraguai</b> — corre pela planície, é navegável e enche o Pantanal. Tem portos como Corumbá e Porto Murtinho.</span></li>
+            <li><span class="k"></span><span><b>Rio Araguaia</b> — abriga a <b>Ilha do Bananal</b>, a <b>maior ilha fluvial (de rio) do mundo</b>.</span></li>
+          </ul>
+          <div class="ex">
+            <div class="lab">Exemplo para fixar</div>
+            <p style="margin:0">Imagine uma <b>mesa</b> no meio da sala: o tampo é plano lá em cima e as pernas descem reto. A <b>chapada</b> é assim na natureza. Agora imagine derramar água no meio da mesa: ela escorre para todos os lados — é o que o relevo alto faz com a chuva, mandando água para várias bacias. Por isso, "caixa d'água".</p>
+          </div>
+          <div class="quiz" data-answer="b" data-explain="Chapada é a área alta de topo plano, parecida com uma mesa. O Pantanal é planície (terreno baixo que alaga).">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">Uma área alta com o topo plano, parecida com uma mesa, é chamada de:</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Planície</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Chapada</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Praia</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Depressão</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+          <div class="quiz" data-answer="d" data-explain="A Ilha do Bananal, no rio Araguaia, é a maior ilha fluvial (formada por rio) do mundo.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">A maior ilha fluvial do mundo, que fica no rio Araguaia, é a:</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Ilha do Marajó</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Ilha de Santa Catarina</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Ilha do Pantanal</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Ilha do Bananal</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="geo-3">
+          <h3><span class="n">3</span> Clima e vegetação</h3>
+          <p>Na maior parte do Centro-Oeste o clima é <b>tropical típico</b> (também chamado <b>continental</b>): faz <b>calor</b> o ano quase todo e tem <b>duas estações bem marcadas</b>.</p>
+          <div class="callout tip">
+            <div class="lab">Jeito fácil de lembrar o clima</div>
+            <p style="margin:0"><b>"Seis meses de chuva, seis meses de seca."</b> Chove muito no verão (out–mar) e fica seco no inverno (abr–set).</p>
+          </div>
+          <p>Mas, como a região é enorme, tem variações nas pontas:</p>
+          <div class="tbl-wrap"><table class="tbl">
+            <tr><th>Onde</th><th>Clima</th><th>Como é</th></tr>
+            <tr><td>Maior parte</td><td>Tropical típico</td><td>Quente; chuva no verão e seca no inverno.</td></tr>
+            <tr><td>Norte de MT</td><td>Equatorial (amazônico)</td><td>Quente e chove o ano quase todo.</td></tr>
+            <tr><td>Sul de MS</td><td>Subtropical / de altitude</td><td>Temperaturas mais amenas (fica mais frio).</td></tr>
+          </table></div>
+          <h4>A vegetação: o Cerrado</h4>
+          <p>A vegetação que mais aparece é o <b>Cerrado</b>, a "savana brasileira". Ele tem um jeitão bem característico:</p>
+          <ul class="list">
+            <li>Árvores <b>baixas e retorcidas</b>, com galhos tortos e <b>casca grossa</b>.</li>
+            <li><b>Raízes muito profundas</b> (vão fundo atrás de água).</li>
+            <li>Mistura de gramado (capim) com árvores espalhadas.</li>
+          </ul>
+          <p>Também aparecem: a vegetação <b>do Pantanal</b> (mistura de vários biomas) e faixas de <b>Floresta Amazônica</b> (ao norte), <b>Mata Atlântica</b> e <b>matas ciliares</b> (as que crescem na beira dos rios).</p>
+          <div class="ex">
+            <div class="lab">Por que as árvores do Cerrado são assim?</div>
+            <p style="margin:0">Como tem uma longa seca, as plantas se "viram" para sobreviver: <b>raiz funda</b> para achar água lá embaixo e <b>casca grossa</b> para se proteger do fogo e do sol. Pense nelas como plantas "durões" adaptadas ao tempo seco.</p>
+          </div>
+          <div class="video" data-subject="geo">
+            <div class="frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/6yOO9YiSAcw" title="Região Centro-Oeste: aspectos naturais" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            <div class="cap"><div><div class="t">Aspectos naturais: relevo, clima, hidrografia e vegetação</div><div class="c">Canal: Quadro Livre</div></div>
+              <a href="https://www.youtube.com/watch?v=6yOO9YiSAcw" target="_blank" rel="noopener">YouTube <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+          </div>
+          <div class="quiz" data-answer="a" data-explain="O Cerrado tem árvores baixas e tortas, casca grossa e raízes profundas — tudo para sobreviver à longa estação seca.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">Uma marca registrada do Cerrado é:</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Árvores baixas e retorcidas, com casca grossa e raízes profundas.</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Árvores enormes e sempre verdes, típicas de deserto.</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Só cactos, porque não chove nunca.</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Vegetação de mangue, na beira do mar.</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="geo-4">
+          <h3><span class="n">4</span> Povoamento: como a região foi ocupada</h3>
+          <p>Por muito tempo o Centro-Oeste teve <b>pouca gente</b>. A ocupação por pessoas não indígenas aconteceu em etapas:</p>
+          <ul class="list">
+            <li><b>Bandeirantes</b> (séculos XVII e XVIII): entraram pelo interior atrás de <b>ouro</b> e de indígenas para escravizar.</li>
+            <li><b>Frentes pioneiras</b> (a partir de 1960): agricultores vindos do Sul e de São Paulo em busca de <b>terras baratas</b> para plantar.</li>
+          </ul>
+          <div class="callout">
+            <div class="lab">O grande marco: Brasília</div>
+            <p style="margin:0">O presidente <b>Juscelino Kubitschek (JK)</b> mandou construir <b>Brasília</b> e transferiu a capital do Rio de Janeiro para o meio do país. Brasília foi <b>inaugurada em 1960</b>.</p>
+          </div>
+          <h4>Por que JK mudou a capital para o centro do Brasil?</h4>
+          <ul class="list">
+            <li>Para <b>integrar</b> e <b>interiorizar</b> o país (ligar melhor as 5 regiões e ocupar o interior vazio).</li>
+            <li>Para <b>afastar o governo</b> (Congresso e Presidência) dos grandes centros do litoral, onde havia mais pressão popular.</li>
+          </ul>
+          <h4>O governo também ajudou com:</h4>
+          <ul class="list">
+            <li><b>Estradas</b>: rodovias como a Belém–Brasília e a Brasília–Rio Branco; e a antiga Estrada de Ferro Noroeste (Bauru–Corumbá).</li>
+            <li><b>Órgãos e programas</b>: a <b>Sudeco</b> (Superintendência do Desenvolvimento do Centro-Oeste) e o <b>Polocentro</b> (programa para desenvolver os cerrados).</li>
+            <li><b>Colônias agrícolas</b>, como Ceres (GO) e Dourados (MS).</li>
+          </ul>
+          <div class="quiz" data-answer="b" data-explain="Brasília foi construída no governo de Juscelino Kubitschek (JK) e inaugurada em 1960, para interiorizar e integrar o país.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">A construção de Brasília, em 1960, aconteceu no governo de:</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Dom Pedro II</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Juscelino Kubitschek (JK)</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Getúlio Vargas</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Tiradentes</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="geo-5">
+          <h3><span class="n">5</span> Economia: o reino do agronegócio</h3>
+          <p>Hoje a força do Centro-Oeste é o <b>agronegócio</b> — uma agricultura e pecuária <b>modernas</b>, com máquinas e tecnologia, que produzem muito para <b>exportar</b>.</p>
+          <ul class="facts">
+            <li><span class="k"></span><span>É a <b>maior produtora de soja e algodão</b> do Brasil. A <b>soja</b> é chamada de <b>"novo ouro brasileiro"</b>.</span></li>
+            <li><span class="k"></span><span>Cidades campeãs de soja: <b>Lucas do Rio Verde, Sorriso, Rondonópolis</b> (MT) e <b>Maracaju</b> (MS).</span></li>
+            <li><span class="k"></span><span>Também planta trigo, cana-de-açúcar, milho e arroz.</span></li>
+          </ul>
+          <h4>Três palavras que caem em prova</h4>
+          <div class="tbl-wrap"><table class="tbl">
+            <tr><th>Termo</th><th>O que é</th></tr>
+            <tr><td><b>Boi verde</b></td><td>Gado criado solto no pasto, comendo <b>capim</b> (e não ração no confinamento). "Verde" = alimentado com pasto.</td></tr>
+            <tr><td><b>Quebracho</b></td><td>Árvore de <b>madeira muito dura</b> (o nome quer dizer "quebra-machado"). Sua madeira é rica em <b>tanino</b>, usado para curtir couro.</td></tr>
+            <tr><td><b>Escudo cristalino</b></td><td>Base geológica <b>muito antiga</b> do terreno, formada por rochas duras e <b>rica em minérios</b> — importante para a mineração.</td></tr>
+          </table></div>
+          <div class="callout">
+            <div class="lab">O problema que ainda trava a região</div>
+            <p style="margin:0">Mesmo produzindo muito, falta <b>infraestrutura para escoar</b> (transportar) a produção: há <b>poucas ferrovias e hidrovias</b>, então quase tudo sai por <b>rodovias</b> — que às vezes estão em más condições. Isso encarece e atrasa a chegada aos portos.</p>
+          </div>
+          <div class="quiz" data-answer="c" data-explain='A soja é o produto que mais cresceu e é chamado de "novo ouro brasileiro". O Centro-Oeste é o maior produtor do país.'>
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">Qual produto é conhecido como o "novo ouro brasileiro" e tem o Centro-Oeste como maior produtor?</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Café</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Borracha</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Soja</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Cacau</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="geo-teste">
+          <div class="exam-wrap" data-subject="geo">
+            <h3 style="font-family:'Baloo 2',sans-serif">🎯 Teste final · Geografia</h3>
+            <p class="exam-intro">São <b>10 questões</b>, cada uma vale <b>1 ponto</b> (nota de 0 a 10). Responda todas e clique em <b>Corrigir prova</b>.</p>
+            <form class="exam" id="exam-geo">
+              <div class="q" data-answer="c"><p class="qt"><span class="num">1.</span> A Região Centro-Oeste é formada por quais unidades?</p>
+                <label class="o"><input type="radio" name="g1" value="a"><span>São Paulo, Rio de Janeiro e Minas Gerais</span></label>
+                <label class="o"><input type="radio" name="g1" value="b"><span>Amazonas, Pará e Acre</span></label>
+                <label class="o"><input type="radio" name="g1" value="c"><span>Mato Grosso, Mato Grosso do Sul, Goiás e o Distrito Federal</span></label>
+                <label class="o"><input type="radio" name="g1" value="d"><span>Bahia, Ceará e Pernambuco</span></label>
+                <div class="qfb"><b>Resposta: C.</b> São 3 estados (MT, MS, GO) mais o Distrito Federal.</div></div>
+
+              <div class="q" data-answer="b"><p class="qt"><span class="num">2.</span> O que só o Centro-Oeste tem entre as regiões brasileiras?</p>
+                <label class="o"><input type="radio" name="g2" value="a"><span>O maior litoral do país</span></label>
+                <label class="o"><input type="radio" name="g2" value="b"><span>Ser a única região que não é banhada pelo oceano</span></label>
+                <label class="o"><input type="radio" name="g2" value="c"><span>A maior população do Brasil</span></label>
+                <label class="o"><input type="radio" name="g2" value="d"><span>Não ter nenhum rio</span></label>
+                <div class="qfb"><b>Resposta: B.</b> É totalmente interior, sem costa marítima.</div></div>
+
+              <div class="q" data-answer="d"><p class="qt"><span class="num">3.</span> Com quais países o Centro-Oeste faz fronteira?</p>
+                <label class="o"><input type="radio" name="g3" value="a"><span>Argentina e Uruguai</span></label>
+                <label class="o"><input type="radio" name="g3" value="b"><span>Peru e Colômbia</span></label>
+                <label class="o"><input type="radio" name="g3" value="c"><span>Venezuela e Guiana</span></label>
+                <label class="o"><input type="radio" name="g3" value="d"><span>Paraguai e Bolívia</span></label>
+                <div class="qfb"><b>Resposta: D.</b> É a única região que faz fronteira com o Paraguai e a Bolívia.</div></div>
+
+              <div class="q" data-answer="a"><p class="qt"><span class="num">4.</span> A capital do Brasil, no Distrito Federal, é:</p>
+                <label class="o"><input type="radio" name="g4" value="a"><span>Brasília</span></label>
+                <label class="o"><input type="radio" name="g4" value="b"><span>Cuiabá</span></label>
+                <label class="o"><input type="radio" name="g4" value="c"><span>Goiânia</span></label>
+                <label class="o"><input type="radio" name="g4" value="d"><span>Campo Grande</span></label>
+                <div class="qfb"><b>Resposta: A.</b> Brasília fica no DF. Cuiabá, Goiânia e Campo Grande são capitais dos estados.</div></div>
+
+              <div class="q" data-answer="b"><p class="qt"><span class="num">5.</span> Uma área alta com o topo plano, parecida com uma mesa, é a:</p>
+                <label class="o"><input type="radio" name="g5" value="a"><span>Planície</span></label>
+                <label class="o"><input type="radio" name="g5" value="b"><span>Chapada</span></label>
+                <label class="o"><input type="radio" name="g5" value="c"><span>Baía</span></label>
+                <label class="o"><input type="radio" name="g5" value="d"><span>Duna</span></label>
+                <div class="qfb"><b>Resposta: B.</b> Chapada = área elevada de topo plano, como a Chapada dos Guimarães.</div></div>
+
+              <div class="q" data-answer="c"><p class="qt"><span class="num">6.</span> A maior planície alagável do mundo, no Centro-Oeste, é o:</p>
+                <label class="o"><input type="radio" name="g6" value="a"><span>Cerrado</span></label>
+                <label class="o"><input type="radio" name="g6" value="b"><span>Sertão</span></label>
+                <label class="o"><input type="radio" name="g6" value="c"><span>Pantanal</span></label>
+                <label class="o"><input type="radio" name="g6" value="d"><span>Deserto</span></label>
+                <div class="qfb"><b>Resposta: C.</b> O Pantanal é a maior planície alagável do mundo.</div></div>
+
+              <div class="q" data-answer="a"><p class="qt"><span class="num">7.</span> O Centro-Oeste é a "Caixa d'água do Brasil" porque:</p>
+                <label class="o"><input type="radio" name="g7" value="a"><span>Suas áreas altas funcionam como divisor de águas e alimentam grandes bacias hidrográficas</span></label>
+                <label class="o"><input type="radio" name="g7" value="b"><span>Tem o maior reservatório de água salgada</span></label>
+                <label class="o"><input type="radio" name="g7" value="c"><span>Nunca chove na região</span></label>
+                <label class="o"><input type="radio" name="g7" value="d"><span>Fica embaixo do nível do mar</span></label>
+                <div class="qfb"><b>Resposta: A.</b> A água que cai nas terras altas escorre e abastece várias bacias (Amazônica, Tocantins-Araguaia e Platina).</div></div>
+
+              <div class="q" data-answer="d"><p class="qt"><span class="num">8.</span> O clima que predomina na região é o tropical típico, marcado por:</p>
+                <label class="o"><input type="radio" name="g8" value="a"><span>Frio o ano inteiro, com neve</span></label>
+                <label class="o"><input type="radio" name="g8" value="b"><span>Chuva o ano todo sem parar</span></label>
+                <label class="o"><input type="radio" name="g8" value="c"><span>Seca o ano inteiro, como um deserto</span></label>
+                <label class="o"><input type="radio" name="g8" value="d"><span>Duas estações: chuvosa (verão) e seca (inverno)</span></label>
+                <div class="qfb"><b>Resposta: D.</b> "Seis meses de chuva e seis de seca" resume o tropical típico.</div></div>
+
+              <div class="q" data-answer="b"><p class="qt"><span class="num">9.</span> A vegetação que mais aparece no Centro-Oeste é o:</p>
+                <label class="o"><input type="radio" name="g9" value="a"><span>Manguezal</span></label>
+                <label class="o"><input type="radio" name="g9" value="b"><span>Cerrado</span></label>
+                <label class="o"><input type="radio" name="g9" value="c"><span>Pampa</span></label>
+                <label class="o"><input type="radio" name="g9" value="d"><span>Caatinga</span></label>
+                <div class="qfb"><b>Resposta: B.</b> O Cerrado, com árvores baixas e retorcidas e raízes profundas.</div></div>
+
+              <div class="q" data-answer="c"><p class="qt"><span class="num">10.</span> A principal força econômica da região é o agronegócio, e seu produto de destaque, o "novo ouro brasileiro", é a:</p>
+                <label class="o"><input type="radio" name="g10" value="a"><span>Borracha</span></label>
+                <label class="o"><input type="radio" name="g10" value="b"><span>Cana-de-açúcar</span></label>
+                <label class="o"><input type="radio" name="g10" value="c"><span>Soja</span></label>
+                <label class="o"><input type="radio" name="g10" value="d"><span>Uva</span></label>
+                <div class="qfb"><b>Resposta: C.</b> O Centro-Oeste é o maior produtor de soja do Brasil.</div></div>
+            </form>
+            <div class="exam-actions">
+              <button type="button" class="btn primary" data-grade="geo">Corrigir prova</button>
+              <button type="button" class="btn ghost" data-reset="geo">Refazer</button>
+            </div>
+            <div class="result" id="result-geo"><div class="score"><span class="val">0</span><span class="of">/10</span></div><div class="bar"><i></i></div><div class="msg"></div><div class="hits"></div></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ============ QUÍMICA ============ -->
+      <div class="subject-panel" data-subject="qui" id="panel-qui" hidden>
+        <div class="subj-head">
+          <span class="kicker">Química · Biocombustíveis</span>
+          <h2>Biocombustíveis: energia que vem das plantas</h2>
+          <p class="lead">Vamos entender a diferença entre combustível fóssil e biocombustível, por que o biocombustível polui menos, e como o Brasil faz etanol e biodiesel.</p>
+        </div>
+
+        <section class="block" id="qui-1">
+          <h3><span class="n">1</span> O que é um biocombustível?</h3>
+          <p>Combustível é qualquer coisa que <b>queima e libera energia</b> (para mover carros, ônibus, máquinas). Existem dois grandes grupos:</p>
+          <div class="tbl-wrap"><table class="tbl">
+            <tr><th></th><th>Combustíveis fósseis</th><th>Biocombustíveis</th></tr>
+            <tr><td><b>Exemplos</b></td><td>Petróleo (gasolina, diesel), carvão, gás natural</td><td>Etanol (álcool) da cana, biodiesel</td></tr>
+            <tr><td><b>De onde vêm</b></td><td>Restos de seres vivos de <b>milhões de anos</b> atrás</td><td>De <b>biomassa</b>: plantas cultivadas <b>agora</b> (cana, soja...)</td></tr>
+            <tr><td><b>Acabam?</b></td><td><b>Não renováveis</b> (um dia acabam)</td><td><b>Renováveis</b> (dá para plantar de novo)</td></tr>
+          </table></div>
+          <div class="callout tip">
+            <div class="lab">Ideia central</div>
+            <p style="margin:0"><b>Bio = vida.</b> Biocombustível é o combustível feito de <span class="hl">matéria viva recente</span> (plantas). No Brasil, os dois mais importantes são o <b>etanol</b> (da cana) e o <b>biodiesel</b> (de óleos vegetais, como o de soja).</p>
+          </div>
+          <div class="video" data-subject="qui">
+            <div class="frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/kC6OACI36EE" title="Biocombustíveis - Brasil Escola" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            <div class="cap"><div><div class="t">Biocombustíveis — introdução</div><div class="c">Canal: Brasil Escola</div></div>
+              <a href="https://www.youtube.com/watch?v=kC6OACI36EE" target="_blank" rel="noopener">YouTube <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+          </div>
+          <div class="quiz" data-answer="b" data-explain="Biocombustível vem de biomassa (plantas cultivadas agora), por isso é renovável. Petróleo, carvão e gás são fósseis e não renováveis.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">Qual destes é um biocombustível (renovável)?</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Gasolina</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Etanol de cana-de-açúcar</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Carvão mineral</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Gás natural</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="qui-2">
+          <h3><span class="n">2</span> Efeito estufa e o "ciclo do carbono"</h3>
+          <p>Quando um combustível queima, ele solta <b>gás carbônico (CO₂)</b>. O CO₂ é um <b>gás do efeito estufa</b>: ele segura o calor na atmosfera. Muito CO₂ a mais = <b>aquecimento global</b>.</p>
+          <h4>Então biocombustível também solta CO₂. Qual a diferença?</h4>
+          <p>A diferença é <b>de onde vem esse carbono</b>:</p>
+          <ul class="list">
+            <li><b>Fóssil:</b> o CO₂ estava <b>preso há milhões de anos</b> dentro do petróleo. Ao queimar, você joga na atmosfera um carbono "extra", que estava fora de circulação. → <b>aumenta</b> o CO₂ do ar.</li>
+            <li><b>Biocombustível:</b> a planta <b>absorveu esse CO₂ do ar há pouco tempo</b>, na fotossíntese, para crescer. Ao queimar, ela devolve o mesmo CO₂ que tinha tirado. É um <b>ciclo fechado</b>.</li>
+          </ul>
+          <div class="callout">
+            <div class="lab">Por isso o biocombustível é "mais limpo"</div>
+            <p style="margin:0">Ele quase não coloca carbono <b>novo</b> na atmosfera: devolve o que a planta acabou de tirar. Por isso contribui <span class="hl">menos para o efeito estufa</span> do que os fósseis. (Ele não é 100% limpo, porque máquinas e transporte ainda gastam energia — mas polui bem menos.)</p>
+          </div>
+          <div class="ex">
+            <div class="lab">Comparação para entender</div>
+            <p style="margin:0">Pense numa <b>caixa d'água</b>. O fóssil é como <b>trazer água nova de fora</b> e despejar: o nível sobe. O biocombustível é como <b>tirar um copo e devolver o mesmo copo</b>: o nível quase não muda. O "nível" aqui é o CO₂ da atmosfera.</p>
+          </div>
+          <div class="callout tip">
+            <div class="lab">Como o Enem cobra isso</div>
+            <p style="margin:0">A diferença principal entre petróleo e etanol de cana está nas <b>escalas de tempo de formação</b>: o petróleo leva <b>milhões de anos</b> (tempo geológico) para se formar; a cana se planta e colhe <b>todo ano</b>.</p>
+          </div>
+          <div class="quiz" data-answer="c" data-explain="O CO₂ que o etanol libera ao queimar foi absorvido pela cana há pouco tempo, na fotossíntese. É um ciclo fechado, por isso contribui menos para o efeito estufa.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">Por que o etanol contribui menos para o efeito estufa que a gasolina?</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Porque o etanol não solta nenhum CO₂.</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Porque a gasolina não solta CO₂.</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Porque o CO₂ do etanol foi absorvido pouco antes pela planta (ciclo fechado).</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Porque o etanol esfria a atmosfera.</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="qui-3">
+          <h3><span class="n">3</span> Etanol: do açúcar ao álcool</h3>
+          <p>O etanol (álcool combustível) é feito a partir de <b>açúcares</b>. O passo principal é a <b>fermentação</b>: micro-organismos (leveduras), com suas enzimas, "comem" a glicose e produzem <b>etanol + gás carbônico</b>.</p>
+          <div class="callout">
+            <div class="lab">A reação da fermentação (bem simples)</div>
+            <p style="margin:0;font-weight:700">glicose &nbsp;→&nbsp; etanol &nbsp;+&nbsp; CO₂</p>
+            <p style="margin:.5em 0 0">É o mesmo gás (CO₂) que <b>infla o saco plástico</b> naquele experimento da apostila: a levedura está soltando gás enquanto faz o álcool.</p>
+          </div>
+          <h4>Antes de fermentar, às vezes é preciso "quebrar" o açúcar</h4>
+          <p>A levedura só fermenta açúcares simples (monossacarídeos, como a glicose). Açúcares grandes precisam ser quebrados em pedaços menores por <b>hidrólise</b> (quebra usando água + enzimas):</p>
+          <div class="tbl-wrap"><table class="tbl">
+            <tr><th>Açúcar de partida</th><th>Vira</th><th>É fácil quebrar?</th></tr>
+            <tr><td><b>Sacarose</b> (açúcar da cana = glicose + frutose)</td><td>glicose + frutose</td><td>Fácil</td></tr>
+            <tr><td><b>Amido</b> (ex.: milho, mandioca)</td><td>glicose</td><td>Fácil</td></tr>
+            <tr><td><b>Celulose</b> (bagaço, palha, madeira)</td><td>glicose</td><td><b>Difícil</b></td></tr>
+          </table></div>
+          <div class="callout tip">
+            <div class="lab">Etanol 1G × 2G (cai em prova!)</div>
+            <ul class="list" style="margin:.2em 0 0">
+              <li><b>Etanol 1G (1ª geração):</b> feito do <b>caldo/açúcar da cana</b>. Fácil, é o mais comum.</li>
+              <li><b>Etanol 2G (2ª geração):</b> feito da <b>celulose</b> (bagaço e palha da cana). Aproveita o "resto", mas a quebra da celulose é <b>difícil</b>.</li>
+            </ul>
+          </div>
+          <div class="quiz" data-answer="a" data-explain="Na fermentação, a glicose é transformada pelas leveduras em etanol e gás carbônico (CO₂) — o gás que infla o saco plástico no experimento.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">Na fermentação, a glicose se transforma em:</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Etanol + gás carbônico (CO₂)</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Água + sal</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Petróleo</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Oxigênio puro</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+          <div class="quiz" data-answer="d" data-explain="A celulose (do bagaço e da palha) é a mais difícil de quebrar em glicose. Por isso o etanol 2G, feito dela, é mais complicado de produzir.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">Qual açúcar é o mais DIFÍCIL de quebrar em glicose (e por isso complica o etanol 2G)?</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Sacarose</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Glicose</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Amido</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Celulose</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="qui-4">
+          <h3><span class="n">4</span> Biodiesel: o substituto do diesel</h3>
+          <p>O <b>biodiesel</b> substitui o <b>diesel</b> (aquele de caminhões e ônibus). Ele é <b>biodegradável</b> e vem de <b>fontes vegetais e gorduras</b>: óleo de <b>soja</b>, girassol, mamona, gordura animal, etc.</p>
+          <p>Ele funciona nos motores a diesel porque é <b>parecido com o diesel</b> em coisas como temperatura de ebulição e <b>viscosidade</b> (o quão "grosso" é o líquido).</p>
+          <h4>Como se faz o biodiesel: a transesterificação</h4>
+          <div class="callout">
+            <div class="lab">A "receita" (transesterificação)</div>
+            <p style="margin:0;font-weight:700">óleo vegetal + álcool &nbsp;<span style="color:var(--muted)">(com um catalisador básico e calor)</span>&nbsp; → &nbsp;biodiesel + glicerol</p>
+            <p style="margin:.5em 0 0">Ou seja: você pega o <b>óleo</b> (ex.: de soja), mistura com <b>álcool</b> (etanol ou metanol), com ajuda de uma <b>base</b> (catalisador) e <b>calor</b>. Sai o <b>biodiesel</b> e sobra a <b>glicerina (glicerol)</b> como subproduto.</p>
+          </div>
+          <h4>Por que não dá para pôr óleo de soja direto no tanque?</h4>
+          <p>Porque o óleo puro é <b>grosso demais (muito viscoso)</b> e não tem a composição certa para o motor — ele entope e queima mal. Só depois de virar biodiesel (na transesterificação) é que fica adequado.</p>
+          <div class="tbl-wrap"><table class="tbl">
+            <tr><th>Vantagens</th><th>Desvantagens</th></tr>
+            <tr><td>Polui menos e é renovável</td><td>Usa terra/plantação que poderia ser de <b>alimento</b></td></tr>
+            <tr><td>Biodegradável</td><td>Custo/produção ainda menores que os do diesel fóssil</td></tr>
+            <tr><td>Gera empregos no campo</td><td>Pode estimular <b>desmatamento</b> se mal planejado</td></tr>
+          </table></div>
+          <div class="video" data-subject="qui">
+            <div class="frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/DD885enwwJg" title="Biodiesel e transesterificação" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            <div class="cap"><div><div class="t">Biodiesel e transesterificação — aula completa</div><div class="c">Canal: Prof Guilherme Química</div></div>
+              <a href="https://www.youtube.com/watch?v=DD885enwwJg" target="_blank" rel="noopener">YouTube <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+          </div>
+          <div class="quiz" data-answer="b" data-explain="Na transesterificação, óleo vegetal + álcool (com base e calor) produzem biodiesel e sobra glicerol (glicerina) como subproduto.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">Na produção do biodiesel (transesterificação), além do biodiesel também se forma:</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Gasolina</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Glicerol (glicerina)</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Ouro</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Areia</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="qui-teste">
+          <div class="exam-wrap" data-subject="qui">
+            <h3 style="font-family:'Baloo 2',sans-serif">🎯 Teste final · Química</h3>
+            <p class="exam-intro">São <b>10 questões</b>, cada uma vale <b>1 ponto</b> (nota de 0 a 10). Responda todas e clique em <b>Corrigir prova</b>.</p>
+            <form class="exam" id="exam-qui">
+              <div class="q" data-answer="b"><p class="qt"><span class="num">1.</span> Biocombustível é o combustível feito a partir de:</p>
+                <label class="o"><input type="radio" name="q1" value="a"><span>Petróleo do fundo do mar</span></label>
+                <label class="o"><input type="radio" name="q1" value="b"><span>Biomassa — plantas cultivadas agora (cana, soja...)</span></label>
+                <label class="o"><input type="radio" name="q1" value="c"><span>Carvão mineral</span></label>
+                <label class="o"><input type="radio" name="q1" value="d"><span>Rochas vulcânicas</span></label>
+                <div class="qfb"><b>Resposta: B.</b> "Bio" = vida. Vem de matéria viva recente, por isso é renovável.</div></div>
+
+              <div class="q" data-answer="d"><p class="qt"><span class="num">2.</span> Qual par abaixo é formado por dois biocombustíveis usados no Brasil?</p>
+                <label class="o"><input type="radio" name="q2" value="a"><span>Gasolina e diesel</span></label>
+                <label class="o"><input type="radio" name="q2" value="b"><span>Carvão e gás natural</span></label>
+                <label class="o"><input type="radio" name="q2" value="c"><span>Querosene e gasolina</span></label>
+                <label class="o"><input type="radio" name="q2" value="d"><span>Etanol e biodiesel</span></label>
+                <div class="qfb"><b>Resposta: D.</b> Etanol (da cana) e biodiesel (de óleos vegetais) são os principais no Brasil.</div></div>
+
+              <div class="q" data-answer="a"><p class="qt"><span class="num">3.</span> Qual destes é um combustível fóssil (não renovável)?</p>
+                <label class="o"><input type="radio" name="q3" value="a"><span>Gasolina (do petróleo)</span></label>
+                <label class="o"><input type="radio" name="q3" value="b"><span>Etanol</span></label>
+                <label class="o"><input type="radio" name="q3" value="c"><span>Biodiesel</span></label>
+                <label class="o"><input type="radio" name="q3" value="d"><span>Biogás</span></label>
+                <div class="qfb"><b>Resposta: A.</b> A gasolina vem do petróleo, que leva milhões de anos para se formar.</div></div>
+
+              <div class="q" data-answer="c"><p class="qt"><span class="num">4.</span> O principal gás do efeito estufa liberado quando um combustível queima é o:</p>
+                <label class="o"><input type="radio" name="q4" value="a"><span>Oxigênio (O₂)</span></label>
+                <label class="o"><input type="radio" name="q4" value="b"><span>Nitrogênio (N₂)</span></label>
+                <label class="o"><input type="radio" name="q4" value="c"><span>Gás carbônico (CO₂)</span></label>
+                <label class="o"><input type="radio" name="q4" value="d"><span>Hélio (He)</span></label>
+                <div class="qfb"><b>Resposta: C.</b> O CO₂ segura calor na atmosfera; em excesso, causa aquecimento global.</div></div>
+
+              <div class="q" data-answer="b"><p class="qt"><span class="num">5.</span> O biocombustível contribui MENOS para o efeito estufa porque:</p>
+                <label class="o"><input type="radio" name="q5" value="a"><span>Não solta nenhum gás</span></label>
+                <label class="o"><input type="radio" name="q5" value="b"><span>O CO₂ que ele libera foi absorvido antes pela planta (ciclo fechado do carbono)</span></label>
+                <label class="o"><input type="radio" name="q5" value="c"><span>Ele congela a atmosfera</span></label>
+                <label class="o"><input type="radio" name="q5" value="d"><span>Ele produz oxigênio ao queimar</span></label>
+                <div class="qfb"><b>Resposta: B.</b> A planta tira o CO₂ do ar na fotossíntese; ao queimar, devolve o mesmo carbono.</div></div>
+
+              <div class="q" data-answer="a"><p class="qt"><span class="num">6.</span> A grande diferença entre o petróleo e o etanol de cana está:</p>
+                <label class="o"><input type="radio" name="q6" value="a"><span>No tempo de formação: o petróleo leva milhões de anos; a cana se planta todo ano</span></label>
+                <label class="o"><input type="radio" name="q6" value="b"><span>Na cor dos dois</span></label>
+                <label class="o"><input type="radio" name="q6" value="c"><span>Em nenhuma: são iguais</span></label>
+                <label class="o"><input type="radio" name="q6" value="d"><span>No fato de o etanol não queimar</span></label>
+                <div class="qfb"><b>Resposta: A.</b> É a diferença nas escalas de tempo de formação (tema clássico do Enem).</div></div>
+
+              <div class="q" data-answer="c"><p class="qt"><span class="num">7.</span> Na fermentação (feita pelas leveduras), a glicose se transforma em:</p>
+                <label class="o"><input type="radio" name="q7" value="a"><span>Água e sal</span></label>
+                <label class="o"><input type="radio" name="q7" value="b"><span>Plástico</span></label>
+                <label class="o"><input type="radio" name="q7" value="c"><span>Etanol + gás carbônico (CO₂)</span></label>
+                <label class="o"><input type="radio" name="q7" value="d"><span>Ferro</span></label>
+                <div class="qfb"><b>Resposta: C.</b> Glicose → etanol + CO₂. O CO₂ é o gás que inflava o saco no experimento.</div></div>
+
+              <div class="q" data-answer="d"><p class="qt"><span class="num">8.</span> Entre os açúcares abaixo, o mais DIFÍCIL de quebrar em glicose (usado no etanol 2G) é a:</p>
+                <label class="o"><input type="radio" name="q8" value="a"><span>Sacarose</span></label>
+                <label class="o"><input type="radio" name="q8" value="b"><span>Frutose</span></label>
+                <label class="o"><input type="radio" name="q8" value="c"><span>Amido</span></label>
+                <label class="o"><input type="radio" name="q8" value="d"><span>Celulose</span></label>
+                <div class="qfb"><b>Resposta: D.</b> A celulose (bagaço e palha) é a mais difícil de hidrolisar; por isso o etanol 2G é mais complexo.</div></div>
+
+              <div class="q" data-answer="b"><p class="qt"><span class="num">9.</span> O biodiesel é produzido por uma reação chamada transesterificação, em que:</p>
+                <label class="o"><input type="radio" name="q9" value="a"><span>Água vira gasolina</span></label>
+                <label class="o"><input type="radio" name="q9" value="b"><span>Óleo vegetal + álcool geram biodiesel + glicerol</span></label>
+                <label class="o"><input type="radio" name="q9" value="c"><span>Petróleo é refinado</span></label>
+                <label class="o"><input type="radio" name="q9" value="d"><span>Carvão é queimado</span></label>
+                <div class="qfb"><b>Resposta: B.</b> Óleo + álcool, com base e calor, formam biodiesel e sobra glicerol (glicerina).</div></div>
+
+              <div class="q" data-answer="a"><p class="qt"><span class="num">10.</span> Não dá para abastecer um carro direto com óleo de soja puro porque:</p>
+                <label class="o"><input type="radio" name="q10" value="a"><span>Ele é grosso demais (muito viscoso) e não tem a composição certa para o motor</span></label>
+                <label class="o"><input type="radio" name="q10" value="b"><span>Óleo de soja não existe</span></label>
+                <label class="o"><input type="radio" name="q10" value="c"><span>É mais caro que ouro</span></label>
+                <label class="o"><input type="radio" name="q10" value="d"><span>O carro anda rápido demais</span></label>
+                <div class="qfb"><b>Resposta: A.</b> Por isso o óleo precisa virar biodiesel (transesterificação) antes de ser usado.</div></div>
+            </form>
+            <div class="exam-actions">
+              <button type="button" class="btn primary" data-grade="qui">Corrigir prova</button>
+              <button type="button" class="btn ghost" data-reset="qui">Refazer</button>
+            </div>
+            <div class="result" id="result-qui"><div class="score"><span class="val">0</span><span class="of">/10</span></div><div class="bar"><i></i></div><div class="msg"></div><div class="hits"></div></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ============ HISTÓRIA ============ -->
+      <div class="subject-panel" data-subject="his" id="panel-his" hidden>
+        <div class="subj-head">
+          <span class="kicker">História · Brasil Colonial</span>
+          <h2>Franceses e holandeses na América Portuguesa</h2>
+          <p class="lead">No começo da colônia, o Brasil não teve só os portugueses. Franceses e holandeses tentaram tomar pedaços do território. Vamos ver quem foram, onde chegaram e como foram expulsos.</p>
+        </div>
+
+        <section class="block" id="his-1">
+          <h3><span class="n">1</span> Por que estrangeiros invadiram o Brasil?</h3>
+          <ul class="list">
+            <li><b>Tratado de Tordesilhas (1494):</b> dividiu as terras "novas" só entre <b>Portugal e Espanha</b>. Países como <b>França e Holanda não aceitaram</b> essa divisão ("o mundo não foi dado só a vocês dois").</li>
+            <li><b>Litoral desprotegido:</b> no início, Portugal estava mais interessado no comércio com o <b>Oriente</b>. O Brasil ficou pouco vigiado — uma porta aberta.</li>
+            <li><b>União Ibérica (1580–1640):</b> Portugal ficou <b>sob o rei da Espanha</b>. Assim, as colônias portuguesas viraram <b>alvo dos inimigos da Espanha</b> — principalmente a Holanda.</li>
+          </ul>
+          <div class="callout tip">
+            <div class="lab">Guarde estes três nomes</div>
+            <p style="margin:0"><b>França Antártica</b> (no Rio), <b>França Equinocial</b> (no Maranhão) e <b>Invasões Holandesas</b> (no Nordeste). É o roteiro desta matéria.</p>
+          </div>
+          <div class="quiz" data-answer="b" data-explain="França e Holanda não reconheciam o Tratado de Tordesilhas, que dividia as terras só entre Portugal e Espanha. Por isso tentaram tomar partes do Brasil.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">Um motivo para franceses e holandeses invadirem o Brasil foi:</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Eles tinham assinado o Tratado de Tordesilhas.</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Eles não reconheciam o Tratado de Tordesilhas, que dividia as terras só entre Portugal e Espanha.</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Portugal os convidou para colonizar.</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>O Brasil não tinha nada de valor.</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="his-2">
+          <h3><span class="n">2</span> França Antártica (Rio de Janeiro, 1555)</h3>
+          <ul class="facts">
+            <li><span class="k"></span><span><b>Quem:</b> franceses liderados por <b>Nicolas Durand de Villegagnon</b>.</span></li>
+            <li><span class="k"></span><span><b>Onde:</b> <b>Baía de Guanabara</b>, no atual <b>Rio de Janeiro</b>. Construíram o <b>Forte Coligny</b>.</span></li>
+            <li><span class="k"></span><span><b>Aliados:</b> os indígenas <b>Tamoios</b> (a Confederação dos Tamoios), contra os portugueses.</span></li>
+          </ul>
+          <p><b>Motivos:</b> interesse no <b>comércio</b> (pau-brasil) e disputa por território. Alguns colonos eram <b>protestantes (huguenotes)</b> fugindo da perseguição religiosa na França.</p>
+          <div class="callout">
+            <div class="lab">Como terminou</div>
+            <p style="margin:0">Os portugueses reagiram (<b>Mem de Sá</b> e <b>Estácio de Sá</b>), expulsaram os franceses e, nessa disputa, acabaram <b>fundando a cidade do Rio de Janeiro (1565)</b>.</p>
+          </div>
+          <div class="ex">
+            <div class="lab">Dica para não confundir</div>
+            <p style="margin:0"><b>Antártica → A de "Antes" e do Rio.</b> Foi a <b>primeira</b> (1555) e ficou no <b>Rio de Janeiro</b>. A Equinocial veio depois, no Maranhão.</p>
+          </div>
+          <div class="quiz" data-answer="c" data-explain="A França Antártica (1555), de Villegagnon, ficou na Baía de Guanabara, no atual Rio de Janeiro, com o Forte Coligny.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">A França Antártica (1555) foi instalada em qual região do Brasil atual?</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Maranhão</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Pernambuco</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Rio de Janeiro (Baía de Guanabara)</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Bahia</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="his-3">
+          <h3><span class="n">3</span> França Equinocial (Maranhão, 1612–1615)</h3>
+          <p>Essa é a parte mais detalhada da sua apostila. Vamos por ordem:</p>
+          <ul class="list">
+            <li><b>1594:</b> os franceses <b>Jacques Riffault</b> e <b>Charles des Vaux</b> naufragam no Maranhão e passam a viver com os indígenas locais.</li>
+            <li>De volta à França, Des Vaux convence o rei <b>Henrique IV</b> a colonizar a região. Com a morte do rei (1610), a rainha <b>Maria de Médici</b> (regente) passa a patrocinar o projeto.</li>
+            <li><b>1612:</b> cerca de <b>500 pessoas e 4 padres</b> (capuchinhos, como Claude d'Abbeville) partem da França e desembarcam na <b>ilha do Maranhão</b>. Constroem um forte e uma povoação: nasce <b>São Luís</b>. Estava fundada a <b>França Equinocial</b>.</li>
+          </ul>
+          <div class="callout">
+            <div class="lab">A reação portuguesa</div>
+            <ul class="list" style="margin:.2em 0 0">
+              <li>Os capitães <b>Jerônimo de Albuquerque</b> e <b>Martim Soares Moreno</b> enfrentam os franceses.</li>
+              <li><b>Batalha de Guaxenduba (1614):</b> vitória dos <b>luso-brasileiros</b>.</li>
+              <li><b>1615:</b> os franceses se rendem (<b>Daniel de La Touche</b> entrega-se) e são expulsos.</li>
+            </ul>
+          </div>
+          <h4>O que veio depois (expansão para o Norte)</h4>
+          <ul class="list">
+            <li><b>Alexandre de Moura</b> manda <b>Francisco Caldeira Castelo Branco</b> conquistar o <b>Pará</b>. Ali é construído o <b>Forte do Presépio</b>, que dá origem à cidade de <b>Belém (1616)</b>.</li>
+            <li><b>1637:</b> <b>Pedro Teixeira</b> sobe o rio <b>Amazonas</b> até Quito (Equador). A viagem ajudou a definir o <b>extremo oeste</b> do Brasil.</li>
+          </ul>
+          <div class="video" data-subject="his">
+            <div class="frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/GzenG6CJR_Q" title="Franceses no Brasil - França Antártica e Equinocial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            <div class="cap"><div><div class="t">Franceses no Brasil: França Antártica e Equinocial</div><div class="c">Canal: História do Brasil Doc.</div></div>
+              <a href="https://www.youtube.com/watch?v=GzenG6CJR_Q" target="_blank" rel="noopener">YouTube <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+          </div>
+          <div class="quiz" data-answer="a" data-explain="A França Equinocial (1612-1615) ficou na ilha do Maranhão, onde os franceses fundaram São Luís.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">A França Equinocial e a fundação de São Luís aconteceram em qual atual estado?</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Maranhão</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Rio de Janeiro</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>São Paulo</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Minas Gerais</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="his-4">
+          <h3><span class="n">4</span> Invasões Holandesas (Nordeste, século XVII)</h3>
+          <h4>Por que a Holanda invadiu?</h4>
+          <p>Antes, a Holanda era <b>sócia</b> de Portugal no açúcar: ela <b>financiava, transportava e refinava</b> o açúcar brasileiro na Europa — e ficava com boa parte do lucro. Mas, com a <b>União Ibérica</b>, a Espanha <b>proibiu</b> o comércio com os holandeses. Sem o lucro do açúcar, eles decidiram <b>tomar à força</b> a região que produzia açúcar.</p>
+          <p>Quem organizou foi a <b>Companhia das Índias Ocidentais (WIC)</b>, empresa holandesa.</p>
+          <div class="tbl-wrap"><table class="tbl">
+            <tr><th>Invasão</th><th>Onde</th><th>Quando</th></tr>
+            <tr><td>1ª invasão</td><td>Bahia (Salvador)</td><td>1624 — expulsos em 1625</td></tr>
+            <tr><td>2ª invasão</td><td>Pernambuco (Recife e Olinda)</td><td>1630 — ficaram até 1654</td></tr>
+          </table></div>
+          <h4>Maurício de Nassau (1637–1644)</h4>
+          <p>Governou o Brasil holandês em Pernambuco e ficou famoso pela administração:</p>
+          <ul class="list">
+            <li><b>Tolerância religiosa</b> (aceitava católicos e judeus).</li>
+            <li><b>Obras urbanas</b> em Recife (a "Mauritsstad"): pontes, ruas, um palácio.</li>
+            <li>Trouxe <b>artistas e cientistas</b> (como o pintor Frans Post) para registrar o Brasil.</li>
+            <li>Deu <b>crédito (empréstimos) aos senhores de engenho</b> e abriu espaço para os luso-brasileiros participarem do poder local (a Câmara dos Escabinos).</li>
+          </ul>
+          <div class="callout">
+            <div class="lab">A expulsão: Insurreição Pernambucana (1645–1654)</div>
+            <p style="margin:0">Depois que Nassau foi embora, luso-brasileiros se revoltaram. A <b>Insurreição Pernambucana</b> juntou <b>senhores de engenho e forças populares</b> (vários grupos sociais) para <b>expulsar os holandeses</b>. Houve as <b>batalhas dos Montes Guararapes</b>, e os holandeses foram expulsos em <b>1654</b>.</p>
+          </div>
+          <div class="callout tip">
+            <div class="lab">Consequência importante</div>
+            <p style="margin:0">Depois de expulsos, os holandeses foram <b>produzir açúcar nas Antilhas</b> (Caribe). Isso criou <b>concorrência</b> e ajudou a causar a <b>crise do açúcar</b> no Brasil.</p>
+          </div>
+          <div class="video" data-subject="his">
+            <div class="frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/xQV5ZJvOrLg" title="Invasões Holandesas no Brasil - Brasil Escola" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            <div class="cap"><div><div class="t">Invasões Holandesas no Brasil</div><div class="c">Canal: Brasil Escola</div></div>
+              <a href="https://www.youtube.com/watch?v=xQV5ZJvOrLg" target="_blank" rel="noopener">YouTube <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+          </div>
+          <div class="quiz" data-answer="c" data-explain="Maurício de Nassau ficou conhecido pela tolerância religiosa, pelas obras urbanas no Recife, por trazer artistas/cientistas e por dar crédito aos senhores de engenho.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">A administração de Maurício de Nassau em Pernambuco ficou marcada por:</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Proibir todas as religiões.</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Destruir o Recife e não fazer nenhuma obra.</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Tolerância religiosa, obras urbanas e crédito aos senhores de engenho.</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Expulsar os artistas e cientistas.</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+          <div class="quiz" data-answer="b" data-explain="A Insurreição Pernambucana (1645-1654) uniu diferentes grupos sociais (senhores de engenho e forças populares) para expulsar os holandeses, o que aconteceu em 1654.">
+            <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg> Checagem rápida</span>
+            <p class="q">A Insurreição Pernambucana teve como objetivo principal:</p>
+            <div class="opts">
+              <button class="opt" data-opt="a"><span class="ol">A</span><span>Trazer mais holandeses para o Brasil.</span></button>
+              <button class="opt" data-opt="b"><span class="ol">B</span><span>Expulsar os holandeses, reunindo diferentes grupos sociais.</span></button>
+              <button class="opt" data-opt="c"><span class="ol">C</span><span>Declarar a independência do Brasil em 1645.</span></button>
+              <button class="opt" data-opt="d"><span class="ol">D</span><span>Acabar com a produção de açúcar.</span></button>
+            </div>
+            <div class="fb"></div>
+          </div>
+        </section>
+
+        <section class="block" id="his-teste">
+          <div class="exam-wrap" data-subject="his">
+            <h3 style="font-family:'Baloo 2',sans-serif">🎯 Teste final · História</h3>
+            <p class="exam-intro">São <b>10 questões</b>, cada uma vale <b>1 ponto</b> (nota de 0 a 10). Responda todas e clique em <b>Corrigir prova</b>.</p>
+            <form class="exam" id="exam-his">
+              <div class="q" data-answer="c"><p class="qt"><span class="num">1.</span> Franceses e holandeses invadiram o Brasil, entre outros motivos, porque não reconheciam o:</p>
+                <label class="o"><input type="radio" name="h1" value="a"><span>Tratado de Petrópolis</span></label>
+                <label class="o"><input type="radio" name="h1" value="b"><span>Tratado do Atlântico Norte</span></label>
+                <label class="o"><input type="radio" name="h1" value="c"><span>Tratado de Tordesilhas</span></label>
+                <label class="o"><input type="radio" name="h1" value="d"><span>Tratado de Versalhes</span></label>
+                <div class="qfb"><b>Resposta: C.</b> Tordesilhas (1494) dividia as terras só entre Portugal e Espanha; França e Holanda não aceitavam.</div></div>
+
+              <div class="q" data-answer="b"><p class="qt"><span class="num">2.</span> A França Antártica (1555) foi instalada no atual estado do:</p>
+                <label class="o"><input type="radio" name="h2" value="a"><span>Maranhão</span></label>
+                <label class="o"><input type="radio" name="h2" value="b"><span>Rio de Janeiro (Baía de Guanabara)</span></label>
+                <label class="o"><input type="radio" name="h2" value="c"><span>Pernambuco</span></label>
+                <label class="o"><input type="radio" name="h2" value="d"><span>Ceará</span></label>
+                <div class="qfb"><b>Resposta: B.</b> Ficou na Baía de Guanabara, com o Forte Coligny.</div></div>
+
+              <div class="q" data-answer="a"><p class="qt"><span class="num">3.</span> O líder da França Antártica foi:</p>
+                <label class="o"><input type="radio" name="h3" value="a"><span>Nicolas Durand de Villegagnon</span></label>
+                <label class="o"><input type="radio" name="h3" value="b"><span>Maurício de Nassau</span></label>
+                <label class="o"><input type="radio" name="h3" value="c"><span>Pedro Teixeira</span></label>
+                <label class="o"><input type="radio" name="h3" value="d"><span>Jerônimo de Albuquerque</span></label>
+                <div class="qfb"><b>Resposta: A.</b> Villegagnon comandou a França Antártica no Rio.</div></div>
+
+              <div class="q" data-answer="d"><p class="qt"><span class="num">4.</span> Na França Antártica, os franceses se aliaram a quais indígenas contra os portugueses?</p>
+                <label class="o"><input type="radio" name="h4" value="a"><span>Tupiniquins</span></label>
+                <label class="o"><input type="radio" name="h4" value="b"><span>Astecas</span></label>
+                <label class="o"><input type="radio" name="h4" value="c"><span>Incas</span></label>
+                <label class="o"><input type="radio" name="h4" value="d"><span>Tamoios</span></label>
+                <div class="qfb"><b>Resposta: D.</b> A Confederação dos Tamoios apoiou os franceses.</div></div>
+
+              <div class="q" data-answer="a"><p class="qt"><span class="num">5.</span> A França Equinocial (1612–1615) e a fundação de São Luís ocorreram no atual:</p>
+                <label class="o"><input type="radio" name="h5" value="a"><span>Maranhão</span></label>
+                <label class="o"><input type="radio" name="h5" value="b"><span>Rio de Janeiro</span></label>
+                <label class="o"><input type="radio" name="h5" value="c"><span>Bahia</span></label>
+                <label class="o"><input type="radio" name="h5" value="d"><span>Amazonas</span></label>
+                <div class="qfb"><b>Resposta: A.</b> Os franceses desembarcaram na ilha do Maranhão e fundaram São Luís.</div></div>
+
+              <div class="q" data-answer="b"><p class="qt"><span class="num">6.</span> A batalha de 1614 em que os luso-brasileiros venceram os franceses no Maranhão foi a de:</p>
+                <label class="o"><input type="radio" name="h6" value="a"><span>Montes Guararapes</span></label>
+                <label class="o"><input type="radio" name="h6" value="b"><span>Guaxenduba</span></label>
+                <label class="o"><input type="radio" name="h6" value="c"><span>Tordesilhas</span></label>
+                <label class="o"><input type="radio" name="h6" value="d"><span>Avaí</span></label>
+                <div class="qfb"><b>Resposta: B.</b> A Batalha de Guaxenduba (1614) favoreceu os luso-brasileiros; em 1615 os franceses se renderam.</div></div>
+
+              <div class="q" data-answer="c"><p class="qt"><span class="num">7.</span> Após a conquista do Pará, foi construído o Forte do Presépio, que deu origem à cidade de:</p>
+                <label class="o"><input type="radio" name="h7" value="a"><span>São Luís</span></label>
+                <label class="o"><input type="radio" name="h7" value="b"><span>Recife</span></label>
+                <label class="o"><input type="radio" name="h7" value="c"><span>Belém</span></label>
+                <label class="o"><input type="radio" name="h7" value="d"><span>Salvador</span></label>
+                <div class="qfb"><b>Resposta: C.</b> O Forte do Presépio (1616) deu origem a Belém.</div></div>
+
+              <div class="q" data-answer="d"><p class="qt"><span class="num">8.</span> A empresa holandesa que organizou as invasões ao Nordeste açucareiro foi a:</p>
+                <label class="o"><input type="radio" name="h8" value="a"><span>Companhia de Jesus</span></label>
+                <label class="o"><input type="radio" name="h8" value="b"><span>Companhia Docas</span></label>
+                <label class="o"><input type="radio" name="h8" value="c"><span>Companhia das Índias Orientais</span></label>
+                <label class="o"><input type="radio" name="h8" value="d"><span>Companhia das Índias Ocidentais (WIC)</span></label>
+                <div class="qfb"><b>Resposta: D.</b> A WIC (Companhia das Índias Ocidentais) financiou e organizou as invasões.</div></div>
+
+              <div class="q" data-answer="a"><p class="qt"><span class="num">9.</span> O administrador holandês famoso por tolerância religiosa e obras no Recife foi:</p>
+                <label class="o"><input type="radio" name="h9" value="a"><span>Maurício de Nassau</span></label>
+                <label class="o"><input type="radio" name="h9" value="b"><span>Villegagnon</span></label>
+                <label class="o"><input type="radio" name="h9" value="c"><span>Duarte Coelho</span></label>
+                <label class="o"><input type="radio" name="h9" value="d"><span>Tomé de Sousa</span></label>
+                <div class="qfb"><b>Resposta: A.</b> Maurício de Nassau governou o Brasil holandês (1637–1644).</div></div>
+
+              <div class="q" data-answer="b"><p class="qt"><span class="num">10.</span> O movimento que reuniu diferentes grupos sociais e expulsou os holandeses em 1654 foi a:</p>
+                <label class="o"><input type="radio" name="h10" value="a"><span>Inconfidência Mineira</span></label>
+                <label class="o"><input type="radio" name="h10" value="b"><span>Insurreição Pernambucana</span></label>
+                <label class="o"><input type="radio" name="h10" value="c"><span>Revolta da Vacina</span></label>
+                <label class="o"><input type="radio" name="h10" value="d"><span>Guerra dos Emboabas</span></label>
+                <div class="qfb"><b>Resposta: B.</b> A Insurreição Pernambucana (1645–1654) expulsou os holandeses em 1654.</div></div>
+            </form>
+            <div class="exam-actions">
+              <button type="button" class="btn primary" data-grade="his">Corrigir prova</button>
+              <button type="button" class="btn ghost" data-reset="his">Refazer</button>
+            </div>
+            <div class="result" id="result-his"><div class="score"><span class="val">0</span><span class="of">/10</span></div><div class="bar"><i></i></div><div class="msg"></div><div class="hits"></div></div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+    <footer class="foot"><div class="wrap">Trio de Estudos · material de revisão feito a partir das suas apostilas. Os vídeos abrem no YouTube (canais educativos). Confira sempre com o material da escola.</div></footer>
+  </section>
+</div>
+<script>
+(function(){
+  "use strict";
+  var SUBJECTS = {
+    geo: { name:"Geografia · Centro-Oeste", sections:[
+      ["geo-1","1 · Onde fica"],["geo-2","2 · Relevo e rios"],["geo-3","3 · Clima e vegetação"],
+      ["geo-4","4 · Povoamento"],["geo-5","5 · Economia"],["geo-teste","🎯 Teste final"]] },
+    qui: { name:"Química · Biocombustíveis", sections:[
+      ["qui-1","1 · O que é"],["qui-2","2 · Efeito estufa"],["qui-3","3 · Etanol"],
+      ["qui-4","4 · Biodiesel"],["qui-teste","🎯 Teste final"]] },
+    his: { name:"História · Invasões", sections:[
+      ["his-1","1 · Por que invadiram"],["his-2","2 · França Antártica"],["his-3","3 · França Equinocial"],
+      ["his-4","4 · Invasões holandesas"],["his-teste","🎯 Teste final"]] }
+  };
+  var $ = function(s,r){ return (r||document).querySelector(s); };
+  var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+  var home = $("#home"), study = $("#study"), chips = $("#chips"), nowName = $("#nowName");
+
+  function scrollToEl(el, extra){
+    if(!el) return;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - (extra||116);
+    window.scrollTo({ top: y<0?0:y, behavior:"smooth" });
+  }
+
+  function openSubject(key){
+    var s = SUBJECTS[key]; if(!s) return;
+    study.setAttribute("data-subject", key);
+    nowName.textContent = s.name;
+    $$(".subject-panel").forEach(function(p){ p.hidden = (p.id !== "panel-"+key); });
+    // build chips
+    chips.innerHTML = "";
+    s.sections.forEach(function(sec){
+      var b = document.createElement("button");
+      b.className = "chip"; b.type = "button"; b.textContent = sec[1];
+      b.addEventListener("click", function(){ scrollToEl(document.getElementById(sec[0])); });
+      chips.appendChild(b);
+    });
+    home.hidden = true; study.hidden = false;
+    window.scrollTo(0,0);
+    try{ localStorage.setItem("trio-last", key); }catch(e){}
+  }
+
+  function goHome(){
+    study.hidden = true; home.hidden = false;
+    window.scrollTo(0,0);
+  }
+
+  // home cards
+  $$(".card").forEach(function(c){
+    c.addEventListener("click", function(){ openSubject(c.getAttribute("data-go")); });
+  });
+  $("#homeBtn").addEventListener("click", goHome);
+
+  // inline quizzes (checagens)
+  document.addEventListener("click", function(e){
+    var opt = e.target.closest ? e.target.closest(".opt") : null;
+    if(!opt) return;
+    var quiz = opt.closest(".quiz");
+    if(!quiz || quiz.classList.contains("done")) return;
+    quiz.classList.add("done");
+    var ans = quiz.getAttribute("data-answer");
+    var chosen = opt.getAttribute("data-opt");
+    $$(".opt", quiz).forEach(function(o){
+      o.disabled = true;
+      if(o.getAttribute("data-opt") === ans) o.classList.add("correct");
+    });
+    var fb = $(".fb", quiz);
+    var explain = quiz.getAttribute("data-explain") || "";
+    if(chosen === ans){
+      fb.className = "fb right show";
+      fb.innerHTML = '<span class="v">Isso! ✔</span> ' + explain;
+    } else {
+      opt.classList.add("wrong");
+      fb.className = "fb rong show";
+      fb.innerHTML = '<span class="v">Quase!</span> A resposta certa está em verde. ' + explain;
+    }
+  });
+
+  // exams
+  function gradeExam(key){
+    var form = document.getElementById("exam-"+key);
+    if(!form) return;
+    var qs = $$(".q", form);
+    var correct = 0, answered = 0;
+    qs.forEach(function(q){
+      var ans = q.getAttribute("data-answer");
+      var sel = $("input:checked", q);
+      $$("label.o", q).forEach(function(l){ l.classList.remove("correct","wrong"); });
+      var fb = $(".qfb", q); if(fb) fb.classList.add("show");
+      var correctInput = q.querySelector('input[value="'+ans+'"]');
+      var correctLabel = correctInput ? correctInput.closest("label.o") : null;
+      if(sel){
+        answered++;
+        var chosenLabel = sel.closest("label.o");
+        if(sel.value === ans){ correct++; if(chosenLabel) chosenLabel.classList.add("correct"); }
+        else { if(chosenLabel) chosenLabel.classList.add("wrong"); if(correctLabel) correctLabel.classList.add("correct"); }
+      } else {
+        if(correctLabel) correctLabel.classList.add("correct");
+      }
+    });
+    var total = qs.length;
+    var nota = Math.round((correct/total)*10*10)/10;
+    showResult(key, nota, correct, total, answered);
+  }
+
+  function showResult(key, nota, correct, total, answered){
+    var box = document.getElementById("result-"+key);
+    if(!box) return;
+    var grade = nota>=7 ? "high" : (nota>=5 ? "mid" : "low");
+    box.setAttribute("data-grade", grade);
+    $(".val", box).textContent = (nota % 1 === 0) ? nota.toFixed(0) : nota.toFixed(1);
+    var msg = grade==="high" ? "Mandou muito bem! 🎉 Você domina o conteúdo."
+            : grade==="mid" ? "Bom trabalho! Revise as questões em vermelho e tente de novo."
+            : "Vamos revisar! Releia a matéria com calma e refaça o teste.";
+    $(".msg", box).textContent = msg;
+    var hits = "Você acertou " + correct + " de " + total + " questões.";
+    if(answered < total) hits += " (" + (total-answered) + " ficou sem resposta.)";
+    $(".hits", box).textContent = hits;
+    box.classList.add("show");
+    var bar = $(".bar>i", box);
+    bar.style.width = "0%";
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ bar.style.width = (nota*10) + "%"; }); });
+    scrollToEl(box, 140);
+  }
+
+  function resetExam(key){
+    var form = document.getElementById("exam-"+key);
+    if(!form) return;
+    $$("input[type=radio]", form).forEach(function(r){ r.checked = false; });
+    $$("label.o", form).forEach(function(l){ l.classList.remove("correct","wrong"); });
+    $$(".qfb", form).forEach(function(f){ f.classList.remove("show"); });
+    var box = document.getElementById("result-"+key);
+    if(box) box.classList.remove("show");
+    scrollToEl(form.parentNode, 116);
+  }
+
+  $$("[data-grade]").forEach(function(b){
+    if(b.classList.contains("btn")) b.addEventListener("click", function(){ gradeExam(b.getAttribute("data-grade")); });
+  });
+  $$("[data-reset]").forEach(function(b){
+    b.addEventListener("click", function(){ resetExam(b.getAttribute("data-reset")); });
+  });
+})();
+</script>
+
+</body>
+</html>

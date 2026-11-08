@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Física: calor sem mistério</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&display=swap">
+<style>
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --surface-2:#f8f9fb; --ink:#1c2230; --muted:#5d6577;
+  --line:#dfe3ea; --line-2:#eceff4; --shadow:0 1px 2px rgba(20,30,50,.06),0 8px 24px rgba(20,30,50,.06);
+  --ok:#1d8a52; --ok-bg:#e6f5ec; --no:#c2364d; --no-bg:#fbe8eb;
+  --hot:#e0531c; --hot-ink:#a83a0d; --hot-soft:#fdece3;
+  --cold:#2c6bd3; --cold-ink:#1f4f9e; --cold-soft:#e7effc;
+  --sen:#e0531c; --sen-soft:#fdece3; --sen-ink:#a83a0d;
+  --lat:#6d47c9; --lat-soft:#efe9fb; --lat-ink:#53329e;
+  --accent:var(--hot); --accent-ink:var(--hot-ink); --accent-soft:var(--hot-soft); --on-accent:#ffffff;
+  --sea:#2c87c9; --land:#c9a36a; --air:#5d6577;
+  --radius:16px; --radius-sm:11px; --maxw:840px;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141821; --surface:#1d222d; --surface-2:#191d27; --ink:#eef1f6; --muted:#a3abbb;
+    --line:#2e3542; --line-2:#262c38; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    --ok:#4cc082; --ok-bg:#132d21; --no:#f07a8f; --no-bg:#331a21;
+    --hot:#ff8a52; --hot-ink:#ffb48c; --hot-soft:#35221a;
+    --cold:#6ea2ff; --cold-ink:#a9c6ff; --cold-soft:#1b2640;
+    --sen:#ff8a52; --sen-soft:#35221a; --sen-ink:#ffb48c;
+    --lat:#a98bff; --lat-soft:#261f3b; --lat-ink:#cbb8ff;
+    --on-accent:#141821; --sea:#4ea6e6; --land:#b8925c; --air:#a3abbb;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141821; --surface:#1d222d; --surface-2:#191d27; --ink:#eef1f6; --muted:#a3abbb;
+  --line:#2e3542; --line-2:#262c38; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  --ok:#4cc082; --ok-bg:#132d21; --no:#f07a8f; --no-bg:#331a21;
+  --hot:#ff8a52; --hot-ink:#ffb48c; --hot-soft:#35221a;
+  --cold:#6ea2ff; --cold-ink:#a9c6ff; --cold-soft:#1b2640;
+  --sen:#ff8a52; --sen-soft:#35221a; --sen-ink:#ffb48c;
+  --lat:#a98bff; --lat-soft:#261f3b; --lat-ink:#cbb8ff;
+  --on-accent:#141821; --sea:#4ea6e6; --land:#b8925c; --air:#a3abbb;
+  color-scheme:dark;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 110px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+h1,h2,h3,h4{font-family:"Baloo 2","Nunito Sans",system-ui,sans-serif;line-height:1.18;text-wrap:balance;margin:0}
+p{margin:0 0 .9em}
+a{color:var(--accent-ink)}
+b,strong{font-weight:800}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:20px}
+.num{font-variant-numeric:tabular-nums}
+
+/* HERO */
+.hero{padding:clamp(30px,6vw,60px) 0 10px}
+.hero .tag{display:inline-block;font-weight:700;font-size:.9rem;color:var(--muted);margin-bottom:10px}
+.hero h1{font-size:clamp(2.2rem,7vw,3.6rem);font-weight:800;letter-spacing:-.015em}
+.hero p.lead{color:var(--muted);max-width:52ch;margin-top:12px;font-size:1.06rem}
+.hero-curve{margin:22px 0 4px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 10px 8px}
+.hero-curve svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;padding:4px 10px 6px;font-size:.9rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{display:inline-block;width:22px;height:5px;border-radius:3px}
+
+/* TOPBAR */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:var(--maxw);margin:0 auto;padding:9px 16px 0;display:flex;align-items:center;gap:12px}
+.topbar .ttl{font-family:"Baloo 2",sans-serif;font-weight:700;font-size:1.05rem}
+.topbar .spacer{flex:1}
+.prog{font-size:.85rem;font-weight:700;color:var(--muted);white-space:nowrap}
+.prog b{color:var(--ok)}
+.chips{display:flex;gap:8px;overflow-x:auto;max-width:var(--maxw);margin:0 auto;padding:8px 16px 11px;scrollbar-width:thin}
+.chip{white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:6px 13px;font:inherit;font-weight:700;font-size:.85rem;cursor:pointer;text-decoration:none}
+.chip:hover{color:var(--ink);border-color:var(--accent)}
+.chip:focus-visible,.opt:focus-visible,.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* BLOCKS */
+section.block{padding:34px 0 10px;border-top:1px solid var(--line-2)}
+.block>h2{font-size:clamp(1.65rem,4.6vw,2.2rem);font-weight:800;margin-bottom:4px;display:flex;gap:12px;align-items:baseline}
+.block>h2 .n{flex:none;font-size:.95rem;font-weight:800;color:var(--on-accent);background:var(--accent);width:32px;height:32px;border-radius:10px;display:inline-grid;place-items:center;transform:translateY(-3px)}
+.block .sub{color:var(--muted);margin-bottom:18px}
+.block h3{font-size:1.25rem;font-weight:800;margin:24px 0 6px}
+ul.list{margin:.4em 0 1em;padding-left:1.2em}
+ul.list li{margin:.35em 0}
+
+.formula{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;background:var(--surface);border:2px solid var(--accent);border-radius:var(--radius);padding:16px 20px;margin:16px 0;box-shadow:var(--shadow)}
+.formula .eq{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1.6rem,5vw,2.1rem);color:var(--accent-ink);white-space:nowrap}
+.formula .what{flex:1;min-width:220px;font-size:.96rem}
+.formula .what div{margin:2px 0}
+.formula.lat{border-color:var(--lat)} .formula.lat .eq{color:var(--lat-ink)}
+
+.callout{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:var(--radius-sm);padding:14px 17px;margin:16px 0;box-shadow:var(--shadow)}
+.callout .lab{font-weight:800;color:var(--accent-ink);margin-bottom:4px;display:flex;gap:8px;align-items:center}
+.callout.tip{border-left-color:var(--ok)} .callout.tip .lab{color:var(--ok)}
+.callout.warn{border-left-color:var(--no)} .callout.warn .lab{color:var(--no)}
+.callout.lat{border-left-color:var(--lat)} .callout.lat .lab{color:var(--lat-ink)}
+.callout p:last-child{margin-bottom:0}
+
+.ex{background:var(--surface-2);border:1px dashed var(--line);border-radius:var(--radius-sm);padding:14px 17px;margin:14px 0}
+.ex .lab{font-weight:800;color:var(--muted);margin-bottom:6px}
+.ex .step{display:block;font-variant-numeric:tabular-nums;padding-left:12px;border-left:3px solid var(--line);margin:4px 0}
+.ex .ans{display:inline-block;margin-top:8px;font-weight:800;background:var(--ok-bg);color:var(--ok);padding:3px 10px;border-radius:8px}
+
+.tbl-wrap{overflow-x:auto;margin:14px 0}
+table.tbl{width:100%;border-collapse:collapse;font-size:.95rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;font-variant-numeric:tabular-nums}
+table.tbl th,table.tbl td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top}
+table.tbl th{background:var(--accent-soft);color:var(--accent-ink);font-weight:800;font-size:.88rem}
+table.tbl tr:last-child td{border-bottom:none}
+table.tbl td.r{text-align:right}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:700px){.trio{grid-template-columns:1fr}}
+.trio .t{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 15px;box-shadow:var(--shadow)}
+.trio .t h4{font-size:1.15rem;font-weight:800;margin-bottom:4px}
+.trio .t p{font-size:.94rem;margin:0 0 6px}
+.trio .t .key{font-size:.88rem;font-weight:700;color:var(--accent-ink)}
+
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin:16px 0;box-shadow:var(--shadow)}
+.fig svg{display:block;width:100%;height:auto}
+.fig .cap{font-size:.88rem;color:var(--muted);padding:6px 4px 0}
+
+/* SVG paint */
+.s-axis{stroke:var(--muted);stroke-width:2;fill:none}
+.s-grid{stroke:var(--line);stroke-width:1;stroke-dasharray:4 5}
+.s-txt{fill:var(--muted);font:600 13px "Nunito Sans",sans-serif}
+.s-txt-b{fill:var(--ink);font:800 14px "Nunito Sans",sans-serif}
+.s-sen{stroke:var(--sen);stroke-width:6;fill:none;stroke-linecap:round}
+.s-lat{stroke:var(--lat);stroke-width:6;fill:none;stroke-linecap:round}
+.s-dot-sen{fill:var(--sen)} .s-dot-lat{fill:var(--lat)}
+.s-letter{fill:var(--on-accent);font:800 14px "Baloo 2",sans-serif}
+.s-box{fill:var(--surface-2);stroke:var(--line);stroke-width:1.5}
+.s-hot{stroke:var(--hot);stroke-width:2.5;fill:none}
+.s-cold{stroke:var(--cold);stroke-width:2.5;fill:none}
+.s-hot-t{fill:var(--hot-ink);font:800 13px "Nunito Sans",sans-serif}
+.s-cold-t{fill:var(--cold-ink);font:800 13px "Nunito Sans",sans-serif}
+.ah-hot{fill:var(--hot)} .ah-cold{fill:var(--cold)} .ah-air{fill:var(--air)}
+.s-sea{fill:var(--sea);opacity:.85} .s-land{fill:var(--land)}
+.s-air{stroke:var(--air);stroke-width:2.5;fill:none}
+.s-sun{fill:#f4b400} .s-moon{fill:var(--muted)}
+.s-sky{fill:var(--surface-2)}
+
+/* video */
+.videos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+@media(max-width:640px){.videos{grid-template-columns:1fr}}
+.video{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.video .frame{position:relative;aspect-ratio:16/9;background:#000;display:block}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video a.frame.play{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-decoration:none;background:radial-gradient(120% 120% at 50% 0%,color-mix(in srgb,var(--accent) 38%,#000) 0%,#101218 80%);color:#fff}
+.video .pbtn{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--on-accent);box-shadow:0 8px 22px rgba(0,0,0,.35)}
+.video .pbtn svg{width:26px;height:26px;margin-left:3px}
+.video .ptxt{font-weight:800;font-size:.98rem}
+.video .cap{padding:10px 14px 12px}
+.video .cap .t{font-weight:800;font-size:.95rem;line-height:1.35}
+.video .cap .c{color:var(--muted);font-size:.84rem;margin-top:2px}
+
+/* quiz */
+.quiz{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:17px 18px 15px;margin:20px 0;box-shadow:var(--shadow)}
+.quiz .qlab{display:inline-flex;align-items:center;gap:7px;font-size:.85rem;font-weight:800;color:var(--accent-ink);background:var(--accent-soft);padding:4px 11px;border-radius:999px;margin-bottom:10px}
+.quiz .qlab svg{width:15px;height:15px}
+.quiz .q{font-weight:700;margin-bottom:12px;font-size:1.02rem}
+.opts{display:grid;gap:9px}
+.opt{text-align:left;font:inherit;font-size:.97rem;background:var(--surface-2);border:1.5px solid var(--line);color:var(--ink);border-radius:var(--radius-sm);padding:10px 14px;cursor:pointer;display:flex;gap:10px;align-items:flex-start}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt .ol{flex:none;font-weight:800;color:var(--accent-ink)}
+.opt:disabled{cursor:default}
+.opt.correct{background:var(--ok-bg);border-color:var(--ok)} .opt.correct .ol{color:var(--ok)}
+.opt.wrong{background:var(--no-bg);border-color:var(--no)} .opt.wrong .ol{color:var(--no)}
+.fb{margin-top:12px;padding:11px 14px;border-radius:var(--radius-sm);font-size:.94rem;display:none}
+.fb.show{display:block}
+.fb.right{background:var(--ok-bg);border:1px solid var(--ok)}
+.fb.rong{background:var(--no-bg);border:1px solid var(--no)}
+.fb .v{font-weight:800} .fb.right .v{color:var(--ok)} .fb.rong .v{color:var(--no)}
+.quiz.mini{margin:0;padding:13px 14px}
+.quiz.mini .q{font-size:.96rem;margin-bottom:9px}
+.quiz.mini .opts{grid-template-columns:1fr 1fr}
+.game{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:16px 0}
+.badge-l{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--ink);color:var(--surface);font-family:"Baloo 2",sans-serif;font-weight:800;margin-right:6px}
+
+/* plan & diag */
+.plan{display:grid;gap:10px;margin:14px 0;padding:0;list-style:none}
+.plan li{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 15px}
+.plan .d{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.15rem;color:var(--accent-ink);line-height:1.3}
+.plan .w{font-size:.96rem}
+.plan .w b{display:block}
+.plan label{display:inline-flex;gap:7px;align-items:center;font-size:.88rem;color:var(--muted);margin-top:4px;cursor:pointer}
+.plan input{accent-color:var(--ok);width:16px;height:16px}
+
+/* cola */
+.cola{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:640px){.cola{grid-template-columns:1fr}}
+.cola .c{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px 15px}
+.cola .c h4{font-size:1.05rem;font-weight:800;margin-bottom:4px}
+.cola .c .eq{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.35rem;color:var(--accent-ink)}
+.cola .c.l .eq{color:var(--lat-ink)}
+.cola .c p{font-size:.92rem;margin:2px 0 0}
+
+/* exam */
+.exam-wrap{margin-top:12px;background:var(--surface);border:2px solid var(--accent);border-radius:var(--radius);padding:22px 20px;box-shadow:var(--shadow)}
+.exam-intro{color:var(--muted);font-size:.96rem}
+.exam .q{border-top:1px solid var(--line-2);padding-top:18px;margin-top:18px}
+.exam .q:first-child{border-top:none;margin-top:6px}
+.exam .qt{font-weight:700;margin-bottom:9px}
+.exam .qt .qn{color:var(--accent-ink);font-weight:800}
+.exam label.o{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1.5px solid var(--line);background:var(--surface-2);border-radius:var(--radius-sm);margin:7px 0;cursor:pointer;font-size:.96rem}
+.exam label.o:hover{border-color:var(--accent)}
+.exam label.o input{margin-top:5px;accent-color:var(--accent)}
+.exam label.o.correct{background:var(--ok-bg);border-color:var(--ok)}
+.exam label.o.wrong{background:var(--no-bg);border-color:var(--no)}
+.exam .qfb{display:none;margin-top:8px;font-size:.92rem;color:var(--muted)}
+.exam .qfb.show{display:block}
+.exam .qfb b{color:var(--ink)}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.btn{font:inherit;font-weight:800;border-radius:999px;padding:12px 22px;cursor:pointer;border:1.5px solid transparent}
+.btn.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.btn.ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--accent)}
+.result{display:none;margin-top:20px;border-radius:var(--radius);padding:20px;border:1px solid var(--line);background:var(--surface-2);text-align:center}
+.result.show{display:block}
+.result .score{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:3.3rem;line-height:1}
+.result .of{color:var(--muted);font-weight:700}
+.result .msg{margin-top:8px;font-weight:700}
+.result .bar{height:12px;border-radius:999px;background:var(--line);overflow:hidden;margin:16px auto 4px;max-width:340px}
+.result .bar>i{display:block;height:100%;border-radius:999px;width:0;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.result .hits{color:var(--muted);font-size:.92rem;margin-top:6px}
+.result[data-g="high"] .score{color:var(--ok)} .result[data-g="high"] .bar>i{background:var(--ok)}
+.result[data-g="mid"] .score{color:var(--hot)} .result[data-g="mid"] .bar>i{background:var(--hot)}
+.result[data-g="low"] .score{color:var(--no)} .result[data-g="low"] .bar>i{background:var(--no)}
+.best{font-size:.88rem;color:var(--muted);margin-top:8px}
+
+footer.foot{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 34px;color:var(--muted);font-size:.86rem}
+footer.foot p{margin:0 0 .5em}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="wrap hero">
+  <span class="tag">Física, apostila ETAPA, aulas 24 a 28. Estudo do Murilo</span>
+  <h1>Calor sem mistério</h1>
+  <p class="lead">Como o calor viaja, por que a areia queima o pé e o mar não, e como fazer as contas de calor sem errar. No caminho tem vídeos, checagens rápidas e, no fim, uma prova que dá a sua nota de 0 a 10.</p>
+  <div class="hero-curve" aria-label="Curva de aquecimento da água: rampas são calor sensível e trechos retos são calor latente">
+    <svg viewBox="0 0 640 250" role="img">
+      <line class="s-grid" x1="60" y1="190" x2="620" y2="190"/>
+      <line class="s-grid" x1="60" y1="70" x2="620" y2="70"/>
+      <path class="s-axis" d="M60 20 V230 H625"/>
+      <text class="s-txt" x="52" y="194" text-anchor="end">0 °C</text>
+      <text class="s-txt" x="52" y="74" text-anchor="end">100 °C</text>
+      <text class="s-txt" x="52" y="226" text-anchor="end">−20 °C</text>
+      <text class="s-txt" x="620" y="246" text-anchor="end">calor recebido</text>
+      <path class="s-sen" d="M70 222 L140 190"/>
+      <path class="s-lat" d="M140 190 L250 190"/>
+      <path class="s-sen" d="M250 190 L330 70"/>
+      <path class="s-lat" d="M330 70 L540 70"/>
+      <path class="s-sen" d="M540 70 L600 44"/>
+      <text class="s-txt-b" x="195" y="180" text-anchor="middle">gelo derretendo</text>
+      <text class="s-txt-b" x="435" y="60" text-anchor="middle">água fervendo</text>
+      <text class="s-txt" x="80" y="176">gelo</text>
+      <text class="s-txt" x="270" y="135" text-anchor="end">água</text>
+      <text class="s-txt" x="560" y="40" text-anchor="end">vapor</text>
+    </svg>
+    <div class="legend"><span><i style="background:var(--sen)"></i>Rampa: calor sensível, a temperatura muda</span><span><i style="background:var(--lat)"></i>Trecho reto: calor latente, o estado muda</span></div>
+  </div>
+</header>
+
+<nav class="topbar" aria-label="Seções">
+  <div class="topbar-in"><span class="ttl">Calor sem mistério</span><span class="spacer"></span><span class="prog" id="prog">Checagens: <b>0</b> de 0 certas</span></div>
+  <div class="chips">
+    <a class="chip" href="#plano">Plano</a>
+    <a class="chip" href="#erros">Seus erros</a>
+    <a class="chip" href="#transmissao">1. Como o calor viaja</a>
+    <a class="chip" href="#brisas">2. Brisas</a>
+    <a class="chip" href="#estufa">3. Estufa</a>
+    <a class="chip" href="#sensivel">4. Calor sensível</a>
+    <a class="chip" href="#latente">5. Calor latente</a>
+    <a class="chip" href="#curva">6. Curva de aquecimento</a>
+    <a class="chip" href="#cola">Cola de revisão</a>
+    <a class="chip" href="#prova">Prova final</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- PLANO -->
+<section class="block" id="plano">
+  <h2>Plano de estudo</h2>
+  <p class="sub">Cinco dias, uns 40 minutos por dia. Marque cada dia quando terminar.</p>
+  <ul class="plan">
+    <li><span class="d">Dia 1</span><span class="w"><b>Como o calor viaja</b>Condução, convecção e radiação (parte 1). Assista aos dois vídeos e faça as checagens.<br><label><input type="checkbox" data-day="1"> Feito</label></span></li>
+    <li><span class="d">Dia 2</span><span class="w"><b>Brisas e estufa</b>Partes 2 e 3, que são os Desafios 1 e 2 da apostila. Tente explicar as brisas em voz alta, sem olhar.<br><label><input type="checkbox" data-day="2"> Feito</label></span></li>
+    <li><span class="d">Dia 3</span><span class="w"><b>Calor sensível</b>Parte 4. Depois refaça na apostila as questões 3 e 4 de calor sensível com as dicas daqui.<br><label><input type="checkbox" data-day="3"> Feito</label></span></li>
+    <li><span class="d">Dia 4</span><span class="w"><b>Calor latente e curva de aquecimento</b>Partes 5 e 6. Desenhe a curva de aquecimento da água de memória numa folha.<br><label><input type="checkbox" data-day="4"> Feito</label></span></li>
+    <li><span class="d">Dia 5</span><span class="w"><b>Revisão e prova final</b>Leia "Seus erros" e a cola de revisão, depois faça a prova final. Abaixo de 7? Revise as questões em vermelho e refaça.<br><label><input type="checkbox" data-day="5"> Feito</label></span></li>
+  </ul>
+</section>
+
+<!-- ERROS -->
+<section class="block" id="erros">
+  <h2>Seus erros, já corrigidos</h2>
+  <p class="sub">Olhando o que você fez na apostila e no gráfico da prova, os erros se repetem em quatro pontos. Saber quais são já é metade do caminho.</p>
+
+  <div class="callout warn"><div class="lab">1. Esquecer de passar kg para g</div>
+    <p>Nas tabelas, o calor específico e o calor latente são <b>por grama</b>. Então a massa tem que estar em gramas. <b>1 kg = 1000 g</b> e <b>1 L de água = 1000 g</b>.</p></div>
+  <div class="callout warn"><div class="lab">2. Esquecer o sinal de menos</div>
+    <p>Quando o corpo <b>perde</b> calor (esfria, solidifica ou liquefaz), a resposta é <b>negativa</b>.</p></div>
+  <div class="callout warn"><div class="lab">3. Errar a conta no final</div>
+    <p>Arme a conta com calma e confira se o resultado faz sentido: 200 g de água esquentando 75 °C não pode dar só 1500 cal.</p></div>
+  <div class="callout warn"><div class="lab">4. Confundir calor sensível com calor latente no gráfico</div>
+    <p>Rampa (temperatura subindo) é calor <b>sensível</b>. Trecho reto (temperatura parada) é calor <b>latente</b>, e ali o estado está mudando.</p></div>
+
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Questão da apostila</th><th>Conta certa</th><th>Resposta</th></tr>
+    <tr><td>Sensível 4a: bloco de platina de 15 kg</td><td>C = 15&nbsp;000 · 0,03</td><td>450 cal/°C</td></tr>
+    <tr><td>Sensível 4c: 1 L de água</td><td>C = 1000 · 1</td><td>1000 cal/°C</td></tr>
+    <tr><td>Sensível 4e: cilindro de ferro de 3,5 kg</td><td>C = 3500 · 0,11</td><td>385 cal/°C</td></tr>
+    <tr><td>Sensível 5: 200 g de água de 10 °C a 85 °C</td><td>Q = 200 · 1 · 75</td><td>15&nbsp;000 cal</td></tr>
+    <tr><td>Latente 1b: fundir 1 kg de cobre</td><td>Q = 1000 · 51</td><td>51&nbsp;000 cal</td></tr>
+    <tr><td>Latente 1c: liquefazer 350 g de vapor d’água</td><td>Q = 350 · (−540)</td><td>−189&nbsp;000 cal</td></tr>
+    <tr><td>Latente 1d: solidificar 1250 g de ouro</td><td>Q = 1250 · (−16)</td><td>−20&nbsp;000 cal</td></tr>
+  </table></div>
+  <div class="callout tip"><div class="lab">O que você já acertou</div><p>Você escolheu o valor certo na tabela em quase todas as questões, montou bem Q = m·c·Δθ nas questões 6, 7 e 8 e acertou a massa de 150 g do silício. A base está lá; falta cuidado com unidade, sinal e conta.</p></div>
+</section>
+
+<!-- 1 TRANSMISSAO -->
+<section class="block" id="transmissao">
+  <h2><span class="n">1</span>Como o calor viaja</h2>
+  <p class="sub">Calor é energia que passa do corpo <b>mais quente</b> para o <b>mais frio</b>. Ele pode viajar de três jeitos.</p>
+
+  <div class="trio">
+    <div class="t"><h4>Condução</h4><p>O calor passa de partícula para partícula, como uma fila passando um balde. Cada uma vibra e empurra a vizinha.</p><span class="key">Não há transporte de matéria.</span><p style="margin-top:6px">Ex.: a ponta da colher que esquenta inteira dentro da panela.</p></div>
+    <div class="t"><h4>Convecção</h4><p>Um <b>fluido</b> (líquido ou gás) se movimenta levando o calor junto. O que está quente sobe, o que está frio desce.</p><span class="key">Há transporte de matéria.</span><p style="margin-top:6px">Ex.: a água girando dentro da panela no fogo.</p></div>
+    <div class="t"><h4>Radiação</h4><p>O calor viaja como <b>ondas eletromagnéticas</b>, iguais à luz. Não precisa de nada no caminho, nem de ar.</p><span class="key">Funciona até no vácuo.</span><p style="margin-top:6px">Ex.: o calor do Sol e o calor da fogueira no rosto.</p></div>
+  </div>
+
+  <div class="callout"><div class="lab">Macete</div>
+    <p>Pergunte: <b>está encostando?</b> Então é condução (pense no cabo da panela). <b>Tem líquido ou ar se mexendo?</b> Convecção (pense na água girando). <b>Chega sem precisar de nada no caminho?</b> Radiação (pense no Sol).</p></div>
+
+  <h3>Respostas às perguntas da apostila</h3>
+  <div class="ex"><div class="lab">Por que a condução é mais eficiente nos sólidos?</div>
+    Nos sólidos as partículas estão bem juntinhas e presas umas às outras. Quando uma vibra, a vizinha sente na hora, então o calor passa mais fácil. Nos líquidos e gases as partículas ficam mais afastadas. Entre os sólidos, os <b>metais</b> são os melhores condutores.</div>
+  <div class="ex"><div class="lab">Qual a vantagem da colher de pau?</div>
+    A madeira é <b>má condutora</b> de calor (isolante térmico). O calor da comida quase não sobe pelo cabo, então a colher não esquenta e você não queima a mão. Com uma colher de metal, o calor chega rápido até a sua mão por condução.</div>
+  <div class="ex"><div class="lab">Como o calor se propaga quando colocamos água para ferver?</div>
+    O fogo esquenta o fundo da panela, e o calor atravessa o metal por <b>condução</b>. A água do fundo esquenta, fica mais leve e sobe; a água fria de cima desce. Esse sobe e desce são as <b>correntes de convecção</b>, que espalham o calor pela água toda.</div>
+
+  <div class="videos">
+    <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/CgQyQd8_AQM" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="cap"><div class="t">Transmissão de calor, parte 1</div><div class="c">Brasil Escola</div></div></div>
+    <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/wmSfNekdnrM" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="cap"><div class="t">Formas de propagação de calor: condução, convecção e radiação</div><div class="c">Aula de Ciências para o 7º ano</div></div></div>
+  </div>
+
+  <div class="quiz" data-answer="a" data-explain="Encostar é contato direto, e calor por contato é condução.">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">Você encosta a mão no cabo de metal de uma panela quente e se queima. O calor chegou à sua mão por:</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>Condução</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>Convecção</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>Radiação</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>Nenhuma delas, foi o metal que gerou calor</span></button>
+    </div><div class="fb"></div></div>
+
+  <div class="quiz" data-answer="c" data-explain="O ar frio é mais pesado e desce; o ar quente sobe. Colocando o aparelho no alto, o ar frio desce e circula pela sala toda: é convecção.">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">Por que o ar-condicionado costuma ser instalado no alto da parede?</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>Porque o ar frio sobe e se perde no teto</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>Porque assim o frio chega por radiação</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>Porque o ar frio desce e forma correntes de convecção pela sala</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>Porque a parede conduz o frio para o chão</span></button>
+    </div><div class="fb"></div></div>
+
+  <div class="quiz" data-answer="b" data-explain="Entre o Sol e a Terra existe o vácuo do espaço. Só a radiação viaja sem precisar de um meio material.">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">O calor do Sol chega até a Terra atravessando o espaço, onde não há ar. Isso só é possível porque:</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>A condução funciona no vácuo</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>A radiação não precisa de meio material</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>O espaço é cheio de um fluido que faz convecção</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>O calor do Sol chega por condução e convecção juntas</span></button>
+    </div><div class="fb"></div></div>
+</section>
+
+<!-- 2 BRISAS -->
+<section class="block" id="brisas">
+  <h2><span class="n">2</span>Brisa marítima e brisa terrestre</h2>
+  <p class="sub">Desafio 1 da apostila. Aqui entra uma ideia da parte 4: o <b>calor específico</b>.</p>
+
+  <p>A água tem calor específico <b>alto</b> (1,00 cal/g·°C): ela demora para esquentar e também demora para esfriar. A areia e a terra têm calor específico <b>baixo</b>: esquentam rápido e esfriam rápido. É por isso que, ao meio-dia, a areia queima o pé e a água do mar continua fresca.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 230" role="img" aria-label="De dia o vento sopra do mar para a terra; à noite, da terra para o mar">
+      <defs>
+        <marker id="aa" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="ah-air" d="M0 0 L10 5 L0 10 z"/></marker>
+      </defs>
+      <!-- DIA -->
+      <rect class="s-sky" x="5" y="5" width="305" height="220" rx="12"/>
+      <circle class="s-sun" cx="40" cy="35" r="16"/>
+      <text class="s-txt-b" x="290" y="30" text-anchor="end">De dia: brisa marítima</text>
+      <rect class="s-land" x="5" y="170" width="150" height="55"/>
+      <rect class="s-sea" x="155" y="178" width="155" height="47"/>
+      <text class="s-txt-b" x="80" y="205" text-anchor="middle" style="fill:#3b2a10">terra (mais quente)</text>
+      <text class="s-txt-b" x="232" y="207" text-anchor="middle" style="fill:#fff">mar (mais frio)</text>
+      <path class="s-air" d="M240 160 L95 160" marker-end="url(#aa)"/>
+      <path class="s-air" d="M75 150 L75 75" marker-end="url(#aa)"/>
+      <path class="s-air" d="M95 62 L240 62" marker-end="url(#aa)"/>
+      <path class="s-air" d="M262 75 L262 148" marker-end="url(#aa)"/>
+      <text class="s-txt" x="85" y="110">ar quente sobe</text>
+      <text class="s-txt" x="168" y="153" text-anchor="middle">vento do mar</text>
+      <!-- NOITE -->
+      <rect class="s-sky" x="330" y="5" width="305" height="220" rx="12"/>
+      <circle class="s-moon" cx="365" cy="35" r="14"/>
+      <text class="s-txt-b" x="615" y="30" text-anchor="end">À noite: brisa terrestre</text>
+      <rect class="s-land" x="330" y="170" width="150" height="55"/>
+      <rect class="s-sea" x="480" y="178" width="155" height="47"/>
+      <text class="s-txt-b" x="405" y="205" text-anchor="middle" style="fill:#3b2a10">terra (mais fria)</text>
+      <text class="s-txt-b" x="557" y="207" text-anchor="middle" style="fill:#fff">mar (mais quente)</text>
+      <path class="s-air" d="M420 160 L565 160" marker-end="url(#aa)"/>
+      <path class="s-air" d="M587 150 L587 75" marker-end="url(#aa)"/>
+      <path class="s-air" d="M565 62 L420 62" marker-end="url(#aa)"/>
+      <path class="s-air" d="M398 75 L398 148" marker-end="url(#aa)"/>
+      <text class="s-txt" x="577" y="110" text-anchor="end">ar quente sobe</text>
+      <text class="s-txt" x="492" y="153" text-anchor="middle">vento da terra</text>
+    </svg>
+    <div class="cap">As setas mostram a corrente de convecção do ar. Embaixo, perto do chão, fica o vento que a gente sente.</div>
+  </div>
+
+  <div class="two">
+    <div class="ex"><div class="lab">De dia: brisa marítima</div>
+      <span class="step">1. O Sol esquenta a terra mais rápido que o mar (a terra tem calor específico menor).</span>
+      <span class="step">2. O ar em cima da terra esquenta, fica mais leve e sobe.</span>
+      <span class="step">3. O ar mais frio do mar vem ocupar o lugar.</span>
+      <span class="ans">Vento do mar para a terra</span></div>
+    <div class="ex"><div class="lab">À noite: brisa terrestre</div>
+      <span class="step">1. A terra esfria rápido; o mar guarda o calor (calor específico alto).</span>
+      <span class="step">2. Agora o ar em cima do mar está mais quente e sobe.</span>
+      <span class="step">3. O ar mais frio da terra vai para o mar.</span>
+      <span class="ans">Vento da terra para o mar</span></div>
+  </div>
+
+  <div class="callout"><div class="lab">Macete</div>
+    <p>A brisa leva o nome de <b>onde ela vem</b>. Marítima vem do <b>mar</b> (de dia). Terrestre vem da <b>terra</b> (à noite). E o motor de tudo é a <b>convecção</b>: ar quente sobe, ar frio ocupa o lugar.</p></div>
+
+  <div class="videos">
+    <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/O4GaQtEdS5g" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="cap"><div class="t">Convecção térmica: brisa marítima e brisa terrestre</div><div class="c">Vídeo curto sobre as brisas</div></div></div>
+    <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/eBoqs_4ROAI" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="cap"><div class="t">Brisa marítima e brisa terrestre: como se formam?</div><div class="c">Com o Prof. Ruibran dos Reis</div></div></div>
+  </div>
+
+  <div class="quiz" data-answer="d" data-explain="À noite a terra esfria mais rápido que o mar. O ar sobre o mar fica mais quente e sobe, e o ar frio da terra vai para o mar: brisa terrestre.">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">À noite, na praia, o vento sopra:</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>Do mar para a terra, e é a brisa marítima</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>Do mar para a terra, e é a brisa terrestre</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>Da terra para o mar, e é a brisa marítima</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>Da terra para o mar, e é a brisa terrestre</span></button>
+    </div><div class="fb"></div></div>
+
+  <div class="quiz" data-answer="a" data-explain="Calor específico baixo quer dizer que pouco calor já muda bastante a temperatura. Por isso a areia esquenta (e esfria) mais rápido que a água.">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">Por que a areia esquenta mais rápido que a água do mar?</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>Porque a areia tem calor específico menor que a água</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>Porque a areia tem calor específico maior que a água</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>Porque o Sol manda mais radiação para a areia</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>Porque a água conduz o calor para o fundo do mar</span></button>
+    </div><div class="fb"></div></div>
+</section>
+
+<!-- 3 ESTUFA -->
+<section class="block" id="estufa">
+  <h2><span class="n">3</span>Como funciona uma estufa</h2>
+  <p class="sub">Desafio 2 da apostila. A estufa de plantas é uma casinha de vidro ou plástico transparente que fica mais quente por dentro do que o lado de fora. As três formas de calor aparecem nela.</p>
+
+  <div class="ex"><div class="lab">Passo a passo</div>
+    <span class="step"><b>Radiação, entrando:</b> a luz do Sol atravessa o vidro e aquece o solo e as plantas.</span>
+    <span class="step"><b>Radiação, ficando presa:</b> o solo aquecido solta calor como radiação infravermelha (invisível). O vidro deixa pouco dessa radiação sair.</span>
+    <span class="step"><b>Convecção:</b> o ar perto do solo esquenta e sobe, mas bate no teto e não escapa. O ar quente fica preso lá dentro.</span>
+    <span class="step"><b>Condução:</b> um pouco de calor atravessa as paredes de vidro por condução e se perde para fora. É a parte que "vaza".</span>
+  </div>
+  <div class="callout tip"><div class="lab">Resumo para a prova</div>
+    <p>A estufa deixa a energia do Sol <b>entrar</b> com facilidade, mas <b>dificulta a saída</b>: segura a radiação infravermelha e prende o ar quente, impedindo que a convecção leve o calor embora.</p></div>
+
+  <div class="videos">
+    <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/LoanMEB8EU4" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="cap"><div class="t">Como funciona uma estufa e a relação com o efeito estufa</div><div class="c">Demonstração com mini estufa caseira</div></div></div>
+    <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/WVongbcyYbg" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="cap"><div class="t">Aplicações da irradiação térmica</div><div class="c">Kuadro</div></div></div>
+  </div>
+
+  <div class="quiz" data-answer="b" data-explain="O ar aquecido sobe por convecção, mas o teto o segura. Sem o teto, esse ar quente iria embora.">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">Qual é o papel do teto da estufa em relação à convecção?</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>Ele deixa o ar quente sair para renovar o ar</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>Ele impede que o ar quente, que sobe, escape da estufa</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>Ele produz calor por condução</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>Ele bloqueia a luz do Sol</span></button>
+    </div><div class="fb"></div></div>
+</section>
+
+<!-- 4 SENSIVEL -->
+<section class="block" id="sensivel">
+  <h2><span class="n">4</span>Calor sensível</h2>
+  <p class="sub">Calor <b>sensível</b> é o que faz a <b>temperatura mudar</b>. Dá para "sentir" no termômetro.</p>
+
+  <div class="formula">
+    <span class="eq">Q = m · c · Δθ</span>
+    <div class="what">
+      <div><b>Q</b>: quantidade de calor (cal)</div>
+      <div><b>m</b>: massa (g)</div>
+      <div><b>c</b>: calor específico, da tabela (cal/g·°C)</div>
+      <div><b>Δθ</b>: variação de temperatura = <b>final − inicial</b> (°C)</div>
+    </div>
+  </div>
+  <div class="callout"><div class="lab">Macete</div><p>Leia a fórmula como <b>"Que MaCeTe"</b>: Q = <b>M</b> · <b>C</b> · <b>T</b> (de temperatura, o Δθ).</p></div>
+
+  <h3>Calor específico (c) e capacidade térmica (C)</h3>
+  <p>Os dois nomes parecem iguais, mas não são. A pergunta 2 da apostila pede exatamente essa diferença.</p>
+  <div class="two">
+    <div class="ex"><div class="lab">Calor específico: c minúsculo</div>É da <b>substância</b>. Diz quanto calor <b>1 grama</b> precisa para subir <b>1 °C</b>. Água é sempre 1,00, seja um copo ou uma piscina.</div>
+    <div class="ex"><div class="lab">Capacidade térmica: C maiúsculo</div>É do <b>corpo inteiro</b>. Diz quanto calor o corpo todo precisa para subir 1 °C. Depende da massa.<br><b>C = m · c</b> &nbsp;ou&nbsp; <b>C = Q / Δθ</b> (unidade: cal/°C)</div>
+  </div>
+  <div class="callout tip"><div class="lab">Exemplo do dia a dia</div><p>Um copo d’água e uma piscina têm o <b>mesmo</b> calor específico (é tudo água). Mas a piscina tem uma capacidade térmica <b>enorme</b>, porque tem muito mais massa. Por isso ela demora muito mais para esquentar.</p></div>
+
+  <h3>Tabela da apostila</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Substância</th><th>c (cal/g·°C)</th><th>Substância</th><th>c (cal/g·°C)</th></tr>
+    <tr><td>platina</td><td>0,03</td><td>silício</td><td>0,18</td></tr>
+    <tr><td>mercúrio</td><td>0,03</td><td>alumínio</td><td>0,22</td></tr>
+    <tr><td>cobre</td><td>0,09</td><td>álcool</td><td>0,55</td></tr>
+    <tr><td>níquel</td><td>0,10</td><td>prata</td><td>0,56</td></tr>
+    <tr><td>ferro</td><td>0,11</td><td>água</td><td>1,00</td></tr>
+    <tr><td></td><td></td><td>amônia</td><td>1,12</td></tr>
+  </table></div>
+
+  <h3>Exemplos resolvidos</h3>
+  <div class="ex"><div class="lab">Calcular Q: aquecer 200 g de água de 10 °C até 85 °C</div>
+    <span class="step">Δθ = 85 − 10 = 75 °C</span>
+    <span class="step">Q = 200 · 1 · 75</span>
+    <span class="ans">Q = 15&nbsp;000 cal</span></div>
+  <div class="ex"><div class="lab">Calcular C: bloco de platina de 15 kg</div>
+    <span class="step">Primeiro, kg → g: 15 kg = 15&nbsp;000 g</span>
+    <span class="step">C = m · c = 15&nbsp;000 · 0,03</span>
+    <span class="ans">C = 450 cal/°C</span></div>
+  <div class="ex"><div class="lab">Descobrir a massa: bloco de ferro recebeu 6600 cal e foi de 150 °C para 182 °C</div>
+    <span class="step">Δθ = 182 − 150 = 32 °C</span>
+    <span class="step">6600 = m · 0,11 · 32 → 6600 = 3,52 · m</span>
+    <span class="step">m = 6600 ÷ 3,52</span>
+    <span class="ans">m = 1875 g</span></div>
+  <div class="ex"><div class="lab">Descobrir o metal: 500 g recebem 5320 cal e vão de 45 °C para 64 °C</div>
+    <span class="step">Δθ = 64 − 45 = 19 °C</span>
+    <span class="step">5320 = 500 · c · 19 → 5320 = 9500 · c</span>
+    <span class="step">c = 5320 ÷ 9500 = 0,56 cal/g·°C</span>
+    <span class="ans">Pela tabela, é a prata</span></div>
+
+  <div class="callout warn"><div class="lab">Quando esfria, Q é negativo</div><p>Se a temperatura cai, Δθ fica negativo, e Q também. Exemplo: 100 g de água de 80 °C para 30 °C → Δθ = 30 − 80 = −50 °C → Q = 100 · 1 · (−50) = <b>−5000 cal</b>. O sinal de menos quer dizer que a água <b>cedeu</b> calor.</p></div>
+
+  <div class="videos">
+    <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/LwTXl5Hc6LQ" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="cap"><div class="t">Calor: diferença entre calor sensível e calor latente</div><div class="c">Brasil Escola</div></div></div>
+    <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/hqUHd1yw7Iw" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="cap"><div class="t">Calor sensível: capacidade térmica e calor específico</div><div class="c">Aula com os conceitos e a fórmula</div></div></div>
+  </div>
+
+  <div class="quiz" data-answer="c" data-explain="Δθ = 60 − 20 = 40 °C. Q = 500 · 0,11 · 40 = 2200 cal. Quem marcou 3300 usou 60 °C em vez da variação.">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">Quanto calor é preciso para aquecer 500 g de ferro de 20 °C até 60 °C?</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>220 cal</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>3300 cal</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>2200 cal</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>22&nbsp;000 cal</span></button>
+    </div><div class="fb"></div></div>
+
+  <div class="quiz" data-answer="d" data-explain="3 kg = 3000 g. C = 3000 · 0,09 = 270 cal/°C. Quem marcou 0,27 esqueceu de passar kg para g.">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">Qual é a capacidade térmica de uma barra de cobre de 3 kg?</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>0,27 cal/°C</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>27 cal/°C</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>2700 cal/°C</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>270 cal/°C</span></button>
+    </div><div class="fb"></div></div>
+
+  <div class="quiz" data-answer="a" data-explain="Calor específico (c) é da substância e não depende da quantidade. Capacidade térmica (C) é do corpo inteiro e depende da massa: C = m · c.">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">Um balde e uma xícara, ambos com água. O que é igual nos dois?</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>O calor específico</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>A capacidade térmica</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>Os dois</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>Nenhum dos dois</span></button>
+    </div><div class="fb"></div></div>
+</section>
+
+<!-- 5 LATENTE -->
+<section class="block" id="latente">
+  <h2><span class="n">5</span>Calor latente</h2>
+  <p class="sub">Calor <b>latente</b> é o que faz o corpo <b>mudar de estado</b> (sólido, líquido, gasoso). Enquanto o estado muda, a <b>temperatura fica parada</b>.</p>
+
+  <div class="formula lat">
+    <span class="eq">Q = m · L</span>
+    <div class="what">
+      <div><b>Q</b>: quantidade de calor (cal)</div>
+      <div><b>m</b>: massa (g)</div>
+      <div><b>L</b>: calor latente da mudança, da tabela (cal/g)</div>
+      <div>Não tem Δθ, porque a temperatura não muda.</div>
+    </div>
+  </div>
+  <div class="callout lat"><div class="lab">Macete</div><p><b>L</b>atente = <b>L</b>á vem mudança de estado. Se o estado muda, a fórmula usa o <b>L</b>.</p></div>
+
+  <h3>Recebe ou cede calor? O sinal</h3>
+  <div class="fig">
+    <svg viewBox="0 0 640 220" role="img" aria-label="Indo de sólido para líquido para gasoso o corpo recebe calor; voltando, cede calor">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="ah-hot" d="M0 0 L10 5 L0 10 z"/></marker>
+        <marker id="ac" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="ah-cold" d="M0 0 L10 5 L0 10 z"/></marker>
+      </defs>
+      <rect class="s-box" x="30" y="88" width="130" height="44" rx="10"/><text class="s-txt-b" x="95" y="115" text-anchor="middle">sólido</text>
+      <rect class="s-box" x="255" y="88" width="130" height="44" rx="10"/><text class="s-txt-b" x="320" y="115" text-anchor="middle">líquido</text>
+      <rect class="s-box" x="480" y="88" width="130" height="44" rx="10"/><text class="s-txt-b" x="545" y="115" text-anchor="middle">gasoso</text>
+      <path class="s-hot" d="M120 84 Q207 34 290 84" marker-end="url(#ah)"/>
+      <path class="s-hot" d="M345 84 Q432 34 515 84" marker-end="url(#ah)"/>
+      <text class="s-hot-t" x="207" y="45" text-anchor="middle">fusão</text>
+      <text class="s-hot-t" x="432" y="45" text-anchor="middle">vaporização</text>
+      <path class="s-cold" d="M290 136 Q207 186 120 136" marker-end="url(#ac)"/>
+      <path class="s-cold" d="M515 136 Q432 186 345 136" marker-end="url(#ac)"/>
+      <text class="s-cold-t" x="207" y="185" text-anchor="middle">solidificação</text>
+      <text class="s-cold-t" x="432" y="185" text-anchor="middle">liquefação</text>
+      <text class="s-hot-t" x="320" y="18" text-anchor="middle">indo para a direita: recebe calor, Q positivo (+)</text>
+      <text class="s-cold-t" x="320" y="212" text-anchor="middle">voltando para a esquerda: cede calor, Q negativo (−)</text>
+    </svg>
+    <div class="cap">Sublimação (sólido direto para gás) também recebe calor; o caminho contrário (gás direto para sólido) cede calor.</div>
+  </div>
+  <div class="callout warn"><div class="lab">Regra da apostila</div><p>Nas mudanças "de volta" (solidificação e liquefação) o calor latente é <b>negativo</b>. Exemplo da própria apostila: para solidificar 350 g de água a 0 °C, Q = 350 · (−80) = <b>−28&nbsp;000 cal</b>. A água perdeu 28&nbsp;000 calorias.</p></div>
+
+  <h3>Tabelas da apostila (pressão normal)</h3>
+  <div class="two">
+    <div class="tbl-wrap" style="margin:0"><table class="tbl">
+      <tr><th>Substância</th><th>Fusão a</th><th>L fusão (cal/g)</th></tr>
+      <tr><td>água</td><td>0 °C</td><td>80</td></tr>
+      <tr><td>álcool</td><td>−115 °C</td><td>25</td></tr>
+      <tr><td>alumínio</td><td>660 °C</td><td>93</td></tr>
+      <tr><td>amônia</td><td>−75 °C</td><td>108</td></tr>
+      <tr><td>chumbo</td><td>327 °C</td><td>6,3</td></tr>
+      <tr><td>cobre</td><td>1083 °C</td><td>51</td></tr>
+      <tr><td>ouro</td><td>1063 °C</td><td>16</td></tr>
+      <tr><td>prata</td><td>960 °C</td><td>24</td></tr>
+    </table></div>
+    <div class="tbl-wrap" style="margin:0"><table class="tbl">
+      <tr><th>Substância</th><th>Ebulição a</th><th>L vaporização (cal/g)</th></tr>
+      <tr><td>água</td><td>100 °C</td><td>540</td></tr>
+      <tr><td>álcool</td><td>79 °C</td><td>204</td></tr>
+      <tr><td>alumínio</td><td>2056 °C</td><td>2000</td></tr>
+      <tr><td>amônia</td><td>−34 °C</td><td>327</td></tr>
+      <tr><td>chumbo</td><td>1744 °C</td><td>222</td></tr>
+      <tr><td>cobre</td><td>2595 °C</td><td>1760</td></tr>
+      <tr><td>ouro</td><td>2966 °C</td><td>446</td></tr>
+      <tr><td>prata</td><td>2212 °C</td><td>552</td></tr>
+    </table></div>
+  </div>
+  <p style="margin-top:12px">Dica: a temperatura que aparece no enunciado (ex.: "álcool a 79 °C") é só para mostrar que o corpo já está no ponto de mudar de estado. Ela <b>não entra na conta</b>.</p>
+
+  <h3>Exemplos resolvidos</h3>
+  <div class="ex"><div class="lab">Vaporizar 500 g de álcool a 79 °C</div>
+    <span class="step">Vaporização recebe calor: L = +204 cal/g</span>
+    <span class="step">Q = 500 · 204</span>
+    <span class="ans">Q = 102&nbsp;000 cal</span></div>
+  <div class="ex"><div class="lab">Fundir 1 kg de cobre a 1083 °C</div>
+    <span class="step">1 kg = 1000 g; fusão recebe calor: L = +51 cal/g</span>
+    <span class="step">Q = 1000 · 51</span>
+    <span class="ans">Q = 51&nbsp;000 cal</span></div>
+  <div class="ex"><div class="lab">Liquefazer 350 g de vapor d’água a 100 °C</div>
+    <span class="step">Liquefação cede calor: L = −540 cal/g</span>
+    <span class="step">Q = 350 · (−540)</span>
+    <span class="ans">Q = −189&nbsp;000 cal</span></div>
+  <div class="ex"><div class="lab">Solidificar 1250 g de ouro a 1063 °C</div>
+    <span class="step">Solidificação cede calor: L = −16 cal/g</span>
+    <span class="step">Q = 1250 · (−16)</span>
+    <span class="ans">Q = −20&nbsp;000 cal</span></div>
+
+  <div class="quiz" data-answer="b" data-explain="Na mudança de estado a temperatura não muda, então Δθ = 0 e a fórmula do calor sensível daria Q = 0. Mas o corpo está recebendo calor! Esse calor está sendo usado para mudar o estado, por isso a fórmula certa é Q = m · L. É a resposta da pergunta 2 da aula 28.">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">Um corpo está recebendo calor bem no meio de uma mudança de estado. Se usarmos Q = m · c · Δθ, o que acontece?</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>Dá certo, é a mesma coisa que Q = m · L</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>Dá Q = 0, porque Δθ = 0; essa fórmula não serve na mudança de estado</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>Dá um Q negativo, porque o corpo esfria</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>Dá um Q enorme, porque a temperatura sobe muito</span></button>
+    </div><div class="fb"></div></div>
+
+  <div class="quiz" data-answer="c" data-explain="Fusão do alumínio: L = 93 cal/g. Q = 300 · 93 = 27 900 cal. Quem marcou 600 000 usou o L de vaporização (2000).">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">Quanto calor é preciso para fundir 300 g de alumínio a 660 °C?</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>2790 cal</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>600&nbsp;000 cal</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>27&nbsp;900 cal</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>198&nbsp;000 cal</span></button>
+    </div><div class="fb"></div></div>
+
+  <div class="quiz" data-answer="a" data-explain="Solidificar é cede calor, então L = −80 cal/g. Q = 100 · (−80) = −8000 cal.">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">Qual é a quantidade de calor para solidificar 100 g de água a 0 °C?</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>−8000 cal</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>+8000 cal</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>−54&nbsp;000 cal</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>−800 cal</span></button>
+    </div><div class="fb"></div></div>
+</section>
+
+<!-- 6 CURVA -->
+<section class="block" id="curva">
+  <h2><span class="n">6</span>Curva de aquecimento</h2>
+  <p class="sub">Esse é o tipo de gráfico que caiu na sua prova. Ele junta tudo: calor sensível nas rampas e calor latente nos trechos retos.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 330" role="img" aria-label="Curva de aquecimento da água de menos 50 a 110 graus, com trechos A a E">
+      <line class="s-grid" x1="70" y1="230" x2="620" y2="230"/>
+      <line class="s-grid" x1="70" y1="90" x2="620" y2="90"/>
+      <line class="s-grid" x1="70" y1="76" x2="620" y2="76"/>
+      <path class="s-axis" d="M70 20 V300 H628"/>
+      <text class="s-txt" x="62" y="304" text-anchor="end">−50 °C</text>
+      <text class="s-txt" x="62" y="234" text-anchor="end">0 °C</text>
+      <text class="s-txt" x="62" y="96" text-anchor="end">100 °C</text>
+      <text class="s-txt" x="62" y="72" text-anchor="end">110 °C</text>
+      <text class="s-txt" x="70" y="14">temperatura</text>
+      <text class="s-txt" x="626" y="322" text-anchor="end">calor recebido</text>
+      <path class="s-sen" d="M78 296 L160 230"/>
+      <path class="s-lat" d="M160 230 L290 230"/>
+      <path class="s-sen" d="M290 230 L370 90"/>
+      <path class="s-lat" d="M370 90 L560 90"/>
+      <path class="s-sen" d="M560 90 L605 76"/>
+      <circle class="s-dot-sen" cx="119" cy="263" r="13"/><text class="s-letter" x="119" y="268" text-anchor="middle">A</text>
+      <circle class="s-dot-lat" cx="225" cy="230" r="13"/><text class="s-letter" x="225" y="235" text-anchor="middle">B</text>
+      <circle class="s-dot-sen" cx="330" cy="160" r="13"/><text class="s-letter" x="330" y="165" text-anchor="middle">C</text>
+      <circle class="s-dot-lat" cx="465" cy="90" r="13"/><text class="s-letter" x="465" y="95" text-anchor="middle">D</text>
+      <circle class="s-dot-sen" cx="583" cy="83" r="13"/><text class="s-letter" x="583" y="88" text-anchor="middle">E</text>
+      <text class="s-txt" x="140" y="290">gelo</text>
+      <text class="s-txt" x="225" y="256" text-anchor="middle">gelo + água</text>
+      <text class="s-txt" x="352" y="200">água</text>
+      <text class="s-txt" x="465" y="118" text-anchor="middle">água + vapor</text>
+      <text class="s-txt" x="600" y="62" text-anchor="end">vapor</text>
+    </svg>
+    <div class="cap">Gráfico fora de escala: na vida real, o trecho D (ferver toda a água) é o mais comprido de todos.</div>
+  </div>
+
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Trecho</th><th>O que acontece</th><th>Tipo de calor</th><th>Fórmula</th></tr>
+    <tr><td><b>A</b></td><td>Gelo esquentando de −50 °C até 0 °C</td><td>Sensível</td><td>Q = m · c<sub>gelo</sub> · Δθ</td></tr>
+    <tr><td><b>B</b></td><td>Gelo derretendo a 0 °C (fusão)</td><td>Latente</td><td>Q = m · L<sub>fusão</sub></td></tr>
+    <tr><td><b>C</b></td><td>Água esquentando de 0 °C até 100 °C</td><td>Sensível</td><td>Q = m · c<sub>água</sub> · Δθ</td></tr>
+    <tr><td><b>D</b></td><td>Água fervendo a 100 °C (vaporização)</td><td>Latente</td><td>Q = m · L<sub>vaporização</sub></td></tr>
+    <tr><td><b>E</b></td><td>Vapor esquentando de 100 °C até 110 °C</td><td>Sensível</td><td>Q = m · c<sub>vapor</sub> · Δθ</td></tr>
+  </table></div>
+
+  <div class="callout"><div class="lab">Macete do gráfico</div><p><b>Subiu? Sensível.</b> A linha inclinada mostra a temperatura mudando: use Q = m·c·Δθ.<br><b>Parou? Latente.</b> A linha reta mostra o estado mudando: use Q = m·L. No trecho de fusão use L de <b>fusão</b>; no de vaporização, L de <b>vaporização</b>.</p></div>
+
+  <h3>Jogo: classifique cada trecho</h3>
+  <p>Olhe o gráfico acima e escolha o tipo de calor de cada letra.</p>
+  <div class="game">
+    <div class="quiz mini" data-answer="s" data-explain="A temperatura sobe de −50 °C a 0 °C: o gelo só esquenta, sem derreter.">
+      <p class="q"><span class="badge-l">A</span>Gelo de −50 °C a 0 °C</p>
+      <div class="opts"><button class="opt" data-opt="s"><span>Sensível</span></button><button class="opt" data-opt="l"><span>Latente</span></button></div><div class="fb"></div></div>
+    <div class="quiz mini" data-answer="l" data-explain="Linha reta a 0 °C: o gelo está derretendo (fusão). Foi aqui que a prova marcou erro.">
+      <p class="q"><span class="badge-l">B</span>Trecho reto a 0 °C</p>
+      <div class="opts"><button class="opt" data-opt="s"><span>Sensível</span></button><button class="opt" data-opt="l"><span>Latente</span></button></div><div class="fb"></div></div>
+    <div class="quiz mini" data-answer="s" data-explain="A água líquida esquenta de 0 °C a 100 °C: a temperatura muda.">
+      <p class="q"><span class="badge-l">C</span>Água de 0 °C a 100 °C</p>
+      <div class="opts"><button class="opt" data-opt="s"><span>Sensível</span></button><button class="opt" data-opt="l"><span>Latente</span></button></div><div class="fb"></div></div>
+    <div class="quiz mini" data-answer="l" data-explain="Linha reta a 100 °C: a água está virando vapor (vaporização). Use L de vaporização, não de fusão.">
+      <p class="q"><span class="badge-l">D</span>Trecho reto a 100 °C</p>
+      <div class="opts"><button class="opt" data-opt="s"><span>Sensível</span></button><button class="opt" data-opt="l"><span>Latente</span></button></div><div class="fb"></div></div>
+    <div class="quiz mini" data-answer="s" data-explain="O vapor esquenta de 100 °C a 110 °C: a temperatura muda.">
+      <p class="q"><span class="badge-l">E</span>Vapor de 100 °C a 110 °C</p>
+      <div class="opts"><button class="opt" data-opt="s"><span>Sensível</span></button><button class="opt" data-opt="l"><span>Latente</span></button></div><div class="fb"></div></div>
+  </div>
+
+  <h3>Exemplo completo: 100 g de gelo a −50 °C virando vapor a 110 °C</h3>
+  <p style="color:var(--muted);font-size:.95rem">Dados que viriam no enunciado: c<sub>gelo</sub> = 0,5 cal/g·°C, c<sub>água</sub> = 1 cal/g·°C, c<sub>vapor</sub> = 0,5 cal/g·°C, L<sub>fusão</sub> = 80 cal/g, L<sub>vaporização</sub> = 540 cal/g.</p>
+  <div class="ex"><div class="lab">Uma conta para cada trecho, depois soma</div>
+    <span class="step"><b>A</b> (sensível): Q₁ = 100 · 0,5 · 50 = 2500 cal</span>
+    <span class="step"><b>B</b> (latente): Q₂ = 100 · 80 = 8000 cal</span>
+    <span class="step"><b>C</b> (sensível): Q₃ = 100 · 1 · 100 = 10&nbsp;000 cal</span>
+    <span class="step"><b>D</b> (latente): Q₄ = 100 · 540 = 54&nbsp;000 cal</span>
+    <span class="step"><b>E</b> (sensível): Q₅ = 100 · 0,5 · 10 = 500 cal</span>
+    <span class="step">Total = 2500 + 8000 + 10&nbsp;000 + 54&nbsp;000 + 500</span>
+    <span class="ans">Q total = 75&nbsp;000 cal</span></div>
+
+  <div class="videos">
+    <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/IBfDX79Hc8s" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="cap"><div class="t">Calor latente e curva de aquecimento</div><div class="c">Prof. Josi Brahm</div></div></div>
+    <div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/fYzY_ru1Tz0" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="cap"><div class="t">Calorimetria: calor sensível × calor latente e curva de aquecimento da água</div><div class="c">Quadro Livre, Prof. Olivier Jr.</div></div></div>
+  </div>
+
+  <div class="quiz" data-answer="b" data-explain="Trecho C é água líquida esquentando: sensível. Q = 50 · 1 · (100 − 0) = 5000 cal.">
+    <span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span>
+    <p class="q">Com 50 g de água, quanto calor é preciso no trecho C (de 0 °C a 100 °C)?</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="ol">A</span><span>4000 cal</span></button>
+      <button class="opt" data-opt="b"><span class="ol">B</span><span>5000 cal</span></button>
+      <button class="opt" data-opt="c"><span class="ol">C</span><span>27&nbsp;000 cal</span></button>
+      <button class="opt" data-opt="d"><span class="ol">D</span><span>500 cal</span></button>
+    </div><div class="fb"></div></div>
+</section>
+
+<!-- COLA -->
+<section class="block" id="cola">
+  <h2>Cola de revisão</h2>
+  <p class="sub">Tudo numa olhada só, para a véspera da prova.</p>
+  <div class="cola">
+    <div class="c"><h4>Calor sensível</h4><div class="eq">Q = m · c · Δθ</div><p>A temperatura muda. Δθ = final − inicial.</p></div>
+    <div class="c l"><h4>Calor latente</h4><div class="eq">Q = m · L</div><p>O estado muda e a temperatura fica parada.</p></div>
+    <div class="c"><h4>Capacidade térmica</h4><div class="eq">C = m · c = Q / Δθ</div><p>É do corpo inteiro; unidade cal/°C.</p></div>
+    <div class="c"><h4>Sinal</h4><div class="eq">Recebe +, cede −</div><p>Solidificação e liquefação: L negativo.</p></div>
+    <div class="c"><h4>Unidades</h4><div class="eq">1 kg = 1000 g</div><p>1 L de água = 1000 g. Massa sempre em gramas.</p></div>
+    <div class="c"><h4>Calor viaja por</h4><div class="eq">Condução, convecção, radiação</div><p>Contato; fluido circulando; ondas (até no vácuo).</p></div>
+    <div class="c"><h4>Brisas</h4><div class="eq">Nome de onde vem</div><p>Dia: do mar (marítima). Noite: da terra (terrestre).</p></div>
+    <div class="c l"><h4>Gráfico</h4><div class="eq">Subiu? Sensível. Parou? Latente.</div><p>Reto a 0 °C: fusão. Reto a 100 °C: vaporização.</p></div>
+  </div>
+</section>
+
+<!-- PROVA -->
+<section class="block" id="prova">
+  <h2>Prova final</h2>
+  <div class="exam-wrap">
+    <p class="exam-intro">São <b>10 questões</b>, cada uma vale <b>1 ponto</b>. Use as tabelas da apostila (estão nas partes 4 e 5). Faça as contas no papel, responda todas e clique em <b>Corrigir prova</b>.</p>
+    <form class="exam" id="exam">
+      <div class="q" data-answer="c"><p class="qt"><span class="qn">1.</span> Numa estufa, a luz do Sol atravessa o vidro e aquece o solo. A energia do Sol chega até a estufa por:</p>
+        <label class="o"><input type="radio" name="q1" value="a"><span>Condução</span></label>
+        <label class="o"><input type="radio" name="q1" value="b"><span>Convecção</span></label>
+        <label class="o"><input type="radio" name="q1" value="c"><span>Radiação</span></label>
+        <label class="o"><input type="radio" name="q1" value="d"><span>Condução e convecção</span></label>
+        <div class="qfb"><b>Resposta: C.</b> Entre o Sol e a Terra há vácuo, e só a radiação viaja sem meio material.</div></div>
+
+      <div class="q" data-answer="b"><p class="qt"><span class="qn">2.</span> Por que é melhor mexer a comida quente com uma colher de pau?</p>
+        <label class="o"><input type="radio" name="q2" value="a"><span>Porque a madeira é boa condutora de calor</span></label>
+        <label class="o"><input type="radio" name="q2" value="b"><span>Porque a madeira é má condutora de calor (isolante térmico)</span></label>
+        <label class="o"><input type="radio" name="q2" value="c"><span>Porque a madeira reflete a radiação da panela</span></label>
+        <label class="o"><input type="radio" name="q2" value="d"><span>Porque a madeira cria correntes de convecção na comida</span></label>
+        <div class="qfb"><b>Resposta: B.</b> O calor quase não passa pela madeira por condução, então o cabo não esquenta.</div></div>
+
+      <div class="q" data-answer="a"><p class="qt"><span class="qn">3.</span> Durante o dia, na praia, sopra a brisa:</p>
+        <label class="o"><input type="radio" name="q3" value="a"><span>Marítima, do mar para a terra, porque a terra esquenta mais rápido</span></label>
+        <label class="o"><input type="radio" name="q3" value="b"><span>Terrestre, da terra para o mar, porque a terra esquenta mais rápido</span></label>
+        <label class="o"><input type="radio" name="q3" value="c"><span>Marítima, do mar para a terra, porque o mar esquenta mais rápido</span></label>
+        <label class="o"><input type="radio" name="q3" value="d"><span>Terrestre, do mar para a terra, porque a água tem calor específico baixo</span></label>
+        <div class="qfb"><b>Resposta: A.</b> A terra tem calor específico menor e esquenta mais rápido; o ar sobre ela sobe e o ar do mar vem ocupar o lugar.</div></div>
+
+      <div class="q" data-answer="d"><p class="qt"><span class="qn">4.</span> Quanto calor é preciso para aquecer 300 g de água de 20 °C até 70 °C?</p>
+        <label class="o"><input type="radio" name="q4" value="a"><span>1500 cal</span></label>
+        <label class="o"><input type="radio" name="q4" value="b"><span>6000 cal</span></label>
+        <label class="o"><input type="radio" name="q4" value="c"><span>21&nbsp;000 cal</span></label>
+        <label class="o"><input type="radio" name="q4" value="d"><span>15&nbsp;000 cal</span></label>
+        <div class="qfb"><b>Resposta: D.</b> Δθ = 70 − 20 = 50 °C. Q = 300 · 1 · 50 = 15 000 cal.</div></div>
+
+      <div class="q" data-answer="c"><p class="qt"><span class="qn">5.</span> Qual é a capacidade térmica de um bloco de alumínio de 2 kg?</p>
+        <label class="o"><input type="radio" name="q5" value="a"><span>0,44 cal/°C</span></label>
+        <label class="o"><input type="radio" name="q5" value="b"><span>44 cal/°C</span></label>
+        <label class="o"><input type="radio" name="q5" value="c"><span>440 cal/°C</span></label>
+        <label class="o"><input type="radio" name="q5" value="d"><span>4400 cal/°C</span></label>
+        <div class="qfb"><b>Resposta: C.</b> 2 kg = 2000 g. C = 2000 · 0,22 = 440 cal/°C.</div></div>
+
+      <div class="q" data-answer="b"><p class="qt"><span class="qn">6.</span> Um bloco metálico de 400 g recebeu 3600 cal e sua temperatura foi de 10 °C para 100 °C. Pela tabela, de que metal ele é feito?</p>
+        <label class="o"><input type="radio" name="q6" value="a"><span>Cobre (0,09)</span></label>
+        <label class="o"><input type="radio" name="q6" value="b"><span>Níquel (0,10)</span></label>
+        <label class="o"><input type="radio" name="q6" value="c"><span>Ferro (0,11)</span></label>
+        <label class="o"><input type="radio" name="q6" value="d"><span>Alumínio (0,22)</span></label>
+        <div class="qfb"><b>Resposta: B.</b> Δθ = 90 °C. 3600 = 400 · c · 90 = 36 000 · c → c = 0,10 cal/g·°C, que é o níquel.</div></div>
+
+      <div class="q" data-answer="a"><p class="qt"><span class="qn">7.</span> Quanto calor é preciso para derreter 200 g de gelo a 0 °C?</p>
+        <label class="o"><input type="radio" name="q7" value="a"><span>16&nbsp;000 cal</span></label>
+        <label class="o"><input type="radio" name="q7" value="b"><span>1600 cal</span></label>
+        <label class="o"><input type="radio" name="q7" value="c"><span>108&nbsp;000 cal</span></label>
+        <label class="o"><input type="radio" name="q7" value="d"><span>−16&nbsp;000 cal</span></label>
+        <div class="qfb"><b>Resposta: A.</b> Derreter é fusão (recebe calor). Q = 200 · 80 = 16 000 cal. 108 000 usaria o L de vaporização; o sinal negativo seria de solidificação.</div></div>
+
+      <div class="q" data-answer="c"><p class="qt"><span class="qn">8.</span> Qual é a quantidade de calor na liquefação de 50 g de vapor d’água a 100 °C?</p>
+        <label class="o"><input type="radio" name="q8" value="a"><span>+27&nbsp;000 cal</span></label>
+        <label class="o"><input type="radio" name="q8" value="b"><span>−4000 cal</span></label>
+        <label class="o"><input type="radio" name="q8" value="c"><span>−27&nbsp;000 cal</span></label>
+        <label class="o"><input type="radio" name="q8" value="d"><span>−2700 cal</span></label>
+        <div class="qfb"><b>Resposta: C.</b> Liquefação cede calor: L = −540 cal/g. Q = 50 · (−540) = −27 000 cal.</div></div>
+
+      <div class="q" data-answer="d"><p class="qt"><span class="qn">9.</span> Numa curva de aquecimento da água, o trecho reto (horizontal) a 0 °C representa:</p>
+        <label class="o"><input type="radio" name="q9" value="a"><span>Calor sensível; o gelo está esquentando</span></label>
+        <label class="o"><input type="radio" name="q9" value="b"><span>Calor sensível; a água está fervendo</span></label>
+        <label class="o"><input type="radio" name="q9" value="c"><span>Calor latente; a água está virando vapor</span></label>
+        <label class="o"><input type="radio" name="q9" value="d"><span>Calor latente; o gelo está derretendo e a temperatura fica constante</span></label>
+        <div class="qfb"><b>Resposta: D.</b> Trecho reto é mudança de estado. A 0 °C, é a fusão do gelo: Q = m · L<sub>fusão</sub>.</div></div>
+
+      <div class="q" data-answer="b"><p class="qt"><span class="qn">10.</span> 20 g de gelo a −10 °C são aquecidos até virarem água a 0 °C, toda derretida. Quanto calor foi recebido? (Dados: c<sub>gelo</sub> = 0,5 cal/g·°C; L<sub>fusão</sub> = 80 cal/g)</p>
+        <label class="o"><input type="radio" name="q10" value="a"><span>1600 cal</span></label>
+        <label class="o"><input type="radio" name="q10" value="b"><span>1700 cal</span></label>
+        <label class="o"><input type="radio" name="q10" value="c"><span>100 cal</span></label>
+        <label class="o"><input type="radio" name="q10" value="d"><span>1800 cal</span></label>
+        <div class="qfb"><b>Resposta: B.</b> Duas etapas. Gelo esquentando (sensível): 20 · 0,5 · 10 = 100 cal. Gelo derretendo (latente): 20 · 80 = 1600 cal. Total = 1700 cal.</div></div>
+    </form>
+    <div class="actions">
+      <button class="btn primary" type="button" id="grade">Corrigir prova</button>
+      <button class="btn ghost" type="button" id="reset">Refazer</button>
+    </div>
+    <div class="result" id="result" aria-live="polite">
+      <div><span class="score num"><span class="val">0</span></span> <span class="of">/ 10</span></div>
+      <div class="bar"><i></i></div>
+      <div class="msg"></div>
+      <div class="hits"></div>
+      <div class="best"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>Conteúdo baseado na apostila ETAPA de Física, aulas 24 a 28 (transmissão de calor, calor sensível e calor latente), com as tabelas de calor específico e de calor latente da própria apostila.</p>
+  <p>Os calores específicos do gelo e do vapor (0,5 cal/g·°C) não estão nas tabelas da apostila; aqui eles aparecem como dados do enunciado. Se a professora usar outro valor, use o dela.</p>
+  <p>Vídeos: links para o YouTube, de canais e professores indicados em cada cartão.</p>
+</footer>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(s,r){ return (r||document).querySelector(s); };
+  var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+  function store(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } }
+
+  // progress
+  var quizzes = $$(".quiz"), right = 0;
+  var prog = $("#prog");
+  function updProg(){ prog.innerHTML = "Checagens: <b>" + right + "</b> de " + quizzes.length + " certas"; }
+  updProg();
+
+  document.addEventListener("click", function(e){
+    var opt = e.target.closest ? e.target.closest(".opt") : null;
+    if(!opt) return;
+    var quiz = opt.closest(".quiz");
+    if(!quiz || quiz.classList.contains("done")) return;
+    quiz.classList.add("done");
+    var ans = quiz.getAttribute("data-answer"), chosen = opt.getAttribute("data-opt");
+    $$(".opt", quiz).forEach(function(o){ o.disabled = true; if(o.getAttribute("data-opt") === ans) o.classList.add("correct"); });
+    var fb = $(".fb", quiz), ex = quiz.getAttribute("data-explain") || "";
+    if(chosen === ans){ right++; fb.className = "fb right show"; fb.innerHTML = '<span class="v">Isso!</span> ' + ex; }
+    else { opt.classList.add("wrong"); fb.className = "fb rong show"; fb.innerHTML = '<span class="v">Quase.</span> A resposta certa está em verde. ' + ex; }
+    updProg();
+  });
+
+  // plan checkboxes
+  $$(".plan input[type=checkbox]").forEach(function(cb){
+    var k = "fisica-calor-dia-" + cb.getAttribute("data-day");
+    if(store(k) === "1") cb.checked = true;
+    cb.addEventListener("change", function(){ store(k, cb.checked ? "1" : "0"); });
+  });
+
+  // exam
+  var form = $("#exam"), box = $("#result");
+  function showBest(){ var b = store("fisica-calor-melhor"); $(".best", box).textContent = b ? "Sua melhor nota até agora: " + b.replace(".", ",") : ""; }
+  $("#grade").addEventListener("click", function(){
+    var qs = $$(".q", form), correct = 0, answered = 0;
+    qs.forEach(function(q){
+      var ans = q.getAttribute("data-answer"), sel = $("input:checked", q);
+      $$("label.o", q).forEach(function(l){ l.classList.remove("correct","wrong"); });
+      $(".qfb", q).classList.add("show");
+      var ci = q.querySelector('input[value="'+ans+'"]'), cl = ci ? ci.closest("label.o") : null;
+      if(sel){ answered++; var sl = sel.closest("label.o");
+        if(sel.value === ans){ correct++; sl.classList.add("correct"); } else { sl.classList.add("wrong"); if(cl) cl.classList.add("correct"); }
+      } else if(cl){ cl.classList.add("correct"); }
+    });
+    var total = qs.length, nota = Math.round(correct/total*100)/10;
+    var g = nota >= 7 ? "high" : (nota >= 5 ? "mid" : "low");
+    box.setAttribute("data-g", g);
+    $(".val", box).textContent = (nota % 1 === 0 ? nota.toFixed(0) : nota.toFixed(1)).replace(".", ",");
+    $(".msg", box).textContent = g === "high" ? "Mandou muito bem! Você está pronto para a prova."
+      : g === "mid" ? "Bom caminho. Revise as questões em vermelho e refaça."
+      : "Vamos revisar: releia \"Seus erros\" e a cola de revisão, depois refaça a prova.";
+    var h = "Você acertou " + correct + " de " + total + " questões.";
+    if(answered < total) h += " (" + (total-answered) + " ficaram sem resposta.)";
+    $(".hits", box).textContent = h;
+    var best = parseFloat(store("fisica-calor-melhor") || "0");
+    if(nota > best) store("fisica-calor-melhor", String(nota));
+    showBest();
+    box.classList.add("show");
+    var bar = $(".bar>i", box); bar.style.width = "0%";
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ bar.style.width = (nota*10) + "%"; }); });
+    box.scrollIntoView({behavior:"smooth", block:"center"});
+  });
+  $("#reset").addEventListener("click", function(){
+    $$("input[type=radio]", form).forEach(function(r){ r.checked = false; });
+    $$("label.o", form).forEach(function(l){ l.classList.remove("correct","wrong"); });
+    $$(".qfb", form).forEach(function(f){ f.classList.remove("show"); });
+    box.classList.remove("show");
+    $("#prova").scrollIntoView({behavior:"smooth"});
+  });
+})();
+</script>
+</body>
+</html>

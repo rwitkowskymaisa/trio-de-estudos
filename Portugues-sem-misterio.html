@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Português sem mistério</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&display=swap">
+<style>
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --surface-2:#f8f9fb; --ink:#1c2230; --muted:#5d6577;
+  --line:#dfe3ea; --line-2:#eceff4; --shadow:0 1px 2px rgba(20,30,50,.06),0 8px 24px rgba(20,30,50,.06);
+  --ok:#1d8a52; --ok-bg:#e6f5ec; --no:#c2364d; --no-bg:#fbe8eb;
+  --hot:#e0531c; --hot-ink:#a83a0d; --hot-soft:#fdece3;
+  --cold:#2c6bd3; --cold-ink:#1f4f9e; --cold-soft:#e7effc;
+  --sen:#e0531c; --sen-soft:#fdece3; --sen-ink:#a83a0d;
+  --lat:#6d47c9; --lat-soft:#efe9fb; --lat-ink:#53329e;
+  --accent:var(--cold); --accent-ink:var(--cold-ink); --accent-soft:var(--cold-soft); --on-accent:#ffffff;
+  --sea:#2c87c9; --land:#c9a36a; --air:#5d6577;
+  --radius:16px; --radius-sm:11px; --maxw:840px;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141821; --surface:#1d222d; --surface-2:#191d27; --ink:#eef1f6; --muted:#a3abbb;
+    --line:#2e3542; --line-2:#262c38; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    --ok:#4cc082; --ok-bg:#132d21; --no:#f07a8f; --no-bg:#331a21;
+    --hot:#ff8a52; --hot-ink:#ffb48c; --hot-soft:#35221a;
+    --cold:#6ea2ff; --cold-ink:#a9c6ff; --cold-soft:#1b2640;
+    --sen:#ff8a52; --sen-soft:#35221a; --sen-ink:#ffb48c;
+    --lat:#a98bff; --lat-soft:#261f3b; --lat-ink:#cbb8ff;
+    --on-accent:#141821; --sea:#4ea6e6; --land:#b8925c; --air:#a3abbb;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141821; --surface:#1d222d; --surface-2:#191d27; --ink:#eef1f6; --muted:#a3abbb;
+  --line:#2e3542; --line-2:#262c38; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  --ok:#4cc082; --ok-bg:#132d21; --no:#f07a8f; --no-bg:#331a21;
+  --hot:#ff8a52; --hot-ink:#ffb48c; --hot-soft:#35221a;
+  --cold:#6ea2ff; --cold-ink:#a9c6ff; --cold-soft:#1b2640;
+  --sen:#ff8a52; --sen-soft:#35221a; --sen-ink:#ffb48c;
+  --lat:#a98bff; --lat-soft:#261f3b; --lat-ink:#cbb8ff;
+  --on-accent:#141821; --sea:#4ea6e6; --land:#b8925c; --air:#a3abbb;
+  color-scheme:dark;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 110px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+h1,h2,h3,h4{font-family:"Baloo 2","Nunito Sans",system-ui,sans-serif;line-height:1.18;text-wrap:balance;margin:0}
+p{margin:0 0 .9em}
+a{color:var(--accent-ink)}
+b,strong{font-weight:800}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:20px}
+.num{font-variant-numeric:tabular-nums}
+
+/* HERO */
+.hero{padding:clamp(30px,6vw,60px) 0 10px}
+.hero .tag{display:inline-block;font-weight:700;font-size:.9rem;color:var(--muted);margin-bottom:10px}
+.hero h1{font-size:clamp(2.2rem,7vw,3.6rem);font-weight:800;letter-spacing:-.015em}
+.hero p.lead{color:var(--muted);max-width:52ch;margin-top:12px;font-size:1.06rem}
+.hero-curve{margin:22px 0 4px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 10px 8px}
+.hero-curve svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;padding:4px 10px 6px;font-size:.9rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{display:inline-block;width:22px;height:5px;border-radius:3px}
+
+/* TOPBAR */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:var(--maxw);margin:0 auto;padding:9px 16px 0;display:flex;align-items:center;gap:12px}
+.topbar .ttl{font-family:"Baloo 2",sans-serif;font-weight:700;font-size:1.05rem}
+.topbar .spacer{flex:1}
+.prog{font-size:.85rem;font-weight:700;color:var(--muted);white-space:nowrap}
+.prog b{color:var(--ok)}
+.chips{display:flex;gap:8px;overflow-x:auto;max-width:var(--maxw);margin:0 auto;padding:8px 16px 11px;scrollbar-width:thin}
+.chip{white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:6px 13px;font:inherit;font-weight:700;font-size:.85rem;cursor:pointer;text-decoration:none}
+.chip:hover{color:var(--ink);border-color:var(--accent)}
+.chip:focus-visible,.opt:focus-visible,.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* BLOCKS */
+section.block{padding:34px 0 10px;border-top:1px solid var(--line-2)}
+.block>h2{font-size:clamp(1.65rem,4.6vw,2.2rem);font-weight:800;margin-bottom:4px;display:flex;gap:12px;align-items:baseline}
+.block>h2 .n{flex:none;font-size:.95rem;font-weight:800;color:var(--on-accent);background:var(--accent);width:32px;height:32px;border-radius:10px;display:inline-grid;place-items:center;transform:translateY(-3px)}
+.block .sub{color:var(--muted);margin-bottom:18px}
+.block h3{font-size:1.25rem;font-weight:800;margin:24px 0 6px}
+ul.list{margin:.4em 0 1em;padding-left:1.2em}
+ul.list li{margin:.35em 0}
+
+.formula{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;background:var(--surface);border:2px solid var(--accent);border-radius:var(--radius);padding:16px 20px;margin:16px 0;box-shadow:var(--shadow)}
+.formula .eq{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1.6rem,5vw,2.1rem);color:var(--accent-ink);white-space:nowrap}
+.formula .what{flex:1;min-width:220px;font-size:.96rem}
+.formula .what div{margin:2px 0}
+.formula.lat{border-color:var(--lat)} .formula.lat .eq{color:var(--lat-ink)}
+
+.callout{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:var(--radius-sm);padding:14px 17px;margin:16px 0;box-shadow:var(--shadow)}
+.callout .lab{font-weight:800;color:var(--accent-ink);margin-bottom:4px;display:flex;gap:8px;align-items:center}
+.callout.tip{border-left-color:var(--ok)} .callout.tip .lab{color:var(--ok)}
+.callout.warn{border-left-color:var(--no)} .callout.warn .lab{color:var(--no)}
+.callout.lat{border-left-color:var(--lat)} .callout.lat .lab{color:var(--lat-ink)}
+.callout p:last-child{margin-bottom:0}
+
+.ex{background:var(--surface-2);border:1px dashed var(--line);border-radius:var(--radius-sm);padding:14px 17px;margin:14px 0}
+.ex .lab{font-weight:800;color:var(--muted);margin-bottom:6px}
+.ex .step{display:block;font-variant-numeric:tabular-nums;padding-left:12px;border-left:3px solid var(--line);margin:4px 0}
+.ex .ans{display:inline-block;margin-top:8px;font-weight:800;background:var(--ok-bg);color:var(--ok);padding:3px 10px;border-radius:8px}
+
+.tbl-wrap{overflow-x:auto;margin:14px 0}
+table.tbl{width:100%;border-collapse:collapse;font-size:.95rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;font-variant-numeric:tabular-nums}
+table.tbl th,table.tbl td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top}
+table.tbl th{background:var(--accent-soft);color:var(--accent-ink);font-weight:800;font-size:.88rem}
+table.tbl tr:last-child td{border-bottom:none}
+table.tbl td.r{text-align:right}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:700px){.trio{grid-template-columns:1fr}}
+.trio .t{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 15px;box-shadow:var(--shadow)}
+.trio .t h4{font-size:1.15rem;font-weight:800;margin-bottom:4px}
+.trio .t p{font-size:.94rem;margin:0 0 6px}
+.trio .t .key{font-size:.88rem;font-weight:700;color:var(--accent-ink)}
+
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin:16px 0;box-shadow:var(--shadow)}
+.fig svg{display:block;width:100%;height:auto}
+.fig .cap{font-size:.88rem;color:var(--muted);padding:6px 4px 0}
+
+/* SVG paint */
+.s-axis{stroke:var(--muted);stroke-width:2;fill:none}
+.s-grid{stroke:var(--line);stroke-width:1;stroke-dasharray:4 5}
+.s-txt{fill:var(--muted);font:600 13px "Nunito Sans",sans-serif}
+.s-txt-b{fill:var(--ink);font:800 14px "Nunito Sans",sans-serif}
+.s-sen{stroke:var(--sen);stroke-width:6;fill:none;stroke-linecap:round}
+.s-lat{stroke:var(--lat);stroke-width:6;fill:none;stroke-linecap:round}
+.s-dot-sen{fill:var(--sen)} .s-dot-lat{fill:var(--lat)}
+.s-letter{fill:var(--on-accent);font:800 14px "Baloo 2",sans-serif}
+.s-box{fill:var(--surface-2);stroke:var(--line);stroke-width:1.5}
+.s-hot{stroke:var(--hot);stroke-width:2.5;fill:none}
+.s-cold{stroke:var(--cold);stroke-width:2.5;fill:none}
+.s-hot-t{fill:var(--hot-ink);font:800 13px "Nunito Sans",sans-serif}
+.s-cold-t{fill:var(--cold-ink);font:800 13px "Nunito Sans",sans-serif}
+.ah-hot{fill:var(--hot)} .ah-cold{fill:var(--cold)} .ah-air{fill:var(--air)}
+.s-sea{fill:var(--sea);opacity:.85} .s-land{fill:var(--land)}
+.s-air{stroke:var(--air);stroke-width:2.5;fill:none}
+.s-sun{fill:#f4b400} .s-moon{fill:var(--muted)}
+.s-sky{fill:var(--surface-2)}
+
+/* video */
+.videos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+@media(max-width:640px){.videos{grid-template-columns:1fr}}
+.video{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.video .frame{position:relative;aspect-ratio:16/9;background:#000;display:block}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video a.frame.play{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-decoration:none;background:radial-gradient(120% 120% at 50% 0%,color-mix(in srgb,var(--accent) 38%,#000) 0%,#101218 80%);color:#fff}
+.video .pbtn{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--on-accent);box-shadow:0 8px 22px rgba(0,0,0,.35)}
+.video .pbtn svg{width:26px;height:26px;margin-left:3px}
+.video .ptxt{font-weight:800;font-size:.98rem}
+.video .cap{padding:10px 14px 12px}
+.video .cap .t{font-weight:800;font-size:.95rem;line-height:1.35}
+.video .cap .c{color:var(--muted);font-size:.84rem;margin-top:2px}
+
+/* quiz */
+.quiz{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:17px 18px 15px;margin:20px 0;box-shadow:var(--shadow)}
+.quiz .qlab{display:inline-flex;align-items:center;gap:7px;font-size:.85rem;font-weight:800;color:var(--accent-ink);background:var(--accent-soft);padding:4px 11px;border-radius:999px;margin-bottom:10px}
+.quiz .qlab svg{width:15px;height:15px}
+.quiz .q{font-weight:700;margin-bottom:12px;font-size:1.02rem}
+.opts{display:grid;gap:9px}
+.opt{text-align:left;font:inherit;font-size:.97rem;background:var(--surface-2);border:1.5px solid var(--line);color:var(--ink);border-radius:var(--radius-sm);padding:10px 14px;cursor:pointer;display:flex;gap:10px;align-items:flex-start}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt .ol{flex:none;font-weight:800;color:var(--accent-ink)}
+.opt:disabled{cursor:default}
+.opt.correct{background:var(--ok-bg);border-color:var(--ok)} .opt.correct .ol{color:var(--ok)}
+.opt.wrong{background:var(--no-bg);border-color:var(--no)} .opt.wrong .ol{color:var(--no)}
+.fb{margin-top:12px;padding:11px 14px;border-radius:var(--radius-sm);font-size:.94rem;display:none}
+.fb.show{display:block}
+.fb.right{background:var(--ok-bg);border:1px solid var(--ok)}
+.fb.rong{background:var(--no-bg);border:1px solid var(--no)}
+.fb .v{font-weight:800} .fb.right .v{color:var(--ok)} .fb.rong .v{color:var(--no)}
+.quiz.mini{margin:0;padding:13px 14px}
+.quiz.mini .q{font-size:.96rem;margin-bottom:9px}
+.quiz.mini .opts{grid-template-columns:1fr 1fr}
+.game{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:16px 0}
+.badge-l{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--ink);color:var(--surface);font-family:"Baloo 2",sans-serif;font-weight:800;margin-right:6px}
+
+/* plan & diag */
+.plan{display:grid;gap:10px;margin:14px 0;padding:0;list-style:none}
+.plan li{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 15px}
+.plan .d{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.15rem;color:var(--accent-ink);line-height:1.3}
+.plan .w{font-size:.96rem}
+.plan .w b{display:block}
+.plan label{display:inline-flex;gap:7px;align-items:center;font-size:.88rem;color:var(--muted);margin-top:4px;cursor:pointer}
+.plan input{accent-color:var(--ok);width:16px;height:16px}
+
+/* cola */
+.cola{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:640px){.cola{grid-template-columns:1fr}}
+.cola .c{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px 15px}
+.cola .c h4{font-size:1.05rem;font-weight:800;margin-bottom:4px}
+.cola .c .eq{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.35rem;color:var(--accent-ink)}
+.cola .c.l .eq{color:var(--lat-ink)}
+.cola .c p{font-size:.92rem;margin:2px 0 0}
+
+/* exam */
+.exam-wrap{margin-top:12px;background:var(--surface);border:2px solid var(--accent);border-radius:var(--radius);padding:22px 20px;box-shadow:var(--shadow)}
+.exam-intro{color:var(--muted);font-size:.96rem}
+.exam .q{border-top:1px solid var(--line-2);padding-top:18px;margin-top:18px}
+.exam .q:first-child{border-top:none;margin-top:6px}
+.exam .qt{font-weight:700;margin-bottom:9px}
+.exam .qt .qn{color:var(--accent-ink);font-weight:800}
+.exam label.o{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1.5px solid var(--line);background:var(--surface-2);border-radius:var(--radius-sm);margin:7px 0;cursor:pointer;font-size:.96rem}
+.exam label.o:hover{border-color:var(--accent)}
+.exam label.o input{margin-top:5px;accent-color:var(--accent)}
+.exam label.o.correct{background:var(--ok-bg);border-color:var(--ok)}
+.exam label.o.wrong{background:var(--no-bg);border-color:var(--no)}
+.exam .qfb{display:none;margin-top:8px;font-size:.92rem;color:var(--muted)}
+.exam .qfb.show{display:block}
+.exam .qfb b{color:var(--ink)}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.btn{font:inherit;font-weight:800;border-radius:999px;padding:12px 22px;cursor:pointer;border:1.5px solid transparent}
+.btn.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.btn.ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--accent)}
+.result{display:none;margin-top:20px;border-radius:var(--radius);padding:20px;border:1px solid var(--line);background:var(--surface-2);text-align:center}
+.result.show{display:block}
+.result .score{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:3.3rem;line-height:1}
+.result .of{color:var(--muted);font-weight:700}
+.result .msg{margin-top:8px;font-weight:700}
+.result .bar{height:12px;border-radius:999px;background:var(--line);overflow:hidden;margin:16px auto 4px;max-width:340px}
+.result .bar>i{display:block;height:100%;border-radius:999px;width:0;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.result .hits{color:var(--muted);font-size:.92rem;margin-top:6px}
+.result[data-g="high"] .score{color:var(--ok)} .result[data-g="high"] .bar>i{background:var(--ok)}
+.result[data-g="mid"] .score{color:var(--hot)} .result[data-g="mid"] .bar>i{background:var(--hot)}
+.result[data-g="low"] .score{color:var(--no)} .result[data-g="low"] .bar>i{background:var(--no)}
+.best{font-size:.88rem;color:var(--muted);margin-top:8px}
+
+footer.foot{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 34px;color:var(--muted);font-size:.86rem}
+footer.foot p{margin:0 0 .5em}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* ---- Português: cores das funções ---- */
+:root{--r-suj:#2c6bd3;--r-v:#1c2230;--r-od:#1d8a52;--r-oi:#6d47c9;--r-adv:#d2541a;--r-pred:#c2367f;--r-ag:#0d8585;--r-se:#8a6d00}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--r-suj:#6ea2ff;--r-v:#eef1f6;--r-od:#4cc082;--r-oi:#a98bff;--r-adv:#ff8a52;--r-pred:#f27ab8;--r-ag:#3fc6c6;--r-se:#e0c050}}
+:root[data-theme="dark"]{--r-suj:#6ea2ff;--r-v:#eef1f6;--r-od:#4cc082;--r-oi:#a98bff;--r-adv:#ff8a52;--r-pred:#f27ab8;--r-ag:#3fc6c6;--r-se:#e0c050}
+.r-suj{--rc:var(--r-suj)} .r-v{--rc:var(--r-v)} .r-od{--rc:var(--r-od)} .r-oi{--rc:var(--r-oi)} .r-adv{--rc:var(--r-adv)} .r-pred{--rc:var(--r-pred)} .r-ag{--rc:var(--r-ag)} .r-se{--rc:var(--r-se)}
+.an{display:inline-flex;flex-direction:column;align-items:center;margin:0 .12em 6px;vertical-align:top}
+.an .w{border-bottom:3px solid var(--rc);padding:0 .08em 1px;font-weight:700;line-height:1.35}
+.an small{font-size:.68rem;font-weight:800;color:var(--rc);line-height:1.25;margin-top:3px;white-space:nowrap}
+.sent{font-size:1.06rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 15px 6px;margin:10px 0;box-shadow:var(--shadow)}
+.sent .arrow{display:block;color:var(--muted);font-size:.85rem;font-weight:700;margin:2px 0 6px}
+.hero-stage{margin:22px 0 4px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 18px 16px}
+.hero-stage .big{font-size:clamp(1.25rem,4.4vw,2rem);font-family:"Baloo 2",sans-serif}
+.hero-stage .big .an small{font-family:"Nunito Sans",sans-serif;font-size:.42em}
+.hero-stage .big .an .w{border-bottom-width:4px}
+.hero-stage .row{display:none}
+.hero-stage .row.on{display:block}
+.hero-stage .lbl{font-size:.88rem;font-weight:800;color:var(--muted);margin-bottom:6px}
+.hero-stage .note{font-size:.92rem;color:var(--muted);margin:8px 0 0}
+.morph{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.morph .p{display:flex;flex-direction:column;align-items:center;background:var(--surface);border:2px solid var(--rc);border-radius:10px;padding:6px 12px 4px;min-width:58px}
+.morph .p b{font-family:"Baloo 2",sans-serif;font-size:1.5rem;line-height:1.1;color:var(--rc)}
+.morph .p small{font-size:.72rem;font-weight:800;color:var(--muted);text-align:center;line-height:1.25}
+.morph .eq{align-self:center;font-weight:800;color:var(--muted);font-size:1.2rem;padding:0 4px}
+.key{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.86rem;color:var(--muted);margin:8px 0 2px}
+.key span{display:inline-flex;align-items:center;gap:6px}
+.key i{display:inline-block;width:18px;height:4px;border-radius:2px;background:var(--rc)}
+table.tbl td.hl{font-weight:800;color:var(--accent-ink)}
+.fc-wrap{background:var(--surface);border:2px solid var(--accent);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);margin:14px 0}
+.fc-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.88rem;font-weight:700;color:var(--muted);margin-bottom:12px}
+.fc-card{min-height:150px;border:1.5px dashed var(--line);border-radius:var(--radius-sm);background:var(--surface-2);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:18px;cursor:pointer}
+.fc-card .side{font-size:.8rem;font-weight:800;color:var(--muted);margin-bottom:6px}
+.fc-card .txt{font-family:"Baloo 2",sans-serif;font-weight:700;font-size:clamp(1.15rem,3.6vw,1.45rem);line-height:1.3}
+.fc-card.back{border-style:solid;border-color:var(--ok);background:var(--ok-bg)}
+.fc-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;justify-content:center}
+.fc-done{display:none;text-align:center;font-weight:800;color:var(--ok);padding:20px}
+.write{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;margin:14px 0}
+.write .two>div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.95rem}
+.write h4{font-size:1rem;margin-bottom:4px}
+.tech{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.tech div{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px 15px}
+.tech h4{font-size:1.05rem;margin-bottom:3px}
+.tech p{font-size:.93rem;margin:0}
+
+</style>
+</head>
+<body>
+<header class="wrap hero">
+  <span class="tag">Língua Portuguesa, apostila ETAPA. Estudo do Murilo</span>
+  <h1>Português sem mistério</h1>
+  <p class="lead">Verbos que mudam e verbos que não mudam, a diferença entre contar e descrever, as peças de uma frase e a voz passiva. No caminho tem vídeos, checagens rápidas, cartões de memória e, no fim, uma prova com nota de 0 a 10.</p>
+  <div class="hero-stage" aria-live="polite">
+    <div class="row on" id="h-ativa"><div class="lbl">Voz ativa: o sujeito faz a ação</div><div class="big"><span class="an r-suj"><span class="w">Eles</span><small>sujeito</small></span><span class="an r-v"><span class="w">atravessaram</span><small>verbo</small></span><span class="an r-od"><span class="w">a serra</span><small>objeto direto</small></span><span class="an r-adv"><span class="w">pelos atalhos</span><small>adjunto adverbial</small></span></div></div>
+    <div class="row" id="h-passiva"><div class="lbl">Voz passiva: o sujeito sofre a ação</div><div class="big"><span class="an r-suj"><span class="w">A serra</span><small>sujeito paciente</small></span><span class="an r-v"><span class="w">foi atravessada</span><small>verbo na passiva</small></span><span class="an r-ag"><span class="w">por eles</span><small>agente da passiva</small></span><span class="an r-adv"><span class="w">pelos atalhos</span><small>adjunto adverbial</small></span></div></div>
+    <p class="note">Frase inspirada no poema “A serra do Rola-Moça”. Cada cor é uma função na frase; você vai aprender todas.</p>
+    <div class="actions" style="margin-top:12px"><button class="btn primary" type="button" id="h-toggle">Passar para a voz passiva</button></div>
+  </div>
+</header>
+
+<nav class="topbar" aria-label="Seções">
+  <div class="topbar-in"><span class="ttl">Português sem mistério</span><span class="spacer"></span><span class="prog" id="prog">Checagens: <b>0</b> de 0 certas</span></div>
+  <div class="chips">
+    <a class="chip" href="#plano">Plano</a>
+    <a class="chip" href="#tecnicas">Como estudar</a>
+    <a class="chip" href="#pecas">1. Peças do verbo</a>
+    <a class="chip" href="#regulares">2. Regular ou irregular</a>
+    <a class="chip" href="#campeoes">3. Irregulares campeões</a>
+    <a class="chip" href="#narrar">4. Narrar e descrever</a>
+    <a class="chip" href="#frase">5. Peças da frase</a>
+    <a class="chip" href="#passiva">6. Voz passiva</a>
+    <a class="chip" href="#cartoes">Cartões de memória</a>
+    <a class="chip" href="#cola">Cola de revisão</a>
+    <a class="chip" href="#prova">Prova final</a>
+  </div>
+</nav>
+
+<main class="wrap">
+<section class="block" id="plano">
+  <h2>Plano de estudo</h2>
+  <p class="sub">Seis dias, uns 40 minutos por dia. Marque cada dia quando terminar.</p>
+  <ul class="plan">
+    <li><span class="d">Dia 1</span><span class="w"><b>Peças do verbo e regular × irregular</b>Partes 1 e 2. Assista aos vídeos e faça o jogo dos verbos do poema.<br><label><input type="checkbox" data-day="1"> Feito</label></span></li>
+    <li><span class="d">Dia 2</span><span class="w"><b>Os irregulares campeões</b>Parte 3. Aprenda a “máquina do eles” e depois passe uma rodada nos cartões de memória.<br><label><input type="checkbox" data-day="2"> Feito</label></span></li>
+    <li><span class="d">Dia 3</span><span class="w"><b>Narrar e descrever</b>Parte 4. No fim, escreva sua rotina em duas colunas (narração × descrição).<br><label><input type="checkbox" data-day="3"> Feito</label></span></li>
+    <li><span class="d">Dia 4</span><span class="w"><b>Peças da frase</b>Parte 5: objeto direto, objeto indireto, adjunto adverbial e predicado verbal × nominal.<br><label><input type="checkbox" data-day="4"> Feito</label></span></li>
+    <li><span class="d">Dia 5</span><span class="w"><b>Voz passiva</b>Parte 6. Treine passar 3 frases suas da ativa para a passiva, no papel.<br><label><input type="checkbox" data-day="5"> Feito</label></span></li>
+    <li><span class="d">Dia 6</span><span class="w"><b>Revisão e prova final</b>Cartões de memória até zerar o baralho, cola de revisão e prova final. Abaixo de 7? Revise as questões em vermelho e refaça.<br><label><input type="checkbox" data-day="6"> Feito</label></span></li>
+  </ul>
+</section>
+
+<section class="block" id="tecnicas">
+  <h2>Como estudar para lembrar na prova</h2>
+  <p class="sub">Ler várias vezes dá a sensação de que aprendeu, mas o que fixa de verdade é <b>tentar lembrar</b>. Use estas quatro técnicas.</p>
+  <div class="tech">
+    <div><h4>1. Tente antes de ver</h4><p>Nas checagens, responda primeiro e só depois leia a explicação. Errar e corrigir fixa mais do que acertar de primeira.</p></div>
+    <div><h4>2. Explique em voz alta</h4><p>No fim de cada parte, explique a regra como se fosse para um colega mais novo, sem olhar. Travou? Volte só naquele ponto.</p></div>
+    <div><h4>3. Cartões que voltam</h4><p>Nos cartões de memória, o que você erra volta para o fim da fila. Repita até não sobrar nenhum.</p></div>
+    <div><h4>4. Revise no dia seguinte</h4><p>Comece cada dia com 5 minutos de cartões do dia anterior. Revisar espaçado guarda o conteúdo por mais tempo.</p></div>
+  </div>
+</section>
+<section class="block" id="pecas">
+  <h2><span class="n">1</span>As peças do verbo</h2>
+  <p class="sub">Todo verbo é montado com peças, como um brinquedo de encaixar. Saber as peças é o que permite dizer se um verbo é regular ou não.</p>
+
+  <div class="morph" aria-label="cant + a + va + mos">
+    <div class="p r-suj"><b>cant</b><small>radical<br>o significado</small></div><span class="eq">+</span>
+    <div class="p r-od"><b>a</b><small>vogal temática<br>a conjugação</small></div><span class="eq">+</span>
+    <div class="p r-adv"><b>va</b><small>desinência<br>tempo e modo</small></div><span class="eq">+</span>
+    <div class="p r-oi"><b>mos</b><small>desinência<br>pessoa e número</small></div>
+  </div>
+
+  <ul class="list">
+    <li><b>Radical:</b> a parte que guarda o significado. Para achar, tire o <b>-ar</b>, <b>-er</b> ou <b>-ir</b> do infinitivo: am<i>ar</i> → <b>am</b>, vend<i>er</i> → <b>vend</b>, part<i>ir</i> → <b>part</b>.</li>
+    <li><b>Vogal temática:</b> a vogal que mostra a conjugação (a, e, i). Radical + vogal temática = <b>tema</b> (ama, vende, parti).</li>
+    <li><b>Desinências:</b> o final que muda conforme a pessoa (eu, tu, ele…), o número (singular ou plural), o tempo (presente, pretérito, futuro) e o modo (indicativo, subjuntivo, imperativo).</li>
+    <li><b>Prefixo</b> vem antes do radical (<b>re</b>fazer) e <b>sufixo</b> vem depois dele.</li>
+  </ul>
+
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Conjugação</th><th>Termina em</th><th>Vogal temática</th><th>Modelo</th></tr>
+    <tr><td>1ª</td><td>-ar</td><td class="hl">a</td><td>amar</td></tr>
+    <tr><td>2ª</td><td>-er</td><td class="hl">e</td><td>vender (e também <b>pôr</b>)</td></tr>
+    <tr><td>3ª</td><td>-ir</td><td class="hl">i</td><td>partir</td></tr>
+  </table></div>
+
+  <div class="callout warn"><div class="lab">Duas pegadinhas</div>
+    <p><b>Pôr</b> é da 2ª conjugação, porque vem da forma antiga <i>poer</i>. A apostila também chama atenção para <b>fervilhar</b>: o <i>-ilh-</i> é sufixo e o verbo de origem é <i>ferver</i>; por isso a apostila o classifica como 2ª conjugação. Se cair na prova, responda como a apostila.</p></div>
+
+  <div class="ex"><div class="lab">Exemplo resolvido: “vendíamos”</div>
+    <span class="step">Infinitivo: vender → tira o -er → radical <b>vend</b></span>
+    <span class="step">Vogal temática: <b>e</b> (aqui aparece como <i>í</i>) → 2ª conjugação</span>
+    <span class="step"><b>-a</b> indica pretérito imperfeito; <b>-mos</b> indica nós (1ª pessoa do plural)</span>
+    <span class="ans">vend + í + a + mos</span></div>
+<div class="quiz" data-answer="b" data-explain="Tire o -ir de partir: sobra part. O -i- é a vogal temática e -remos são as desinências."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Em “partiremos”, qual é o radical?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>parti</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>part</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>remos</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>partir</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="c" data-explain="Correr termina em -er: a vogal temática é e, 2ª conjugação."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Qual é a vogal temática de “correr”?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>a</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>r</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>e</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>o</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="b" data-explain="Re- vem antes do radical (faz) e muda o sentido: fazer de novo. É prefixo."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Em “refazer”, a parte “re-” é:</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Radical</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Prefixo</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Desinência</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Vogal temática</span></button></div><div class="fb"></div></div>
+<div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/90itL7YRqJs" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="cap"><div class="t">Verbos regulares e irregulares em português: aula completa com exemplos</div><div class="c">YouTube</div></div></div></div>
+</section>
+<section class="block" id="regulares">
+  <h2><span class="n">2</span>Regular, irregular ou anômalo?</h2>
+  <p class="sub">Regular é o verbo que se comporta igual ao modelo. Irregular é o que foge do modelo em algum momento.</p>
+
+  <div class="trio">
+    <div class="t"><h4>Regular</h4><p>O radical <b>não muda</b> e as terminações seguem amar, vender ou partir.</p><span class="key">cantar: canto, cantei</span></div>
+    <div class="t"><h4>Irregular</h4><p>O radical ou as terminações <b>mudam</b> em algum tempo ou pessoa.</p><span class="key">caber: caibo, coube</span></div>
+    <div class="t"><h4>Anômalo</h4><p>Muda <b>quase tudo</b>, até parece outro verbo. São os casos de ser e ir.</p><span class="key">ser: sou, és, fui</span></div>
+  </div>
+
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th></th><th>Modelo: amar</th><th>Regular: cantar</th><th>Irregular: estar</th><th>Anômalo: ser</th></tr>
+    <tr><td>eu (presente)</td><td>amo</td><td>canto</td><td class="hl">estou</td><td class="hl">sou</td></tr>
+    <tr><td>tu (presente)</td><td>amas</td><td>cantas</td><td class="hl">estás</td><td class="hl">és</td></tr>
+    <tr><td>eles (presente)</td><td>amam</td><td>cantam</td><td class="hl">estão</td><td class="hl">são</td></tr>
+    <tr><td>eu (pretérito)</td><td>amei</td><td>cantei</td><td class="hl">estive</td><td class="hl">fui</td></tr>
+  </table></div>
+
+  <div class="formula"><span class="eq">Teste do eu e do ele</span>
+    <span class="what"><div>1. Diga o verbo com <b>eu</b> no presente: “eu ___”.</div><div>2. Diga com <b>ele</b> no passado: “ontem ele ___”.</div><div>3. O começo do verbo (radical) mudou ou o final ficou estranho? <b>Irregular.</b></div></span></div>
+
+  <div class="ex"><div class="lab">Exemplos do teste</div>
+    <span class="step">comer → eu <b>com</b>o, ele <b>com</b>eu → radical igual → <b>regular</b></span>
+    <span class="step">caber → eu <b>caib</b>o, ele <b>coub</b>e → radical mudou → <b>irregular</b></span>
+    <span class="step">dizer → eu <b>dig</b>o, ele <b>diss</b>e → radical mudou → <b>irregular</b></span></div>
+
+  <div class="callout warn"><div class="lab">Pegadinha 1: mudar só a letra não é irregularidade</div>
+    <p>Fi<b>c</b>ar → fi<b>qu</b>ei, che<b>g</b>ar → che<b>gu</b>ei, conhe<b>c</b>er → conhe<b>ç</b>o. A letra muda só para manter o mesmo som. Esses verbos continuam <b>regulares</b>.</p></div>
+  <div class="callout warn"><div class="lab">Pegadinha 2: palavra difícil não quer dizer verbo irregular</div>
+    <p>No poema aparecem <i>despenhou</i> (despenhar), <i>precipitados</i> (precipitar) e <i>escondiam</i> (esconder). Parecem complicados, mas seguem o modelo direitinho: são <b>regulares</b>. Na dúvida, faça o teste do eu e do ele.</p></div>
+
+  <div class="callout tip"><div class="lab">Os irregulares mais comuns (lista da apostila)</div>
+    <p><b>1ª conjugação:</b> estar, dar. <b>2ª:</b> ser, ter, ver, ler, crer, caber, saber, poder e pôr, com todos os compostos (manter, reter, deter, rever, reler, descrer, compor, repor…). <b>3ª:</b> ir, rir, vir e seus compostos.</p></div>
+
+  <h3>Jogo: os verbos do poema</h3>
+  <p>Todos estes verbos aparecem em “A serra do Rola-Moça”, de Mário de Andrade. Regular ou irregular?</p>
+  <div class="game">
+<div class="quiz mini" data-answer="r" data-explain="Eu caso, ele casou. Radical cas- não muda."><p class="q"><span class="badge-l">A</span>casar <span class="num" style="color:var(--muted)">(vieram na vila casar)</span></p><div class="opts"><button class="opt" data-opt="r"><span>Regular</span></button><button class="opt" data-opt="i"><span>Irregular</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="i" data-explain="Eu digo, ele disse. O radical diz- vira dig- e diss-."><p class="q"><span class="badge-l">B</span>disseram <span style="color:var(--muted)">(dizer)</span></p><div class="opts"><button class="opt" data-opt="r"><span>Regular</span></button><button class="opt" data-opt="i"><span>Irregular</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="r" data-explain="Eu atravesso, ele atravessou. Segue o modelo amar."><p class="q"><span class="badge-l">C</span>atravessaram <span style="color:var(--muted)">(atravessar)</span></p><div class="opts"><button class="opt" data-opt="r"><span>Regular</span></button><button class="opt" data-opt="i"><span>Irregular</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="i" data-explain="Pôr está na lista: ponho, pus, puseram."><p class="q"><span class="badge-l">D</span>puseram-se <span style="color:var(--muted)">(pôr)</span></p><div class="opts"><button class="opt" data-opt="r"><span>Regular</span></button><button class="opt" data-opt="i"><span>Irregular</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="r" data-explain="Eu escondo, ele escondeu. Segue o modelo vender."><p class="q"><span class="badge-l">E</span>escondiam <span style="color:var(--muted)">(esconder)</span></p><div class="opts"><button class="opt" data-opt="r"><span>Regular</span></button><button class="opt" data-opt="i"><span>Irregular</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="i" data-explain="Vir está na lista: venho, vim, vieram."><p class="q"><span class="badge-l">F</span>vieram <span style="color:var(--muted)">(vir)</span></p><div class="opts"><button class="opt" data-opt="r"><span>Regular</span></button><button class="opt" data-opt="i"><span>Irregular</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="r" data-explain="Eu despenho, ele despenhou. Palavra rara, mas verbo regular."><p class="q"><span class="badge-l">G</span>despenhou <span style="color:var(--muted)">(despenhar)</span></p><div class="opts"><button class="opt" data-opt="r"><span>Regular</span></button><button class="opt" data-opt="i"><span>Irregular</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="i" data-explain="Rir está na lista dos irregulares: rio, ris, ri, rimos, rides, riem."><p class="q"><span class="badge-l">H</span>riam <span style="color:var(--muted)">(rir)</span></p><div class="opts"><button class="opt" data-opt="r"><span>Regular</span></button><button class="opt" data-opt="i"><span>Irregular</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="i" data-explain="Ser é anômalo: sou, és, é, fui, era. Todo anômalo é irregular."><p class="q"><span class="badge-l">I</span>eram <span style="color:var(--muted)">(ser)</span></p><div class="opts"><button class="opt" data-opt="r"><span>Regular</span></button><button class="opt" data-opt="i"><span>Irregular</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="r" data-explain="Eu volto, ele voltou. Segue o modelo amar."><p class="q"><span class="badge-l">J</span>voltar <span style="color:var(--muted)">(se lembraram de voltar)</span></p><div class="opts"><button class="opt" data-opt="r"><span>Regular</span></button><button class="opt" data-opt="i"><span>Irregular</span></button></div><div class="fb"></div></div>
+</div>
+<div class="quiz" data-answer="a" data-explain="Em ficar → fiquei só a letra muda (c → qu) para manter o som. O radical fic- continua o mesmo. Os outros mudam o radical."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Qual destes verbos é <b>regular</b>?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Ficar (eu fico, eu fiquei)</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Saber (eu sei, eu soube)</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Ter (eu tenho, eu tive)</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Poder (eu posso, eu pude)</span></button></div><div class="fb"></div></div>
+<div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/n6wK1nVqqeY" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="cap"><div class="t">Verbos regulares e irregulares: você sabe a diferença?</div><div class="c">YouTube</div></div></div></div>
+</section>
+<section class="block" id="campeoes">
+  <h2><span class="n">3</span>Os irregulares campeões</h2>
+  <p class="sub">A aula 119 traz nove verbos: dar, ver, poder, caber, pôr, saber, ir, rir e vir. Ninguém precisa decorar as tabelas inteiras. Com um truque você monta quase tudo sozinho.</p>
+
+  <div class="formula"><span class="eq">A máquina do “eles”</span>
+    <span class="what"><div>1. Conjugue com <b>eles</b> no pretérito perfeito: eles <b>puse</b>ram.</div><div>2. Tire o <b>-ram</b>: sobra <b>puse</b>.</div><div>3. + <b>sse</b> → <i>se eu pusesse</i> (imperfeito do subjuntivo)<br>+ <b>r</b> → <i>quando eu puser</i> (futuro do subjuntivo)<br>+ <b>ra</b> → <i>eu pusera</i> (mais-que-perfeito)</div></span></div>
+
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Verbo</th><th>eu (presente)</th><th>eles (pretérito perfeito)</th><th>se eu… (imperf. subj.)</th><th>quando eu… (fut. subj.)</th><th>imperativo (tu)</th></tr>
+    <tr><td><b>dar</b></td><td>dou</td><td>de-ram</td><td>desse</td><td class="hl">der</td><td>dá</td></tr>
+    <tr><td><b>ver</b></td><td>vejo</td><td>vi-ram</td><td>visse</td><td class="hl">vir</td><td>vê</td></tr>
+    <tr><td><b>poder</b></td><td>posso</td><td>pude-ram</td><td>pudesse</td><td class="hl">puder</td><td>não se usa</td></tr>
+    <tr><td><b>caber</b></td><td>caibo</td><td>coube-ram</td><td>coubesse</td><td class="hl">couber</td><td>não se usa</td></tr>
+    <tr><td><b>pôr</b></td><td>ponho</td><td>puse-ram</td><td>pusesse</td><td class="hl">puser</td><td>põe</td></tr>
+    <tr><td><b>saber</b></td><td>sei</td><td>soube-ram</td><td>soubesse</td><td class="hl">souber</td><td>sabe</td></tr>
+    <tr><td><b>ir</b></td><td>vou</td><td>fo-ram</td><td>fosse</td><td class="hl">for</td><td>vai</td></tr>
+    <tr><td><b>rir</b></td><td>rio</td><td>ri-ram</td><td>risse</td><td class="hl">rir</td><td>ri</td></tr>
+    <tr><td><b>vir</b></td><td>venho</td><td>vie-ram</td><td>viesse</td><td class="hl">vier</td><td>vem</td></tr>
+  </table></div>
+  <p style="font-size:.92rem;color:var(--muted)">Os presentes, pretéritos e imperativos acima são os da apostila (aula 119).</p>
+
+  <div class="callout warn"><div class="lab">A pegadinha número 1: ver × vir</div>
+    <p><b>Ver</b> (enxergar) no futuro do subjuntivo é <b>vir</b>: “Quando eu <b>vir</b> a Beatriz…”. <b>Vir</b> (chegar) no futuro do subjuntivo é <b>vier</b>: “Quando ela <b>vier</b> aqui…”. “Quando eu ver” está <b>errado</b>.</p>
+    <p>No presente: ele <b>vê</b> / eles <b>veem</b> (ver) × ele <b>vem</b> / eles <b>vêm</b> (vir).</p></div>
+
+  <div class="callout tip"><div class="lab">Os compostos copiam o “pai”</div>
+    <p>Propor, compor e repor se conjugam como <b>pôr</b>: se ele <b>propuser</b>. Intervir se conjuga como <b>vir</b>: se você não <b>interviesse</b>. Obter e manter se conjugam como <b>ter</b>: quando ele <b>obtiver</b>. Rever, como <b>ver</b>: quando eu <b>revir</b>.</p></div>
+
+  <div class="ex"><div class="lab">Exemplo resolvido: “Se você não ___ (intervir, imperfeito do subjuntivo)…”</div>
+    <span class="step">Intervir copia vir → eles inter<b>vie</b>ram</span>
+    <span class="step">Tira o -ram → intervie</span>
+    <span class="step">Imperfeito do subjuntivo → + sse</span>
+    <span class="ans">Se você não interviesse…</span></div>
+  <div class="ex"><div class="lab">Exemplo resolvido: “Quando ele ___ (obter, futuro do subjuntivo) o resultado…”</div>
+    <span class="step">Obter copia ter → eles ob<b>tive</b>ram</span>
+    <span class="step">Tira o -ram → obtive → + r</span>
+    <span class="ans">Quando ele obtiver o resultado…</span></div>
+<div class="quiz" data-answer="c" data-explain="Ver no futuro do subjuntivo: eles viram → vi + r = vir. Vier é do verbo vir (chegar)."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">“Quando eu ___ (ver) a Beatriz, vou contar a novidade.”</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>ver</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>vier</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>vir</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>visse</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="b" data-explain="Propor copia pôr: eles propuseram → propuse + r = propuser."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">“Se ele me ___ (propor, futuro do subjuntivo) um bom salário, aceitarei o emprego.”</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>propor</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>propuser</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>propusesse</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>propôr</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="c" data-explain="Caber no presente: eu caibo, tu cabes, ele cabe. Coube é pretérito; caiba é subjuntivo."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">“Eu não ___ (caber, presente do indicativo) neste elevador!”</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>cabo</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>coube</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>caibo</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>caiba</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="a" data-explain="Talvez pede presente do subjuntivo: que eu caiba, que ele caiba."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">“Talvez não ___ (caber, presente do subjuntivo) tanta roupa naquela gaveta.”</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>caiba</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>cabe</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>coubesse</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>couber</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="b" data-explain="Ver no presente: vejo, vês, vê, vemos, vedes, veem. Vindes é do verbo vir."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">“Vós não ___ (ver, presente do indicativo) vossos próprios defeitos.”</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>vindes</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>vedes</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>vêdes</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>viram</span></button></div><div class="fb"></div></div>
+<div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/j-tBN48bITU" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="cap"><div class="t">Verbos irregulares</div><div class="c">Brasil Escola</div></div></div></div>
+</section>
+<section class="block" id="narrar">
+  <h2><span class="n">4</span>Narrar e descrever</h2>
+  <p class="sub">Quase toda história mistura dois jeitos de escrever: contar o que acontece e mostrar como as coisas são.</p>
+
+  <div class="two">
+    <div class="callout"><div class="lab">Narração: um vídeo</div>
+      <p>Conta <b>ações</b> que acontecem uma depois da outra, com o tempo passando. Usa <b>verbos de ação</b> e marcadores de tempo: <i>logo cedo, em seguida, depois, ao meio-dia, finalmente</i>.</p></div>
+    <div class="callout tip"><div class="lab">Descrição: uma foto</div>
+      <p>Mostra <b>como é</b> uma pessoa, um lugar ou um objeto, com o tempo “congelado”. Usa <b>adjetivos</b> e verbos de estado: <i>ser, estar, ter, parecer</i>.</p></div>
+  </div>
+
+  <div class="formula"><span class="eq">Filmar ou fotografar?</span>
+    <span class="what"><div>Para mostrar esse trecho você precisaria <b>filmar</b> (coisas acontecendo)? → <b>narração</b>.</div><div>Bastaria <b>uma foto</b> (como algo é)? → <b>descrição</b>.</div></span></div>
+
+  <div class="ex"><div class="lab">Exemplos de “Cinco mulheres”, de Machado de Assis (apostila, aulas 122 e 123)</div>
+    <span class="step"><b>Narração:</b> “O casamento foi fixado para um dia de junho.” Algo acontece.</span>
+    <span class="step"><b>Descrição:</b> “O namorado era um belo rapaz de vinte e seis anos, alto, moreno, de olhos e cabelos pretos.” Uma foto do namorado.</span>
+    <span class="step"><b>Narração:</b> “Marcelina não se levantou da cama.” Ação.</span>
+    <span class="step"><b>Descrição:</b> “Marcelina era uma criatura débil como uma haste de flor.” Como ela é.</span></div>
+
+  <div class="callout"><div class="lab">Descrição objetiva × subjetiva</div>
+    <p><b>Objetiva:</b> mostra o que qualquer pessoa veria (“a sala tem duas janelas”). <b>Subjetiva:</b> mostra a impressão de quem escreve (“a sala era triste e abafada”).</p></div>
+
+  <h3>Jogo: narração ou descrição?</h3>
+  <div class="game">
+<div class="quiz mini" data-answer="n" data-explain="Ações em sequência, com marcadores de tempo (logo cedo, em seguida)."><p class="q"><span class="badge-l">A</span>Levantei logo cedo e, em seguida, fui ao trabalho.</p><div class="opts"><button class="opt" data-opt="n"><span>Narração</span></button><button class="opt" data-opt="d"><span>Descrição</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="d" data-explain="Mostra como o lugar é: adjetivos e verbos de estado (era, estavam)."><p class="q"><span class="badge-l">B</span>Tudo lá era antiquado e as instalações elétricas estavam deterioradas.</p><div class="opts"><button class="opt" data-opt="n"><span>Narração</span></button><button class="opt" data-opt="d"><span>Descrição</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="n" data-explain="Três ações, uma depois da outra."><p class="q"><span class="badge-l">C</span>O cachorro latiu, pulou o portão e correu até a esquina.</p><div class="opts"><button class="opt" data-opt="n"><span>Narração</span></button><button class="opt" data-opt="d"><span>Descrição</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="d" data-explain="Uma foto da casa: características."><p class="q"><span class="badge-l">D</span>A casa era pequena, de paredes azuis e janelas de madeira.</p><div class="opts"><button class="opt" data-opt="n"><span>Narração</span></button><button class="opt" data-opt="d"><span>Descrição</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="n" data-explain="Marcador de tempo e ações."><p class="q"><span class="badge-l">E</span>Ao meio-dia, parei para almoçar e descansei um pouco.</p><div class="opts"><button class="opt" data-opt="n"><span>Narração</span></button><button class="opt" data-opt="d"><span>Descrição</span></button></div><div class="fb"></div></div>
+<div class="quiz mini" data-answer="d" data-explain="Características de uma pessoa."><p class="q"><span class="badge-l">F</span>Ofélia tinha os olhos grandes e o rosto sereno.</p><div class="opts"><button class="opt" data-opt="n"><span>Narração</span></button><button class="opt" data-opt="d"><span>Descrição</span></button></div><div class="fb"></div></div>
+</div>
+<div class="quiz" data-answer="b" data-explain="“Em seguida” marca a passagem do tempo entre ações. Adjetivos e verbos como parecer são típicos da descrição."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Qual destas palavras é mais típica de uma <b>narração</b>?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Amarelo</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Em seguida</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Parecia</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Bonito</span></button></div><div class="fb"></div></div>
+<div class="write"><h4>Atividade de escrita (no caderno)</h4>
+  <p>Escolha cinco coisas da sua rotina. Divida a folha em duas colunas: à esquerda, conte em forma de narração; à direita, descreva. Veja um modelo:</p>
+  <div class="two">
+    <div><b>Narração</b><br>Acordei às seis, tomei banho e, em seguida, fui para a escola. Ao meio-dia voltei para casa e almocei.</div>
+    <div><b>Descrição</b><br>Meu quarto é pequeno e claro. A cama fica perto da janela, e a mochila azul, cheia de livros, fica sempre sobre a cadeira.</div>
+  </div></div>
+<div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/4t4mzxFZev0" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="cap"><div class="t">Tipologias textuais: descrição</div><div class="c">Brasil Escola</div></div></div><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/U6b46lbRovQ" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="cap"><div class="t">Qual a diferença entre o texto narrativo, dissertativo e descritivo?</div><div class="c">YouTube</div></div></div></div>
+</section>
+<section class="block" id="frase">
+  <h2><span class="n">5</span>As peças da frase</h2>
+  <p class="sub">Alguns verbos precisam de um complemento para fazer sentido; outros não. E alguns verbos só servem de “ponte” para uma característica.</p>
+  <div class="key"><span class="r-suj"><i></i>sujeito</span><span class="r-v"><i></i>verbo</span><span class="r-od"><i></i>objeto direto</span><span class="r-oi"><i></i>objeto indireto</span><span class="r-adv"><i></i>adjunto adverbial</span><span class="r-pred"><i></i>predicativo</span></div>
+
+  <h3>Os complementos do verbo</h3>
+  <div class="trio">
+    <div class="t"><h4>Objeto direto (OD)</h4><p>Completa o verbo <b>sem preposição</b>. O verbo é transitivo direto (VTD).</p><span class="key">Comprei <b>um livro</b>.</span></div>
+    <div class="t"><h4>Objeto indireto (OI)</h4><p>Completa o verbo <b>com preposição</b> (a, de, em, com, para…). O verbo é transitivo indireto (VTI).</p><span class="key">Preciso <b>de ajuda</b>.</span></div>
+    <div class="t"><h4>Verbo intransitivo (VI)</h4><p>Tem sentido completo sozinho, <b>não pede</b> complemento.</p><span class="key">O bebê <b>dormiu</b>.</span></div>
+  </div>
+
+  <div class="formula"><span class="eq">Pergunte ao verbo</span>
+    <span class="what"><div>Verbo + <b>o quê? / quem?</b> → resposta sem preposição = <b>objeto direto</b></div><div>Verbo + <b>de quê? / a quem? / em quê?</b> → resposta com preposição = <b>objeto indireto</b></div><div><b>Onde? Quando? Como? Quanto?</b> → <b>adjunto adverbial</b></div></span></div>
+
+  <div class="sent"><span class="an r-suj"><span class="w">Eles</span><small>sujeito</small></span><span class="an r-v"><span class="w">atravessaram</span><small>VTD</small></span><span class="an r-od"><span class="w">a serra</span><small>objeto direto</small></span><span class="arrow">Atravessaram o quê? A serra. Sem preposição → objeto direto.</span></div>
+  <div class="sent"><span class="an r-v"><span class="w">Disseram</span><small>VTDI</small></span><span class="an r-od"><span class="w">adeus</span><small>objeto direto</small></span><span class="an r-oi"><span class="w">pra todos</span><small>objeto indireto</small></span><span class="arrow">Disseram o quê? Adeus (OD). Para quem? Pra todos, com preposição (OI). O verbo pede os dois.</span></div>
+  <div class="sent"><span class="an r-suj"><span class="w">O noivo</span><small>sujeito</small></span><span class="an r-v"><span class="w">se despenhou</span><small>VI</small></span><span class="arrow">Despenhou-se e pronto, o sentido está completo. Verbo intransitivo.</span></div>
+
+  <h3>O adjunto adverbial: a informação “extra”</h3>
+  <p>Diz uma <b>circunstância</b>: lugar, tempo, modo, intensidade… É um termo <b>acessório</b>: se você tirar, a frase continua de pé. No poema, “pelos atalhos da serra” é adjunto adverbial de <b>lugar</b>.</p>
+  <div class="ex"><div class="lab">Exemplo resolvido: “Ontem choveu muito na cidade.”</div>
+    <span class="step">ontem → quando? → adjunto adverbial de tempo</span>
+    <span class="step">muito → quanto? → adjunto adverbial de intensidade</span>
+    <span class="step">na cidade → onde? → adjunto adverbial de lugar</span>
+    <span class="ans">Tire os três: “Choveu.” A frase ainda funciona.</span></div>
+
+  <h3>Predicado verbal × predicado nominal</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Predicado verbal</th><th>Predicado nominal</th></tr>
+    <tr><td>O verbo indica uma <b>ação</b> e é o centro: VTD + OD, VTI + OI ou VI.</td><td><b>Verbo de ligação</b> (VL) + <b>predicativo do sujeito</b>, que é uma característica ou estado do sujeito.</td></tr>
+    <tr><td>Os noivos <b>atravessaram</b> a serra.</td><td>Os dois estavam <b>felizes</b>.</td></tr>
+  </table></div>
+  <p>Verbos de ligação mais comuns: <b>ser, estar, ficar, parecer, permanecer, continuar, andar, tornar-se, virar</b>.</p>
+  <div class="sent"><span class="an r-suj"><span class="w">Os dois</span><small>sujeito</small></span><span class="an r-v"><span class="w">estavam</span><small>VL</small></span><span class="an r-pred"><span class="w">felizes</span><small>predicativo do sujeito</small></span></div>
+  <div class="sent"><span class="an r-adv"><span class="w">Na altura</span><small>adj. adverbial de lugar</small></span><span class="an r-suj"><span class="w">tudo</span><small>sujeito</small></span><span class="an r-v"><span class="w">era</span><small>VL</small></span><span class="an r-pred"><span class="w">paz</span><small>predicativo</small></span></div>
+  <div class="sent"><span class="an r-suj"><span class="w">O céu</span><small>sujeito</small></span><span class="an r-v"><span class="w">ficou</span><small>VL</small></span><span class="an r-pred"><span class="w">vermelho</span><small>predicativo</small></span><span class="an r-adv"><span class="w">ao entardecer</span><small>adj. adverbial de tempo</small></span></div>
+
+  <div class="callout warn"><div class="lab">Pegadinha: o mesmo verbo pode mudar de papel</div>
+    <p>“Ela <b>anda</b> cansada” → anda = está → verbo de ligação, <i>cansada</i> é predicativo. “Ela <b>anda</b> depressa” → anda = caminha → verbo de ação. O que manda é o <b>sentido</b> na frase, não decorar a lista.</p></div>
+<div class="quiz" data-answer="b" data-explain="Entregou o quê? A carta, sem preposição: objeto direto. “À vizinha” (a + a) é o objeto indireto."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">“O garoto entregou <b>a carta</b> à vizinha.” O termo em negrito é:</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Objeto indireto</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Objeto direto</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Adjunto adverbial</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Sujeito</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="c" data-explain="Precisa de quê? De descanso, com preposição: objeto indireto. Precisar é VTI."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">“Ela precisa <b>de descanso</b>.” O termo em negrito é:</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Objeto direto</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Adjunto adverbial de modo</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Objeto indireto</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Predicativo do sujeito</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="b" data-explain="Está é verbo de ligação e feliz é uma característica da criança (predicativo do sujeito). As outras têm verbos de ação."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Em qual frase o predicado é <b>nominal</b>?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>O menino chutou a bola.</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>A criança está feliz.</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Os alunos chegaram cedo.</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Ela gosta de música.</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="a" data-explain="Cansada é um estado da menina, ligado a ela pelo verbo estar. As outras opções indicam modo, lugar ou tempo (adjuntos adverbiais)."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">“A menina estava ___ depois da longa caminhada.” Qual palavra completa com um <b>predicativo do sujeito</b>?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>cansada</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>rapidamente</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>na praia</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>ontem</span></button></div><div class="fb"></div></div>
+<div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/4mbHUnPvZKA" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="cap"><div class="t">Verbos transitivos diretos, transitivos indiretos e bitransitivos</div><div class="c">Brasil Escola</div></div></div><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/K9PHu69F1iE" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="cap"><div class="t">Objeto direto e indireto: aula de Português</div><div class="c">Prof. Pablo Jamilk</div></div></div><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/lWTpQdWXu9w" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="cap"><div class="t">Tipos de predicado: nominal, verbal e verbo-nominal</div><div class="c">Prof. Alda</div></div></div></div>
+</section>
+<section class="block" id="passiva">
+  <h2><span class="n">6</span>Voz passiva</h2>
+  <p class="sub">A mesma ação pode ser contada de dois jeitos: destacando quem fez ou destacando quem sofreu.</p>
+  <div class="sent"><span class="an r-suj"><span class="w">O goleiro</span><small>sujeito agente</small></span><span class="an r-v"><span class="w">defendeu</span><small>verbo</small></span><span class="an r-od"><span class="w">o pênalti</span><small>objeto direto</small></span><span class="arrow">Voz ativa: o sujeito pratica a ação.</span></div>
+  <div class="sent"><span class="an r-suj"><span class="w">O pênalti</span><small>sujeito paciente</small></span><span class="an r-v"><span class="w">foi defendido</span><small>ser + particípio</small></span><span class="an r-ag"><span class="w">pelo goleiro</span><small>agente da passiva</small></span><span class="arrow">Voz passiva analítica: o sujeito sofre a ação; quem fez vira agente da passiva.</span></div>
+
+  <div class="formula"><span class="eq">Receita: ativa → passiva</span>
+    <span class="what"><div>1. O <b>objeto direto</b> vira o <b>sujeito</b>.</div><div>2. O <b>sujeito</b> vira <b>agente</b>, com <b>por / pelo / pela</b>.</div><div>3. O verbo vira <b>ser</b> no <b>mesmo tempo</b> + <b>particípio</b>, concordando com o novo sujeito.</div></span></div>
+
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Voz ativa</th><th>Tempo</th><th>Voz passiva analítica</th></tr>
+    <tr><td>O goleiro <b>defendeu</b> o pênalti.</td><td>pretérito perfeito</td><td>O pênalti <b>foi defendido</b> pelo goleiro.</td></tr>
+    <tr><td>Os alunos <b>entregarão</b> os trabalhos.</td><td>futuro do presente</td><td>Os trabalhos <b>serão entregues</b> pelos alunos.</td></tr>
+    <tr><td>A professora <b>tinha corrigido</b> as provas.</td><td>locução com “tinha”</td><td>As provas <b>tinham sido corrigidas</b> pela professora.</td></tr>
+    <tr><td>O técnico <b>teria escolhido</b> os jogadores.</td><td>locução com “teria”</td><td>Os jogadores <b>teriam sido escolhidos</b> pelo técnico.</td></tr>
+    <tr><td>O fogo <b>pode destruir</b> a mata.</td><td>locução com “pode”</td><td>A mata <b>pode ser destruída</b> pelo fogo.</td></tr>
+  </table></div>
+  <div class="callout tip"><div class="lab">Macete do tempo verbal</div>
+    <p>Olhe o verbo da ativa e coloque o <b>ser</b> exatamente naquele lugar: defendeu → <b>foi</b>; entregarão → <b>serão</b>; tinha corrigido → tinha <b>sido</b>; pode destruir → pode <b>ser</b>. O verbo principal vira particípio no fim.</p></div>
+
+  <h3>Voz passiva sintética: com “se”</h3>
+  <div class="sent"><span class="an r-v"><span class="w">Vendem</span><small>VTD</small></span><span class="an r-se"><span class="w">-se</span><small>partícula apassivadora</small></span><span class="an r-suj"><span class="w">equipamentos</span><small>sujeito paciente</small></span><span class="arrow">Equipamentos são vendidos. O “se” faz o papel do “ser + particípio”.</span></div>
+  <p>Estrutura: <b>verbo transitivo direto + se + sujeito paciente</b>. Quase nunca aparece o agente.</p>
+  <div class="callout warn"><div class="lab">Pegadinha: o verbo concorda com o sujeito</div>
+    <p>Se o sujeito está no plural, o verbo também fica: “Vende<b>m</b>-se casas”, “Aluga<b>m</b>-se apartamentos”. “Vende-se casas” está <b>errado</b>. No singular: “Aluga-se tubo de oxigênio”.</p>
+    <p>Teste: troque pela analítica. “Casas <b>são vendidas</b>” → plural → vende<b>m</b>-se.</p></div>
+  <div class="callout warn"><div class="lab">Lembrete da apostila</div>
+    <p>A voz passiva só existe com verbo <b>transitivo direto</b> (que tem objeto direto). “O time precisa de vitórias” não tem passiva, porque precisar pede preposição (VTI).</p></div>
+  <div class="callout"><div class="lab">Agente escondido</div>
+    <p>Às vezes o agente não aparece: “As ilustrações devem ser examinadas cuidadosamente.” Quem examina? Fica subentendido (você). Para passar para a ativa, use quem está implícito: “(Você) deve examinar cuidadosamente as ilustrações.”</p></div>
+
+  <div class="ex"><div class="lab">Exemplo resolvido: passiva → ativa</div>
+    <span class="step">“O bolo foi feito pela minha avó.”</span>
+    <span class="step">Agente (pela minha avó) vira sujeito → minha avó</span>
+    <span class="step">Foi feito (pretérito perfeito) → fez</span>
+    <span class="ans">Minha avó fez o bolo.</span></div>
+<div class="quiz" data-answer="c" data-explain="O muro sofre a ação (é pintado). “Pelos alunos” é o agente da passiva."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">“O muro foi pintado pelos alunos.” Qual é o <b>sujeito paciente</b>?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Pelos alunos</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Foi pintado</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>O muro</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Os alunos pintaram</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="b" data-explain="Anulará é futuro do presente: o ser também vai para o futuro (será) + particípio (anulado)."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Passe para a voz passiva: “O juiz <b>anulará</b> o gol.”</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>O gol foi anulado pelo juiz.</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>O gol será anulado pelo juiz.</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>O gol é anulado pelo juiz.</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>O juiz será anulado pelo gol.</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="c" data-explain="Sapatos são consertados → plural → consertam-se. Nas outras, o verbo deveria ir para o plural: alugam-se, vendem-se, procuram-se."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Qual frase está <b>correta</b>?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Aluga-se apartamentos.</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Vende-se bicicletas.</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Consertam-se sapatos.</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Procura-se ajudantes.</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="a" data-explain="Gostar pede preposição (gosta de), é VTI, e não tem objeto direto. Sem objeto direto, não há voz passiva."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Qual frase <b>não pode</b> ir para a voz passiva?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>O menino gosta de futebol.</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>A empresa contratou dois técnicos.</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Os estudantes enviaram um e-mail.</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Maria comprou um carro.</span></button></div><div class="fb"></div></div>
+<div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/GjbZMa0UmoE" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="cap"><div class="t">Vozes verbais</div><div class="c">Prof. Noslen</div></div></div><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/ZptAlDeCDzw" title="Vídeo do YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="cap"><div class="t">Diferença entre a voz passiva sintética e a voz passiva analítica</div><div class="c">Profa. Ana Rita</div></div></div></div>
+</section>
+<section class="block" id="cartoes">
+  <h2>Cartões de memória</h2>
+  <p class="sub">Leia a pergunta, responda <b>em voz alta</b> e só então toque no cartão para ver a resposta. Se errou, ele volta para o fim da fila. Continue até zerar.</p>
+  <div class="fc-wrap">
+    <div class="fc-top"><span id="fc-count">Faltam 0 cartões</span><span id="fc-round"></span></div>
+    <div class="fc-card" id="fc-card" role="button" tabindex="0" aria-live="polite"><span class="side" id="fc-side">Pergunta</span><span class="txt" id="fc-txt"></span></div>
+    <div class="fc-btns" id="fc-btns">
+      <button class="btn ghost" type="button" id="fc-flip">Ver resposta</button>
+      <button class="btn primary" type="button" id="fc-ok" hidden>Acertei</button>
+      <button class="btn ghost" type="button" id="fc-no" hidden>Errei, volta depois</button>
+    </div>
+    <div class="fc-done" id="fc-done">Baralho zerado! <button class="btn ghost" type="button" id="fc-again" style="margin-left:8px">Embaralhar de novo</button></div>
+  </div>
+</section>
+<section class="block" id="cola">
+  <h2>Cola de revisão</h2>
+  <p class="sub">Para ler na véspera. Se algo aqui não fizer sentido, volte na parte correspondente.</p>
+  <div class="cola">
+    <div class="c"><h4>Peças do verbo</h4><span class="eq">radical + vogal + desinência</span><p>Radical = significado. Vogal temática = conjugação (a, e, i). Pôr é da 2ª.</p></div>
+    <div class="c"><h4>Regular × irregular</h4><span class="eq">eu ___ / ele ___</span><p>Radical mudou? Irregular. Só a letra mudou para manter o som (fiquei)? Regular.</p></div>
+    <div class="c"><h4>Máquina do “eles”</h4><span class="eq">eles pude-ram</span><p>Tira -ram: + sse = pudesse; + r = puder; + ra = pudera.</p></div>
+    <div class="c"><h4>Ver × vir</h4><span class="eq">quando eu vir / vier</span><p>Ver → vir. Vir → vier. Ele vê, eles veem. Ele vem, eles vêm.</p></div>
+    <div class="c"><h4>Narrar × descrever</h4><span class="eq">vídeo × foto</span><p>Narração: ações + tempo passando. Descrição: características, adjetivos, verbos de estado.</p></div>
+    <div class="c"><h4>Complementos</h4><span class="eq">o quê? × de quê?</span><p>Sem preposição: OD. Com preposição: OI. Onde/quando/como: adjunto adverbial.</p></div>
+    <div class="c"><h4>Predicado nominal</h4><span class="eq">VL + predicativo</span><p>Ser, estar, ficar, parecer, permanecer, continuar, andar, tornar-se.</p></div>
+    <div class="c"><h4>Voz passiva</h4><span class="eq">ser + particípio</span><p>OD vira sujeito; sujeito vira agente (por). Mesmo tempo verbal. Só com VTD.</p></div>
+    <div class="c"><h4>Passiva sintética</h4><span class="eq">VTD + se + sujeito</span><p>Vendem-se casas (plural). Aluga-se sala (singular).</p></div>
+  </div>
+</section>
+<section class="block" id="prova">
+  <h2>Prova final</h2>
+  <div class="exam-wrap">
+    <p class="exam-intro">São <b>15 questões</b>, cobrindo as seis partes. A nota vai de 0 a 10. Responda todas sem consultar e clique em <b>Corrigir prova</b>.</p>
+    <form class="exam" id="exam">
+<div class="q" data-answer="b"><p class="qt"><span class="qn">1.</span> Em “partíamos”, qual é o radical?</p><label class="o"><input type="radio" name="q1" value="a"><span>partí</span></label><label class="o"><input type="radio" name="q1" value="b"><span>part</span></label><label class="o"><input type="radio" name="q1" value="c"><span>mos</span></label><label class="o"><input type="radio" name="q1" value="d"><span>parti</span></label><div class="qfb"><b>Resposta: B.</b> Partir sem o -ir: part. O -í- é a vogal temática; -a- e -mos são desinências.</div></div>
+<div class="q" data-answer="b"><p class="qt"><span class="qn">2.</span> Qual grupo tem <b>só verbos irregulares</b>?</p><label class="o"><input type="radio" name="q2" value="a"><span>andar, comer, partir</span></label><label class="o"><input type="radio" name="q2" value="b"><span>dar, ver, caber, pôr</span></label><label class="o"><input type="radio" name="q2" value="c"><span>ficar, chegar, conhecer</span></label><label class="o"><input type="radio" name="q2" value="d"><span>voltar, casar, esconder</span></label><div class="qfb"><b>Resposta: B.</b> Dar, ver, caber e pôr estão na lista da apostila. Ficar, chegar e conhecer só mudam a letra para manter o som: são regulares.</div></div>
+<div class="q" data-answer="c"><p class="qt"><span class="qn">3.</span> Qual verbo é chamado de <b>anômalo</b>?</p><label class="o"><input type="radio" name="q3" value="a"><span>Cantar</span></label><label class="o"><input type="radio" name="q3" value="b"><span>Estar</span></label><label class="o"><input type="radio" name="q3" value="c"><span>Ser</span></label><label class="o"><input type="radio" name="q3" value="d"><span>Vender</span></label><div class="qfb"><b>Resposta: C.</b> Ser muda o radical quase por completo (sou, és, fui, era). O mesmo acontece com ir.</div></div>
+<div class="q" data-answer="b"><p class="qt"><span class="qn">4.</span> “Quando você ___ (ver) o resultado, me avise.”</p><label class="o"><input type="radio" name="q4" value="a"><span>ver</span></label><label class="o"><input type="radio" name="q4" value="b"><span>vir</span></label><label class="o"><input type="radio" name="q4" value="c"><span>vier</span></label><label class="o"><input type="radio" name="q4" value="d"><span>visse</span></label><div class="qfb"><b>Resposta: B.</b> Ver no futuro do subjuntivo: eles viram → vir. Vier é do verbo vir.</div></div>
+<div class="q" data-answer="b"><p class="qt"><span class="qn">5.</span> “Se eles ___ (vir) cedo, iremos juntos.”</p><label class="o"><input type="radio" name="q5" value="a"><span>virem</span></label><label class="o"><input type="radio" name="q5" value="b"><span>vierem</span></label><label class="o"><input type="radio" name="q5" value="c"><span>vêm</span></label><label class="o"><input type="radio" name="q5" value="d"><span>viriam</span></label><div class="qfb"><b>Resposta: B.</b> Vir: eles vieram → vie + r = vier; no plural, vierem. Virem seria do verbo ver.</div></div>
+<div class="q" data-answer="c"><p class="qt"><span class="qn">6.</span> “Ontem eu ___ (pôr) o livro na mesa.”</p><label class="o"><input type="radio" name="q6" value="a"><span>pôs</span></label><label class="o"><input type="radio" name="q6" value="b"><span>ponhei</span></label><label class="o"><input type="radio" name="q6" value="c"><span>pus</span></label><label class="o"><input type="radio" name="q6" value="d"><span>punha</span></label><div class="qfb"><b>Resposta: C.</b> Pretérito perfeito de pôr: pus, puseste, pôs. Eu pus. “Ponhei” não existe.</div></div>
+<div class="q" data-answer="b"><p class="qt"><span class="qn">7.</span> “Talvez não ___ (caber) todos no carro.”</p><label class="o"><input type="radio" name="q7" value="a"><span>cabem</span></label><label class="o"><input type="radio" name="q7" value="b"><span>caibam</span></label><label class="o"><input type="radio" name="q7" value="c"><span>coubessem</span></label><label class="o"><input type="radio" name="q7" value="d"><span>cabam</span></label><div class="qfb"><b>Resposta: B.</b> Talvez pede presente do subjuntivo: que eles caibam.</div></div>
+<div class="q" data-answer="b"><p class="qt"><span class="qn">8.</span> “A sala era ampla, com paredes amarelas e uma janela que dava para o mar.” Esse trecho é:</p><label class="o"><input type="radio" name="q8" value="a"><span>Narração, porque tem verbo no passado</span></label><label class="o"><input type="radio" name="q8" value="b"><span>Descrição, porque mostra como a sala é</span></label><label class="o"><input type="radio" name="q8" value="c"><span>Narração, porque conta uma ação</span></label><label class="o"><input type="radio" name="q8" value="d"><span>Descrição, porque tem marcadores de tempo</span></label><div class="qfb"><b>Resposta: B.</b> É uma “foto” da sala: características e adjetivos. Ter verbo no passado não faz um trecho virar narração.</div></div>
+<div class="q" data-answer="b"><p class="qt"><span class="qn">9.</span> Qual expressão é um <b>marcador de tempo</b>, típico da narração?</p><label class="o"><input type="radio" name="q9" value="a"><span>muito bonito</span></label><label class="o"><input type="radio" name="q9" value="b"><span>em seguida</span></label><label class="o"><input type="radio" name="q9" value="c"><span>de olhos pretos</span></label><label class="o"><input type="radio" name="q9" value="d"><span>parecia</span></label><div class="qfb"><b>Resposta: B.</b> “Em seguida” liga uma ação à próxima, mostrando o tempo passando.</div></div>
+<div class="q" data-answer="c"><p class="qt"><span class="qn">10.</span> “O professor devolveu as provas aos alunos.” O termo “as provas” é:</p><label class="o"><input type="radio" name="q10" value="a"><span>Objeto indireto</span></label><label class="o"><input type="radio" name="q10" value="b"><span>Sujeito</span></label><label class="o"><input type="radio" name="q10" value="c"><span>Objeto direto</span></label><label class="o"><input type="radio" name="q10" value="d"><span>Adjunto adverbial</span></label><div class="qfb"><b>Resposta: C.</b> Devolveu o quê? As provas, sem preposição: objeto direto. “Aos alunos” é o objeto indireto.</div></div>
+<div class="q" data-answer="b"><p class="qt"><span class="qn">11.</span> “Os dois estavam felizes.” O predicado é:</p><label class="o"><input type="radio" name="q11" value="a"><span>Verbal, com objeto direto</span></label><label class="o"><input type="radio" name="q11" value="b"><span>Nominal: estavam é verbo de ligação e felizes é predicativo do sujeito</span></label><label class="o"><input type="radio" name="q11" value="c"><span>Verbal, porque estavam é verbo de ação</span></label><label class="o"><input type="radio" name="q11" value="d"><span>Nominal, porque “os dois” é predicativo</span></label><div class="qfb"><b>Resposta: B.</b> Estar liga o sujeito a uma característica (felizes): predicado nominal.</div></div>
+<div class="q" data-answer="b"><p class="qt"><span class="qn">12.</span> “Ontem choveu muito.” Os termos “ontem” e “muito” são:</p><label class="o"><input type="radio" name="q12" value="a"><span>Objetos diretos</span></label><label class="o"><input type="radio" name="q12" value="b"><span>Adjuntos adverbiais de tempo e de intensidade</span></label><label class="o"><input type="radio" name="q12" value="c"><span>Predicativos do sujeito</span></label><label class="o"><input type="radio" name="q12" value="d"><span>Sujeitos</span></label><div class="qfb"><b>Resposta: B.</b> Ontem responde quando; muito responde quanto. São circunstâncias: adjuntos adverbiais.</div></div>
+<div class="q" data-answer="b"><p class="qt"><span class="qn">13.</span> Qual é a voz passiva de “Os bombeiros salvaram o gato”?</p><label class="o"><input type="radio" name="q13" value="a"><span>O gato será salvo pelos bombeiros.</span></label><label class="o"><input type="radio" name="q13" value="b"><span>O gato foi salvo pelos bombeiros.</span></label><label class="o"><input type="radio" name="q13" value="c"><span>Os bombeiros foram salvos pelo gato.</span></label><label class="o"><input type="radio" name="q13" value="d"><span>O gato salvou os bombeiros.</span></label><div class="qfb"><b>Resposta: B.</b> Salvaram é pretérito perfeito → foi + particípio. O objeto (o gato) vira sujeito e os bombeiros viram agente.</div></div>
+<div class="q" data-answer="b"><p class="qt"><span class="qn">14.</span> Em “Consertam-se bicicletas”, temos:</p><label class="o"><input type="radio" name="q14" value="a"><span>Voz ativa; bicicletas é objeto direto</span></label><label class="o"><input type="radio" name="q14" value="b"><span>Voz passiva sintética; bicicletas é sujeito paciente</span></label><label class="o"><input type="radio" name="q14" value="c"><span>Voz passiva analítica; bicicletas é agente</span></label><label class="o"><input type="radio" name="q14" value="d"><span>Verbo intransitivo; não há sujeito</span></label><div class="qfb"><b>Resposta: B.</b> VTD + se + sujeito: passiva sintética. Equivale a “Bicicletas são consertadas”; por isso o verbo está no plural.</div></div>
+<div class="q" data-answer="b"><p class="qt"><span class="qn">15.</span> Qual frase <b>não pode</b> ir para a voz passiva?</p><label class="o"><input type="radio" name="q15" value="a"><span>O pintor terminou o quadro.</span></label><label class="o"><input type="radio" name="q15" value="b"><span>O time precisa de vitórias.</span></label><label class="o"><input type="radio" name="q15" value="c"><span>A turma organizou a festa.</span></label><label class="o"><input type="radio" name="q15" value="d"><span>O vento derrubou a árvore.</span></label><div class="qfb"><b>Resposta: B.</b> Precisar pede preposição (precisa de): é VTI, sem objeto direto. A voz passiva só existe com verbo transitivo direto.</div></div>
+    </form>
+    <div class="actions">
+      <button class="btn primary" type="button" id="grade">Corrigir prova</button>
+      <button class="btn ghost" type="button" id="reset">Refazer</button>
+    </div>
+    <div class="result" id="result" aria-live="polite">
+      <div><span class="score num"><span class="val">0</span></span> <span class="of">/ 10</span></div>
+      <div class="bar"><i></i></div>
+      <div class="msg"></div>
+      <div class="hits"></div>
+      <div class="best"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>Conteúdo baseado na apostila ETAPA de Língua Portuguesa: aulas 118 e 119 (estrutura verbal e principais verbos irregulares), 120 a 123 (narrar, descrever e expor), 128 e 129 (complementos e adjuntos) e 133 e 134 (sujeito paciente e agente da passiva).</p>
+  <p>Trechos literários: “A serra do Rola-Moça”, de Mário de Andrade, e “Cinco mulheres”, de Machado de Assis, como aparecem na apostila.</p>
+  <p>Vídeos: links para o YouTube, de canais e professores indicados em cada cartão.</p>
+</footer>
+</main>
+<script>
+(function(){
+  "use strict";
+  var $ = function(s,r){ return (r||document).querySelector(s); };
+  var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+  function store(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } }
+
+  // progress
+  var quizzes = $$(".quiz"), right = 0;
+  var prog = $("#prog");
+  function updProg(){ prog.innerHTML = "Checagens: <b>" + right + "</b> de " + quizzes.length + " certas"; }
+  updProg();
+
+  document.addEventListener("click", function(e){
+    var opt = e.target.closest ? e.target.closest(".opt") : null;
+    if(!opt) return;
+    var quiz = opt.closest(".quiz");
+    if(!quiz || quiz.classList.contains("done")) return;
+    quiz.classList.add("done");
+    var ans = quiz.getAttribute("data-answer"), chosen = opt.getAttribute("data-opt");
+    $$(".opt", quiz).forEach(function(o){ o.disabled = true; if(o.getAttribute("data-opt") === ans) o.classList.add("correct"); });
+    var fb = $(".fb", quiz), ex = quiz.getAttribute("data-explain") || "";
+    if(chosen === ans){ right++; fb.className = "fb right show"; fb.innerHTML = '<span class="v">Isso!</span> ' + ex; }
+    else { opt.classList.add("wrong"); fb.className = "fb rong show"; fb.innerHTML = '<span class="v">Quase.</span> A resposta certa está em verde. ' + ex; }
+    updProg();
+  });
+
+  // plan checkboxes
+  $$(".plan input[type=checkbox]").forEach(function(cb){
+    var k = "portugues-dia-" + cb.getAttribute("data-day");
+    if(store(k) === "1") cb.checked = true;
+    cb.addEventListener("change", function(){ store(k, cb.checked ? "1" : "0"); });
+  });
+
+  // exam
+  var form = $("#exam"), box = $("#result");
+  function showBest(){ var b = store("portugues-melhor"); $(".best", box).textContent = b ? "Sua melhor nota até agora: " + b.replace(".", ",") : ""; }
+  $("#grade").addEventListener("click", function(){
+    var qs = $$(".q", form), correct = 0, answered = 0;
+    qs.forEach(function(q){
+      var ans = q.getAttribute("data-answer"), sel = $("input:checked", q);
+      $$("label.o", q).forEach(function(l){ l.classList.remove("correct","wrong"); });
+      $(".qfb", q).classList.add("show");
+      var ci = q.querySelector('input[value="'+ans+'"]'), cl = ci ? ci.closest("label.o") : null;
+      if(sel){ answered++; var sl = sel.closest("label.o");
+        if(sel.value === ans){ correct++; sl.classList.add("correct"); } else { sl.classList.add("wrong"); if(cl) cl.classList.add("correct"); }
+      } else if(cl){ cl.classList.add("correct"); }
+    });
+    var total = qs.length, nota = Math.round(correct/total*100)/10;
+    var g = nota >= 7 ? "high" : (nota >= 5 ? "mid" : "low");
+    box.setAttribute("data-g", g);
+    $(".val", box).textContent = (nota % 1 === 0 ? nota.toFixed(0) : nota.toFixed(1)).replace(".", ",");
+    $(".msg", box).textContent = g === "high" ? "Mandou muito bem! Você está pronto para a prova."
+      : g === "mid" ? "Bom caminho. Revise as questões em vermelho e refaça."
+      : "Vamos revisar: releia a cola de revisão, passe pelos cartões, depois refaça a prova.";
+    var h = "Você acertou " + correct + " de " + total + " questões.";
+    if(answered < total) h += " (" + (total-answered) + " ficaram sem resposta.)";
+    $(".hits", box).textContent = h;
+    var best = parseFloat(store("portugues-melhor") || "0");
+    if(nota > best) store("portugues-melhor", String(nota));
+    showBest();
+    box.classList.add("show");
+    var bar = $(".bar>i", box); bar.style.width = "0%";
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ bar.style.width = (nota*10) + "%"; }); });
+    box.scrollIntoView({behavior:"smooth", block:"center"});
+  });
+  $("#reset").addEventListener("click", function(){
+    $$("input[type=radio]", form).forEach(function(r){ r.checked = false; });
+    $$("label.o", form).forEach(function(l){ l.classList.remove("correct","wrong"); });
+    $$(".qfb", form).forEach(function(f){ f.classList.remove("show"); });
+    box.classList.remove("show");
+    $("#prova").scrollIntoView({behavior:"smooth"});
+  });
+})();
+</script>
+
+<script>
+(function(){
+  "use strict";
+  // hero toggle
+  var t = document.getElementById("h-toggle"), a = document.getElementById("h-ativa"), p = document.getElementById("h-passiva");
+  t.addEventListener("click", function(){
+    var toPass = a.classList.contains("on");
+    a.classList.toggle("on", !toPass); p.classList.toggle("on", toPass);
+    t.textContent = toPass ? "Voltar para a voz ativa" : "Passar para a voz passiva";
+  });
+
+  // flashcards
+  var CARDS = [
+    ["Como achar o radical de um verbo?", "Tire o -ar, -er ou -ir do infinitivo. Vender → vend."],
+    ["O que a vogal temática mostra?", "A conjugação: a (1ª), e (2ª), i (3ª)."],
+    ["De que conjugação é o verbo pôr?", "2ª conjugação (vem da forma antiga poer)."],
+    ["O que é um verbo irregular?", "Um verbo que muda o radical ou as terminações e foge do modelo amar, vender, partir."],
+    ["Ficar → fiquei é irregularidade?", "Não. Só a letra muda para manter o som. Ficar é regular."],
+    ["O que é um verbo anômalo? Dê dois exemplos.", "Um verbo que muda quase tudo ao ser conjugado: ser e ir."],
+    ["Explique a máquina do “eles”.", "Eles + pretérito perfeito, tire o -ram. + sse = imperfeito do subjuntivo; + r = futuro do subjuntivo."],
+    ["Futuro do subjuntivo de ver: quando eu…", "vir"],
+    ["Futuro do subjuntivo de vir: quando eu…", "vier"],
+    ["Pôr no futuro do subjuntivo: quando ele…", "puser"],
+    ["Caber no presente: eu…", "caibo"],
+    ["Caber no pretérito perfeito: ele…", "coube"],
+    ["Intervir no imperfeito do subjuntivo: se você…", "interviesse (copia vir: vieram → viesse)"],
+    ["Presente de ver e vir com “eles”.", "Eles veem (ver). Eles vêm (vir)."],
+    ["Narração ou descrição: “Acordei, tomei café e saí.”", "Narração: ações em sequência."],
+    ["Qual a pergunta-macete para narração × descrição?", "Precisaria filmar (narração) ou bastaria uma foto (descrição)?"],
+    ["Objeto direto × objeto indireto: qual a diferença?", "O objeto direto vem sem preposição; o objeto indireto vem com preposição."],
+    ["O que é adjunto adverbial?", "Uma circunstância (lugar, tempo, modo, intensidade). Pode sair da frase sem estragá-la."],
+    ["Predicado nominal = ?", "Verbo de ligação + predicativo do sujeito."],
+    ["Cite cinco verbos de ligação.", "Ser, estar, ficar, parecer, permanecer (também continuar, andar, tornar-se)."],
+    ["Na voz passiva, o que vira o sujeito?", "O objeto direto da voz ativa (sujeito paciente)."],
+    ["Como se forma a voz passiva analítica?", "Ser (no mesmo tempo da ativa) + particípio."],
+    ["Passiva de “O goleiro defendeu o pênalti”.", "O pênalti foi defendido pelo goleiro."],
+    ["Vende-se casas ou Vendem-se casas?", "Vendem-se casas: o verbo concorda com o sujeito paciente (casas)."],
+    ["Que tipo de verbo admite voz passiva?", "Só o verbo transitivo direto (que tem objeto direto)."]
+  ];
+  var queue = [], cur = null, shown = false, round = 0;
+  var el = function(id){ return document.getElementById(id); };
+  function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+  function start(){ queue = shuffle(CARDS.slice()); round++; el("fc-done").style.display="none"; el("fc-card").style.display=""; el("fc-btns").style.display=""; next(); }
+  function next(){
+    if(!queue.length){ el("fc-card").style.display="none"; el("fc-btns").style.display="none"; el("fc-done").style.display="block"; el("fc-count").textContent="Faltam 0 cartões"; return; }
+    cur = queue.shift(); shown = false;
+    el("fc-side").textContent = "Pergunta"; el("fc-txt").textContent = cur[0];
+    el("fc-card").classList.remove("back");
+    el("fc-flip").hidden = false; el("fc-ok").hidden = true; el("fc-no").hidden = true;
+    el("fc-count").textContent = "Faltam " + (queue.length + 1) + (queue.length + 1 === 1 ? " cartão" : " cartões");
+  }
+  function flip(){
+    if(!cur || shown) return; shown = true;
+    el("fc-side").textContent = "Resposta"; el("fc-txt").textContent = cur[1];
+    el("fc-card").classList.add("back");
+    el("fc-flip").hidden = true; el("fc-ok").hidden = false; el("fc-no").hidden = false;
+  }
+  el("fc-card").addEventListener("click", flip);
+  el("fc-card").addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " "){ e.preventDefault(); flip(); } });
+  el("fc-flip").addEventListener("click", flip);
+  el("fc-ok").addEventListener("click", next);
+  el("fc-no").addEventListener("click", function(){ queue.push(cur); next(); });
+  el("fc-again").addEventListener("click", start);
+  start();
+})();
+</script>
+</body>
+</html>

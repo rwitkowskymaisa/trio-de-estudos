@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Estudos do Murilo: Português, Biologia, Matemática e Química</title>
+<title>Estudos do Murilo: Português, Biologia, Matemática, Química e Inglês</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&display=swap">
@@ -434,6 +434,17 @@ body[data-subj="quimica"]{--accent:var(--lat);--accent-ink:var(--lat-ink);--acce
 .q-temp{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(2.2rem,8vw,3.2rem);line-height:1;font-variant-numeric:tabular-nums}
 .q-thermo .note{margin-top:8px}
 .subject[data-subject="quimica"] .formula .eq{white-space:normal}
+
+/* ---- Inglês ---- */
+:root{--eng:#0f8a8a;--eng-ink:#0b6464;--eng-soft:#e2f4f3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--eng:#3fc7c2;--eng-ink:#8fe3df;--eng-soft:#13302f}}
+:root[data-theme="dark"]{--eng:#3fc7c2;--eng-ink:#8fe3df;--eng-soft:#13302f}
+body[data-subj="ingles"]{--accent:var(--eng);--accent-ink:var(--eng-ink);--accent-soft:var(--eng-soft)}
+.i-base{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1.15rem,3.8vw,1.5rem);color:var(--muted);margin:0 0 10px}
+.i-sent{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1.35rem,5vw,2.1rem);color:var(--accent-ink);margin:4px 0 2px;line-height:1.25}
+.i-opt{font-size:.88rem;font-weight:800;color:var(--muted);margin:18px 0 -8px}
+.small-note{font-size:.93rem;color:var(--muted);background:var(--surface-2);border:1px solid var(--line-2);border-radius:var(--radius-sm);padding:10px 14px}
+.subject[data-subject="ingles"] .formula .eq{white-space:normal}
 @media(max-width:520px){.switch{max-width:100%;overflow-x:auto;scrollbar-width:none}.switch::-webkit-scrollbar{display:none}.sw{padding:6px 9px;font-size:.84rem;flex:none}.sw .dot{display:none}}
 </style>
 </head>
@@ -446,12 +457,14 @@ body[data-subj="quimica"]{--accent:var(--lat);--accent-ink:var(--lat-ink);--acce
       <button class="sw" type="button" data-subj="biologia" aria-pressed="false"><span class="dot"></span>Biologia</button>
       <button class="sw" type="button" data-subj="matematica" aria-pressed="false"><span class="dot"></span>Matemática</button>
       <button class="sw" type="button" data-subj="quimica" aria-pressed="false"><span class="dot"></span>Química</button>
+      <button class="sw" type="button" data-subj="ingles" aria-pressed="false"><span class="dot"></span>Inglês</button>
     </div>
     <span class="spacer"></span>
     <span class="prog" id="prog">Checagens: <b>0</b> de 0 certas</span>
     <span class="prog" id="b-prog" hidden>Checagens: <b>0</b> de 0 certas</span>
     <span class="prog" id="m-prog" hidden>Checagens: <b>0</b> de 0 certas</span>
     <span class="prog" id="q-prog" hidden>Checagens: <b>0</b> de 0 certas</span>
+    <span class="prog" id="i-prog" hidden>Checagens: <b>0</b> de 0 certas</span>
   </div>
   <div class="chips" data-for="portugues">
     <a class="chip" href="#plano">Plano</a>
@@ -508,6 +521,20 @@ body[data-subj="quimica"]{--accent:var(--lat);--accent-ink:var(--lat-ink);--acce
     <a class="chip" href="#q-cartoes">Cartões de memória</a>
     <a class="chip" href="#q-cola">Cola de revisão</a>
     <a class="chip" href="#q-prova">Prova final</a>
+  </div>
+  <div class="chips" data-for="ingles" hidden>
+    <a class="chip" href="#i-plano">Roteiro</a>
+    <a class="chip" href="#i-hobbies">1. Hobbies</a>
+    <a class="chip" href="#i-the">2. The</a>
+    <a class="chip" href="#i-aan">3. A / an</a>
+    <a class="chip" href="#i-look">4. Aparência</a>
+    <a class="chip" href="#i-like">5. Personalidade</a>
+    <a class="chip" href="#i-yesno">6. Yes/no questions</a>
+    <a class="chip" href="#i-objq">7. Object questions</a>
+    <a class="chip" href="#i-subjq">8. Subject questions</a>
+    <a class="chip" href="#i-cartoes">Cartões de memória</a>
+    <a class="chip" href="#i-cola">Cola de revisão</a>
+    <a class="chip" href="#i-prova">Prova final</a>
   </div>
 </nav>
 
@@ -2232,6 +2259,387 @@ body[data-subj="quimica"]{--accent:var(--lat);--accent-ink:var(--lat-ink);--acce
 </main>
 </div>
 
+<div class="subject" data-subject="ingles" hidden>
+<header class="wrap hero">
+  <span class="tag">Inglês, apostila ETAPA (aulas 51 a 58). Estudo do Murilo</span>
+  <h1>Inglês sem mistério</h1>
+  <p class="lead">Roteiro de um dia só: hobbies e esportes, os artigos <i>the</i> e <i>a/an</i>, como descrever pessoas e como fazer perguntas em inglês. Resumo do essencial, checagens rápidas, cartões de memória e, no fim, uma prova com nota de 0 a 10.</p>
+  <div class="hero-stage">
+    <div class="lbl">A mesma frase vira quatro perguntas. Toque em cada uma:</div>
+    <p class="i-base">Paul met Lucy at the party.</p>
+    <div class="pl-tabs" role="group" aria-label="Tipos de pergunta">
+      <button class="pl-b i-hb on" type="button" data-k="0">Sim ou não?</button>
+      <button class="pl-b i-hb" type="button" data-k="1">Onde?</button>
+      <button class="pl-b i-hb" type="button" data-k="2">Paul encontrou quem?</button>
+      <button class="pl-b i-hb" type="button" data-k="3">Quem encontrou Lucy?</button>
+    </div>
+    <div aria-live="polite"><p class="i-sent" id="i-hq"></p><p class="note" id="i-hn"></p></div>
+  </div>
+</header>
+<main class="wrap">
+<section class="block" id="i-plano">
+  <h2>Roteiro de hoje</h2>
+  <p class="sub">Umas duas horas, em quatro blocos, com uma pausa de 5 minutos entre eles. Os vídeos são opcionais. Se o tempo apertar, faça as checagens, leia a cola de revisão e vá para a prova.</p>
+  <ul class="plan">
+    <li><span class="d">Bloco 1</span><span class="w"><b>Hobbies e artigos (≈ 35 min)</b>Partes 1, 2 e 3: collect/do/go/play, <i>the</i> e <i>a/an</i>.<br><label><input type="checkbox" data-day="1"> Feito</label></span></li>
+    <li><span class="d">Bloco 2</span><span class="w"><b>Descrever pessoas (≈ 25 min)</b>Partes 4 e 5: aparência e personalidade. No fim, descreva em voz alta, em inglês, alguém da família.<br><label><input type="checkbox" data-day="2"> Feito</label></span></li>
+    <li><span class="d">Bloco 3</span><span class="w"><b>Perguntas (≈ 40 min)</b>Partes 6, 7 e 8: yes/no questions, object questions e subject questions. É a parte com mais regra: vá com calma.<br><label><input type="checkbox" data-day="3"> Feito</label></span></li>
+    <li><span class="d">Bloco 4</span><span class="w"><b>Revisão e prova (≈ 25 min)</b>Uma rodada de cartões, a cola de revisão e a prova final. Abaixo de 7? Releia as partes das questões em vermelho e refaça.<br><label><input type="checkbox" data-day="4"> Feito</label></span></li>
+  </ul>
+</section>
+<section class="block" id="i-tecnicas">
+  <h2>Como estudar rápido e lembrar</h2>
+  <div class="tech">
+    <div><h4>1. Tente antes de ver</h4><p>Nas checagens, escolha a resposta antes de ler a explicação. Errar e corrigir fixa mais do que só ler.</p></div>
+    <div><h4>2. Fale em inglês</h4><p>Leia os exemplos em voz alta. Frase falada é frase lembrada.</p></div>
+    <div><h4>3. Cartões que voltam</h4><p>Nos cartões de memória, o que você erra volta para o fim da fila até você acertar.</p></div>
+  </div>
+</section>
+<section class="block" id="i-hobbies">
+  <h2><span class="n">1</span>Hobbies e esportes</h2>
+  <p class="sub">Aula 51. Hobbies (ou <i>pastimes</i>) são as atividades do tempo livre. Em inglês, cada uma “anda” com um verbo: <b>collect</b>, <b>do</b>, <b>go</b> ou <b>play</b>.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Verbo</th><th>Quando usar</th><th>Exemplos da apostila</th></tr>
+    <tr><td class="hl">collect</td><td>Objetos que a pessoa junta</td><td>coins, stamps, comic books, action figures, vinyl records, key chains, magnets</td></tr>
+    <tr><td class="hl">do</td><td>Atividades sem competição e sem time</td><td>karate, yoga, t’ai chi, exercise, aerobics, ballet, crossword puzzles, archery</td></tr>
+    <tr><td class="hl">go</td><td>Atividades terminadas em <b>-ing</b></td><td>cycling, hiking, camping, swimming, jogging, bowling, fishing, rock climbing</td></tr>
+    <tr><td class="hl">play</td><td>Jogos e esportes de competição (um contra o outro)</td><td>video games, chess, cards, checkers, darts, snooker, dominoes</td></tr>
+  </table></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Tipo de esporte</th><th>Verbo</th><th>Exemplos</th></tr>
+    <tr><td>Aquáticos</td><td class="hl">go</td><td>diving, sailing, surfing, scuba diving, water skiing</td></tr>
+    <tr><td>De raquete</td><td class="hl">play</td><td>tennis, table tennis, badminton, squash, pickleball</td></tr>
+    <tr><td>Radicais</td><td class="hl">go</td><td>skydiving, bungee jumping, bouldering, paragliding, free climbing</td></tr>
+    <tr><td>Com bola</td><td class="hl">play</td><td>baseball, rugby, basketball, cricket, volleyball</td></tr>
+  </table></div>
+  <div class="callout tip"><div class="lab">Macete: quatro perguntas</div>
+    <p>Terminou em <b>-ing</b>? → <b>go</b>. Tem bola, raquete ou adversário? → <b>play</b>. É luta, ginástica ou dança? → <b>do</b>. É coisa que se guarda? → <b>collect</b>.</p></div>
+  <div class="callout warn"><div class="lab">Depois de love, like e hate</div>
+    <p>Use o verbo com <b>-ing</b>: <i>We like <b>playing</b> squash.</i> · <i>Our new teacher loves <b>going</b> surfing.</i></p></div>
+  <p class="small-note">Extra: onde se joga. <b>court</b> (quadra): squash, badminton, volleyball, basketball, tennis, pickleball. <b>field</b> (campo): rugby, hockey, cricket.</p>
+  <div class="ex"><div class="lab">Exemplo resolvido</div>
+    <span class="step">Raul and Paul ___ karate on Mondays. → karate é luta → <b>do</b></span>
+    <span class="step">My dad ___ hiking once a month. → hik<b>ing</b> → <b>goes</b> (he/she/it ganha -es)</span>
+    <span class="step">Luci loves ___ darts. → darts é jogo → play; depois de love vem -ing → <b>playing</b></span>
+  </div>
+<div class="quiz" data-answer="d" data-explain="Yoga é atividade sem competição: do. Com she, does."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Mary ___ yoga every morning.</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>plays</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>goes</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>collects</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>does</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="a" data-explain="Surfing termina em -ing (e é esporte aquático): go."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">We ___ surfing on Saturdays.</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>go</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>play</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>do</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>collect</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="c" data-explain="Depois de love, like e hate, o verbo vem com -ing."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">I love ___ volleyball.</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>play</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>plays</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>playing</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>played</span></button></div><div class="fb"></div></div>
+<p class="i-opt">Vídeo opcional: só se sobrar tempo.</p><div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/KHEbzyVZQ4Y" title="Play × do × go: qual usar com cada esporte (aula curta, em inglês)" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="cap"><div class="t">Play × do × go: qual usar com cada esporte (aula curta, em inglês)</div><div class="c">YouTube</div></div></div></div>
+</section>
+<section class="block" id="i-the">
+  <h2><span class="n">2</span>The: o artigo definido</h2>
+  <p class="sub">Aula 52. <b>The</b> = o, a, os, as. Não muda com gênero nem com número: <i>the king</i>, <i>the clouds</i>, <i>the rain</i>.</p>
+  <div class="two">
+    <div class="callout tip"><div class="lab">Usamos THE</div>
+      <ul class="list">
+        <li>Quando os dois sabem do que se fala, ou só existe um ali: <i>He’s in <b>the</b> kitchen.</i></li>
+        <li>Com algo já mencionado antes na conversa.</li>
+        <li>Com superlativo e números ordinais: <i><b>the</b> best</i>, <i><b>the</b> most famous</i>, <i><b>the</b> third</i>.</li>
+        <li>Com instrumentos musicais, jornais e serviços públicos: <i>play <b>the</b> piano</i>.</li>
+        <li>Com o que é único: <i><b>the</b> sun</i>, <i><b>the</b> sky</i>, <i><b>the</b> government</i>.</li>
+        <li>Com rios, mares, desertos, grupos de ilhas, hotéis, cinemas e museus: <i><b>the</b> Amazon</i>, <i><b>the</b> Atlantic</i>, <i><b>the</b> Sahara</i>, <i><b>the</b> Bahamas</i>, <i><b>the</b> Louvre</i>.</li>
+      </ul></div>
+    <div class="callout warn"><div class="lab">NÃO usamos THE</div>
+      <ul class="list">
+        <li>Com nomes de pessoas: <i>Paul</i>, <i>Queen Elizabeth</i>.</li>
+        <li>Com línguas e nacionalidades: <i>She speaks French.</i></li>
+        <li>Com dias, meses, feriados e datas: <i>on Monday</i>, <i>in May</i>.</li>
+        <li>Com jogos e esportes: <i>play volleyball</i>, <i>play chess</i>.</li>
+        <li>Com continentes, a maioria dos países, estados, cidades, ruas, lagos e a maioria das montanhas: <i>Asia</i>, <i>Brazil</i>, <i>São Paulo</i>, <i>Baker Street</i>, <i>Everest</i>.</li>
+      </ul></div>
+  </div>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Exceção</th><th>Exemplo</th></tr>
+    <tr><td>Família inteira (sobrenome no plural)</td><td><i>We’re going to <b>the</b> Smiths.</i></td></tr>
+    <tr><td>Um povo inteiro</td><td><i><b>The</b> Japanese make wonderful cars.</i></td></tr>
+    <tr><td>Países que são união, república ou reino</td><td><i><b>the</b> United States</i>, <i><b>the</b> United Kingdom</i>, <i><b>the</b> Republic of Ireland</i></td></tr>
+    <tr><td>Cadeias de montanhas</td><td><i><b>the</b> Alps</i>, <i><b>the</b> Himalayas</i></td></tr>
+  </table></div>
+  <div class="callout tip"><div class="lab">Macete: instrumento × esporte</div>
+    <p><i>My sister plays <b>the</b> piano and plays volleyball.</i> Instrumento leva <b>the</b>; esporte e jogo, não.</p></div>
+  <p class="small-note">Extra: sem artigo nenhum em <i>at home/school/work</i>, <i>at night</i>, <i>by car/bus</i>, <i>on foot</i>, <i>have breakfast/lunch/dinner</i>, <i>on TV</i>.</p>
+<div class="quiz" data-answer="b" data-explain="Monumentos levam the. Países comuns, línguas e esportes não."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Qual frase está correta?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>The Brazil is a big country.</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>I visited the Eiffel Tower.</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>She speaks the French.</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>We play the soccer on Mondays.</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="d" data-explain="Instrumento musical leva the; esporte não leva."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">My sister plays ___ piano and ___ volleyball.</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>the / the</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>— / the</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>— / —</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>the / —</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="b" data-explain="Superlativo (the best, the most…) sempre com the."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">It’s ___ best movie of the year!</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>a</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>the</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>an</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>(sem artigo)</span></button></div><div class="fb"></div></div>
+<p class="i-opt">Vídeo opcional: só se sobrar tempo.</p><div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/75os2hanb4A" title="Como usar os artigos definidos e indefinidos: a, an e the" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="cap"><div class="t">Como usar os artigos definidos e indefinidos: a, an e the</div><div class="c">YouTube</div></div></div></div>
+</section>
+<section class="block" id="i-aan">
+  <h2><span class="n">3</span>A e an: os artigos indefinidos</h2>
+  <p class="sub">Aula 53. <b>A/an</b> = um, uma. Só com substantivo <b>no singular</b> e <b>contável</b>, quando é algo geral ou ainda não identificado.</p>
+  <div class="formula"><span class="eq">a ou an?</span><div class="what"><div><b>a</b> + palavra que começa com <b>som</b> de consoante: <i>a chair, a boy, a girl</i></div><div><b>an</b> + palavra que começa com <b>som</b> de vogal: <i>an umbrella, an apartment, an engineer</i></div><div class="small">O que manda é o som, não a letra.</div></div></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Pegadinha</th><th>Exemplos</th></tr>
+    <tr><td><b>h</b> mudo (não se fala) → <b>an</b></td><td>an hour, an honest man, an heir, an honor</td></tr>
+    <tr><td><b>h</b> falado → <b>a</b></td><td>a house, a horse, a hero, a huge building</td></tr>
+    <tr><td>Letra de vogal, mas som de consoante (“iu”, “uã”) → <b>a</b></td><td>a university, a uniform, a European, a one-way road</td></tr>
+  </table></div>
+  <div class="two">
+    <div class="callout tip"><div class="lab">Usamos A/AN</div>
+      <ul class="list">
+        <li>Numa definição: <i><b>An</b> otter is <b>a</b> mammal…</i></li>
+        <li>Com profissão: <i>My sister is <b>a</b> nutritionist.</i> · <i>I work as <b>an</b> engineer.</i></li>
+        <li>Quando algo aparece pela primeira vez: <i>There is <b>a</b> ring on the floor.</i></li>
+        <li>Quando não importa qual: <i>He works in <b>a</b> restaurant.</i></li>
+        <li>Antes de adjetivo + substantivo: <i>Noriko has <b>a</b> new motorbike.</i></li>
+      </ul></div>
+    <div class="callout warn"><div class="lab">NÃO usamos A/AN</div>
+      <ul class="list">
+        <li>Com plural: <i>My parents are architects.</i></li>
+        <li>Com incontáveis: <i>sugar, honey, money, water</i>.</li>
+        <li>Com adjetivo sozinho: <i>Noriko’s motorbike is fast.</i></li>
+      </ul></div>
+  </div>
+  <div class="callout tip"><div class="lab">Macete: profissão em inglês tem artigo</div>
+    <p>Em português dizemos “ela é médica”, sem artigo. Em inglês não pode faltar: <i>She is <b>a</b> doctor.</i> · <i>He wants to be <b>an</b> actor.</i></p></div>
+  <p class="small-note">Extra: nas exclamações com <i>what</i> e <i>such</i>: <i>What <b>a</b> pity!</i> · <i>What <b>an</b> expensive pen!</i> · <i>It’s such <b>a</b> good movie!</i></p>
+<div class="quiz" data-answer="a" data-explain="Em hour o h é mudo: a palavra começa com som de vogal → an."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">The class lasted ___ hour.</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>an</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>a</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>the</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>(sem artigo)</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="c" data-explain="Engineer começa com som de vogal (an); teacher, com som de consoante (a)."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">My father is ___ engineer and my mother is ___ teacher.</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>a / an</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>an / an</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>an / a</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>a / a</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="d" data-explain="University começa com som de “iu” (consoante): a university. Sugar é incontável, nurses é plural e fast é adjetivo sozinho."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Qual frase está correta?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>I don’t take a sugar in my tea.</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>We work as a nurses.</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Her car is a fast.</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>She is a university student.</span></button></div><div class="fb"></div></div>
+<p class="i-opt">Vídeo opcional: só se sobrar tempo.</p><div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/oFtrGGTlFJI" title="Artigos a e an em inglês: regras e pegadinhas" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="cap"><div class="t">Artigos a e an em inglês: regras e pegadinhas</div><div class="c">Teacher Matheus</div></div></div></div>
+</section>
+<section class="block" id="i-look">
+  <h2><span class="n">4</span>Descrever a aparência</h2>
+  <p class="sub">Aula 54. Para perguntar como alguém é <b>fisicamente</b>: <b>What does he/she look like?</b> No plural: <b>What do they look like?</b></p>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Parte</th><th>Palavras</th><th>Como falar</th></tr>
+    <tr><td>Altura (height)</td><td>tall · medium height · short</td><td><i>He <b>is</b> tall.</i></td></tr>
+    <tr><td>Corpo (build)</td><td>well-built (= muscular) · slim · plump</td><td><i>She <b>is</b> slim.</i></td></tr>
+    <tr><td>Rosto (face)</td><td>oval · round · square face</td><td><i>He <b>has</b> a square face.</i></td></tr>
+    <tr><td>Cabelo (hair)</td><td>short / medium length / long · curly / wavy / straight · black / red / blond(e) / brown</td><td><i>She <b>has</b> long straight blond hair.</i></td></tr>
+    <tr><td>Pelos no rosto</td><td>mustache (bigode) · goatee (cavanhaque) · beard (barba)</td><td><i>Tom <b>has</b> a beard.</i></td></tr>
+  </table></div>
+  <div class="formula"><span class="eq">is · has</span><div class="what"><div><b>is</b> + altura e corpo · <b>has</b> + rosto e cabelo</div><div><i>He’s medium height, slim and has medium length wavy blond hair.</i></div></div></div>
+  <div class="callout tip"><div class="lab">Macete do cabelo: Tamanho → Forma → Cor</div>
+    <p><i>long</i> (tamanho) <i>curly</i> (forma) <i>black</i> (cor) <i>hair</i>. Pense em “<b>TFC</b>” e nunca troque a ordem.</p></div>
+  <div class="callout warn"><div class="lab">Palavras educadas</div>
+    <p><b>slim</b> é o jeito positivo de dizer magro; <b>skinny</b> (magro demais) é negativo. <b>plump</b> é o jeito educado de dizer <i>fat</i>; <b>overweight</b> é neutro.</p></div>
+  <p class="small-note">Extra: <b>shaved head</b> (cabeça raspada), <b>going bald</b> (ficando careca), <b>going gray</b> (ficando grisalho), <b>dimples</b> (covinhas).</p>
+<div class="quiz" data-answer="c" data-explain="Tamanho → forma → cor: long, curly, black."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Qual está na ordem certa?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>She has black long curly hair.</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>She has curly black long hair.</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>She has long curly black hair.</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>She has long black curly hair.</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="a" data-explain="Goatee é o cavanhaque, no queixo. Mustache é o bigode, acima da boca."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Tom doesn’t have a full beard. He only has hair on his chin: he has a ___.</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>goatee</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>mustache</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>dimple</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>square face</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="b" data-explain="Look like = aparência. What is she like? pergunta sobre a personalidade (Parte 5)."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Qual pergunta é sobre a <b>aparência</b>?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>What is she like?</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>What does she look like?</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>What does she like?</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Does she like music?</span></button></div><div class="fb"></div></div>
+<p class="i-opt">Vídeo opcional: só se sobrar tempo.</p><div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/TJ7SppuxXZE" title="Descrição física em inglês: What does he/she look like?" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="cap"><div class="t">Descrição física em inglês: What does he/she look like?</div><div class="c">YouTube</div></div></div></div>
+</section>
+<section class="block" id="i-like">
+  <h2><span class="n">5</span>Descrever a personalidade</h2>
+  <p class="sub">Aula 55. Para perguntar como alguém é <b>de jeito</b>: <b>What’s he/she like?</b> No plural: <b>What are they like?</b></p>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Positivo</th><th>Oposto (negativo)</th></tr>
+    <tr><td><b>calm</b> (calmo)</td><td><b>nervous</b> (nervoso)</td></tr>
+    <tr><td><b>easy-going</b> (tranquilo)</td><td><b>tense</b> (tenso)</td></tr>
+    <tr><td><b>generous</b> (generoso)</td><td><b>mean</b> (mesquinho)</td></tr>
+    <tr><td><b>hard-working</b> (esforçado)</td><td><b>lazy</b> (preguiçoso)</td></tr>
+    <tr><td><b>nice</b> (legal, simpático)</td><td><b>horrible</b> (horrível)</td></tr>
+    <tr><td><b>organized</b> (organizado)</td><td><b>messy</b> (bagunceiro)</td></tr>
+    <tr><td><b>optimistic</b> (otimista)</td><td><b>pessimistic</b> (pessimista)</td></tr>
+    <tr><td><b>polite</b> (educado)</td><td><b>rude</b> (mal-educado)</td></tr>
+    <tr><td><b>punctual</b> (pontual)</td><td><b>late</b> (atrasado)</td></tr>
+    <tr><td><b>upbeat</b> (animado, alto-astral)</td><td><b>downbeat</b> (desanimado)</td></tr>
+  </table></div>
+  <p>Do quadrinho da Luann: <b>outgoing</b> (extrovertido), <b>vivacious</b> (cheio de vida), <b>moody</b> (de mau humor), <b>stubborn</b> (teimoso, quase nunca muda de ideia), <b>articulate</b> (se expressa bem), <b>scholarly</b> (muito dedicado aos estudos), <b>scatterbrained</b> (avoado, esquece as coisas), <b>introspective</b> (passa muito tempo nos próprios pensamentos).</p>
+  <div class="callout warn"><div class="lab">Não confunda as três perguntas</div>
+    <p><i>What’s he <b>like</b>?</i> → personalidade: <i>He’s polite and hard-working.</i><br>
+    <i>What does he <b>look like</b>?</i> → aparência: <i>He’s tall and has short black hair.</i><br>
+    <i>What does he <b>like</b>?</i> → gosto: <i>He likes video games.</i></p></div>
+  <div class="ex"><div class="lab">Exemplo resolvido: transforme a descrição em adjetivos</div>
+    <span class="step">“Aubrey works hard. Her work station is perfectly neat. She never says a bad word.”</span>
+    <span class="step">works hard → hard-working · neat → organized · never says a bad word → polite</span>
+    <span class="ans">Aubrey is hard-working, organized and polite.</span>
+  </div>
+<div class="quiz" data-answer="d" data-explain="Polite (educado) × rude (mal-educado)."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Qual é o oposto de <b>polite</b>?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>mean</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>lazy</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>tense</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>rude</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="b" data-explain="Nunca chega na hora: late, o oposto de punctual."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Ellis never shows up on time. He is always ___.</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>messy</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>late</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>lazy</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>mean</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="c" data-explain="What’s he like? pede personalidade. Tall e slim respondem a What does he look like?"><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">A: What’s your brother like? B: ___</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>He’s tall and slim.</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>He likes soccer.</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>He’s funny and generous.</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Yes, he does.</span></button></div><div class="fb"></div></div>
+<p class="i-opt">Vídeo opcional: só se sobrar tempo.</p><div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/F60ZQQSmbRU" title="Descrever pessoas em inglês: aparência e personalidade" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="cap"><div class="t">Descrever pessoas em inglês: aparência e personalidade</div><div class="c">YouTube</div></div></div></div>
+</section>
+<section class="block" id="i-yesno">
+  <h2><span class="n">6</span>Yes/no questions</h2>
+  <p class="sub">Aula 56. Perguntas que se respondem com <b>yes</b> ou <b>no</b>. A regra de ouro: o <b>verbo auxiliar vem antes do sujeito</b>.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Tempo</th><th>Estrutura</th><th>Exemplo</th><th>Resposta curta</th></tr>
+    <tr><td>Simple present</td><td class="hl">Do/Does + sujeito + verbo</td><td><i>Do you like team sports?</i></td><td>Yes, I do. / No, I don’t.</td></tr>
+    <tr><td>Present continuous</td><td class="hl">Am/Is/Are + sujeito + verbo-ing</td><td><i>Is your sister sleeping right now?</i></td><td>Yes, she is.</td></tr>
+    <tr><td>Simple past</td><td class="hl">Did + sujeito + verbo</td><td><i>Did you watch a movie last night?</i></td><td>Yes, I did. / No, I didn’t.</td></tr>
+    <tr><td>Past continuous</td><td class="hl">Was/Were + sujeito + verbo-ing</td><td><i>Were you having guitar lessons last night?</i></td><td>Yes, I was.</td></tr>
+    <tr><td>Be going to</td><td class="hl">Am/Is/Are + sujeito + going to + verbo</td><td><i>Are you going to study tonight?</i></td><td>Yes, I am.</td></tr>
+    <tr><td>Modais</td><td class="hl">Modal + sujeito + verbo</td><td><i>Can she speak in public with confidence?</i></td><td>Yes, she can.</td></tr>
+    <tr><td>Be como verbo principal</td><td class="hl">Am/Is/Are + sujeito + complemento</td><td><i>Is Peter your brother?</i></td><td>Yes, he is.</td></tr>
+  </table></div>
+  <p>Quem combina com quem: <b>Do</b> + I, you, we, they · <b>Does</b> + he, she, it · <b>Did</b> + todos · <b>Am</b> + I · <b>Is</b> + he, she, it · <b>Are</b> + you, we, they · <b>Was</b> + I, he, she, it · <b>Were</b> + you, we, they. Modais: will, can, could, may, might, should, ought to, must, shall.</p>
+  <div class="callout warn"><div class="lab">Does e did já carregam o tempo</div>
+    <p>Por isso o verbo principal fica na forma básica: <i>Does he <b>know</b>?</i> (não “knows”) · <i>Did she <b>phone</b>?</i> (não “phoned”).</p></div>
+  <div class="callout tip"><div class="lab">Macete: a resposta curta devolve o auxiliar</div>
+    <p><i><b>Did</b> you…? → Yes, I <b>did</b>.</i> · <i><b>Can</b> you…? → Yes, I <b>can</b>.</i> · <i><b>Are</b> they…? → Yes, they <b>are</b>.</i> O caminho contrário também vale: para consertar uma pergunta, olhe o auxiliar da resposta.</p></div>
+  <div class="ex"><div class="lab">Exemplo resolvido (do exercício da apostila): corrija a pergunta, sem mexer na resposta</div>
+    <span class="step">A: <i>Is Clara and Anne mad at us?</i> B: <i>Yes, they are!</i> → dois sujeitos = they → <b>Are</b> Clara and Anne mad at us?</span>
+    <span class="step">A: <i>Do you listen to that new song?</i> B: <i>No, I didn’t.</i> → a resposta está no passado → <b>Did</b> you listen to that new song?</span>
+    <span class="step">A: <i>Did you help me with my homework?</i> B: <i>No, I can’t!</i> → <b>Can</b> you help me with my homework?</span>
+  </div>
+<div class="quiz" data-answer="a" data-explain="Your father = he → does."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">___ your father play golf on Sundays?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Does</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Do</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Is</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Did he</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="d" data-explain="Depois de did, o verbo volta à forma básica: call."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Did she ___ you yesterday?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>called</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>calls</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>calling</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>call</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="c" data-explain="A resposta devolve o auxiliar: weren’t → Were…?"><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Resposta: <i>No, they weren’t.</i> Qual foi a pergunta?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Did they watch TV?</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Are they watching TV?</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Were they watching TV?</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Do they watch TV?</span></button></div><div class="fb"></div></div>
+<p class="i-opt">Vídeo opcional: só se sobrar tempo.</p><div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/MhXBqmReegw" title="Como fazer perguntas com do, does e did" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="cap"><div class="t">Como fazer perguntas com do, does e did</div><div class="c">YouTube</div></div></div></div>
+</section>
+<section class="block" id="i-objq">
+  <h2><span class="n">7</span>Wh- questions: object questions</h2>
+  <p class="sub">Aula 57. Perguntas para pedir uma <b>informação</b>. Começam com uma palavra interrogativa.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Palavra</th><th>Pergunta sobre</th><th>Exemplo</th></tr>
+    <tr><td class="hl">how</td><td>modo (como)</td><td><i>How do you spell your family name?</i></td></tr>
+    <tr><td class="hl">what</td><td>coisa (o quê)</td><td><i>What is Sandra doing?</i></td></tr>
+    <tr><td class="hl">when</td><td>tempo (quando)</td><td><i>When did you live in London?</i></td></tr>
+    <tr><td class="hl">where</td><td>lugar (onde)</td><td><i>Where were you last night?</i></td></tr>
+    <tr><td class="hl">which</td><td>escolha (qual, entre opções)</td><td><i>Which jacket do you prefer? The blue or the black one?</i></td></tr>
+    <tr><td class="hl">who</td><td>pessoa (quem)</td><td><i>Who do you work for?</i></td></tr>
+    <tr><td class="hl">whom</td><td>pessoa como objeto (quem, mais formal)</td><td><i>Whom did you expect to meet?</i></td></tr>
+    <tr><td class="hl">whose</td><td>dono (de quem)</td><td><i>Whose backpack is this?</i></td></tr>
+    <tr><td class="hl">why</td><td>motivo (por quê) → resposta com <i>because</i></td><td><i>Why are you going to live abroad?</i></td></tr>
+  </table></div>
+  <div class="formula"><span class="eq">wh + aux + sujeito</span><div class="what"><div><b>palavra interrogativa + auxiliar + sujeito + verbo + complemento</b></div><div>É a yes/no question da Parte 6 com a palavra interrogativa na frente: <i>Did you go…?</i> → <i><b>Where</b> did you go last night?</i></div></div></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Tempo</th><th>Exemplo</th></tr>
+    <tr><td>Simple present</td><td><i>Where <b>do</b> you live?</i> · <i>When <b>does</b> Alicia have Japanese classes?</i></td></tr>
+    <tr><td>Present continuous</td><td><i>What <b>are</b> you studying now?</i></td></tr>
+    <tr><td>Simple past</td><td><i>When <b>did</b> they leave?</i></td></tr>
+    <tr><td>Past continuous</td><td><i>What <b>were</b> you doing yesterday at 10 p.m.?</i></td></tr>
+    <tr><td>Be going to</td><td><i>What <b>are</b> you going to do tomorrow morning?</i></td></tr>
+    <tr><td>Modais</td><td><i>Where <b>can</b> I park my car?</i></td></tr>
+    <tr><td>Be como verbo principal</td><td><i>Why <b>is</b> Ted so sad?</i> · <i>Where <b>are</b> Paul and Joanne?</i></td></tr>
+  </table></div>
+  <div class="callout tip"><div class="lab">Macete: monte em dois passos</div>
+    <p>1) Faça a pergunta de sim ou não: <i>Did you see the movie?</i> 2) Ponha a palavra interrogativa na frente: <i><b>When</b> did you see the movie?</i></p></div>
+<div class="quiz" data-answer="b" data-explain="A resposta diz de quem é (Lea’s): whose."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">A: ___ coat is this? B: It’s Lea’s.</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Who</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Whose</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Which</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>What</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="a" data-explain="Escolha entre opções: which."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">A: ___ do you like best, singing or dancing? B: Singing.</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Which</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Where</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Who</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>How</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="d" data-explain="Be como verbo principal: palavra interrogativa + was + sujeito."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">Qual está na ordem certa?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Where your mom was yesterday morning?</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Where did your mom was yesterday morning?</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Where your mom did be yesterday morning?</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Where was your mom yesterday morning?</span></button></div><div class="fb"></div></div>
+</section>
+<section class="block" id="i-subjq">
+  <h2><span class="n">8</span>Wh- questions: subject questions</h2>
+  <p class="sub">Aula 58. Quando a pergunta é sobre <b>quem fez a ação</b> (o sujeito), <b>não tem do, does nem did</b> e a ordem fica igual à da frase normal.</p>
+  <div class="two">
+    <div class="callout"><div class="lab">Object question (sobre o objeto)</div>
+      <p><i>Paul met <b>Lucy</b>.</i><br>Quem o Paul encontrou?<br><b><i>Who did Paul meet?</i></b><br>→ com <b>did</b></p></div>
+    <div class="callout"><div class="lab">Subject question (sobre o sujeito)</div>
+      <p><i><b>Paul</b> met Lucy.</i><br>Quem encontrou a Lucy?<br><b><i>Who met Lucy?</i></b><br>→ sem auxiliar; o verbo fica no passado</p></div>
+  </div>
+  <div class="formula"><span class="eq">wh + verbo</span><div class="what"><div><b>palavra interrogativa + verbo + complemento</b> (who, what, which ou whose no lugar do sujeito)</div><div class="small">A palavra interrogativa toma o lugar do sujeito. Por isso não se inverte nada.</div></div></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <tr><th>Tempo</th><th>Estrutura</th><th>Exemplo</th></tr>
+    <tr><td>Simple present</td><td class="hl">wh + verbo com -s</td><td><i>Who help<b>s</b> you with your homework?</i> · <i>What make<b>s</b> you happy?</i></td></tr>
+    <tr><td>Present continuous</td><td class="hl">wh + is + verbo-ing</td><td><i>Who is washing the dishes?</i></td></tr>
+    <tr><td>Simple past</td><td class="hl">wh + verbo no passado</td><td><i>Who prepared the food?</i> · <i>What fell on the floor?</i></td></tr>
+    <tr><td>Past continuous</td><td class="hl">wh + was + verbo-ing</td><td><i>Who was talking on the phone?</i></td></tr>
+    <tr><td>Be going to</td><td class="hl">wh + is going to + verbo</td><td><i>Who is going to buy the concert tickets?</i></td></tr>
+  </table></div>
+  <p>Também existe a forma negativa: <i>Who <b>doesn’t</b> like vegetables?</i> · <i>Which student <b>didn’t</b> come to school?</i></p>
+  <div class="callout tip"><div class="lab">Teste rápido: sujeito ou objeto?</div>
+    <p>Olhe a resposta. Se a informação pedida é <b>quem começa a frase</b> (quem fez), é subject question: sem auxiliar. Se vem <b>depois do verbo</b>, é object question: com auxiliar.</p></div>
+  <div class="ex"><div class="lab">Exemplo resolvido (estilo da apostila)</div>
+    <span class="step">Resposta: <i><b>James</b> let the dog out this morning.</i> A palavra em destaque é quem fez → sujeito.</span>
+    <span class="step">Opções: <i>When did James let the dog out?</i> ou <i>Who let the dog out this morning?</i></span>
+    <span class="ans">Who let the dog out this morning?</span>
+  </div>
+<div class="quiz" data-answer="b" data-explain="Diana é o sujeito: who + is + washing, sem inverter."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q"><i>Diana is washing the dishes.</i> Pergunte sobre a Diana:</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Who is Diana washing?</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Who is washing the dishes?</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>What is Diana washing?</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Who does wash the dishes?</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="c" data-explain="Subject question no passado: who + verbo no passado, sem did."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q"><i>Mom bought the tickets.</i> Pergunte sobre a mãe:</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>Who did buy the tickets?</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>Who did Mom buy?</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>Who bought the tickets?</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>Who buys did the tickets?</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="a" data-explain="The food é o objeto: what + did + Marlon + prepare (forma básica)."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q"><i>Marlon prepared the food.</i> Pergunte sobre a comida:</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>What did Marlon prepare?</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>What prepared Marlon?</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>What Marlon prepared?</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>What did Marlon prepared?</span></button></div><div class="fb"></div></div>
+<div class="quiz" data-answer="d" data-explain="Subject question no presente: verbo com -s, sem auxiliar."><span class="qlab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 3-6"/><circle cx="12" cy="12" r="9"/></svg>Checagem rápida</span><p class="q">What ___ you happy?</p><div class="opts"><button class="opt" data-opt="a"><span class="ol">A</span><span>make</span></button><button class="opt" data-opt="b"><span class="ol">B</span><span>does make</span></button><button class="opt" data-opt="c"><span class="ol">C</span><span>do make</span></button><button class="opt" data-opt="d"><span class="ol">D</span><span>makes</span></button></div><div class="fb"></div></div>
+<p class="i-opt">Vídeo opcional: só se sobrar tempo.</p><div class="videos"><div class="video"><div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/_a0lorIE6e8" title="Subject questions × object questions" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="cap"><div class="t">Subject questions × object questions</div><div class="c">YouTube</div></div></div></div>
+</section>
+<section class="block" id="i-cartoes">
+  <h2>Cartões de memória</h2>
+  <p class="sub">Leia a pergunta, responda <b>em voz alta</b> e só então toque no cartão. Se errou, ele volta para o fim da fila. Continue até zerar.</p>
+  <div class="fc-wrap">
+    <div class="fc-top"><span id="i-fc-count">Faltam 0 cartões</span><span></span></div>
+    <div class="fc-card" id="i-fc-card" role="button" tabindex="0" aria-live="polite"><span class="side" id="i-fc-side">Pergunta</span><span class="txt" id="i-fc-txt"></span></div>
+    <div class="fc-btns" id="i-fc-btns">
+      <button class="btn ghost" type="button" id="i-fc-flip">Ver resposta</button>
+      <button class="btn primary" type="button" id="i-fc-ok" hidden>Acertei</button>
+      <button class="btn ghost" type="button" id="i-fc-no" hidden>Errei, volta depois</button>
+    </div>
+    <div class="fc-done" id="i-fc-done">Baralho zerado! <button class="btn ghost" type="button" id="i-fc-again" style="margin-left:8px">Embaralhar de novo</button></div>
+  </div>
+</section>
+<section class="block" id="i-cola">
+  <h2>Cola de revisão</h2>
+  <p class="sub">Tudo numa página. Se algo aqui não fizer sentido, volte na parte correspondente.</p>
+  <div class="cola">
+    <div class="c"><h4>Hobbies</h4><span class="eq">collect · do · go · play</span><p>Objetos: collect. Sem competição: do. Termina em -ing: go. Jogo ou esporte com bola/raquete: play.</p></div>
+    <div class="c"><h4>love, like, hate</h4><span class="eq">+ verbo-ing</span><p><i>I love playing chess.</i></p></div>
+    <div class="c"><h4>The</h4><span class="eq">o que é específico</span><p>Único, já citado, superlativo, ordinal, instrumento, rio, mar, deserto, museu. Sem the: nomes, línguas, dias, esportes, a maioria dos países.</p></div>
+    <div class="c"><h4>A / an</h4><span class="eq">a + som de consoante · an + som de vogal</span><p>an hour, a university. Só singular contável. Profissão leva artigo: <i>She’s a doctor.</i></p></div>
+    <div class="c"><h4>Aparência</h4><span class="eq">look like?</span><p><i>is</i> + altura/corpo · <i>has</i> + rosto/cabelo. Cabelo: tamanho → forma → cor.</p></div>
+    <div class="c"><h4>Personalidade</h4><span class="eq">What’s he like?</span><p>calm × nervous, generous × mean, polite × rude, hard-working × lazy, punctual × late…</p></div>
+    <div class="c"><h4>Yes/no questions</h4><span class="eq">auxiliar + sujeito</span><p>Do/Does/Did + verbo na forma básica. A resposta curta devolve o auxiliar.</p></div>
+    <div class="c"><h4>Object questions</h4><span class="eq">wh + aux + sujeito</span><p><i>Where did you go?</i> Pergunta sobre o que vem depois do verbo.</p></div>
+    <div class="c"><h4>Subject questions</h4><span class="eq">wh + verbo</span><p><i>Who met Lucy?</i> Pergunta sobre quem fez a ação: sem do/does/did.</p></div>
+    <div class="c"><h4>Palavras interrogativas</h4><span class="eq">how · what · when · where</span><p>which (escolha), who (pessoa), whose (dono), why (motivo → because).</p></div>
+  </div>
+</section>
+<section class="block" id="i-prova">
+  <h2>Prova final</h2>
+  <div class="exam-wrap">
+    <p class="exam-intro">São <b>20 questões</b>, cobrindo as oito partes. A nota vai de 0 a 10. Não consulte nada e clique em <b>Corrigir prova</b> no fim.</p>
+    <form class="exam" id="i-exam">
+<div class="q" data-answer="c"><p class="qt"><span class="qn">1.</span> My brother ___ karate twice a week.</p><label class="o"><input type="radio" name="iq1" value="a"><span>plays</span></label><label class="o"><input type="radio" name="iq1" value="b"><span>goes</span></label><label class="o"><input type="radio" name="iq1" value="c"><span>does</span></label><label class="o"><input type="radio" name="iq1" value="d"><span>collects</span></label><div class="qfb"><b>Resposta: C.</b> Karate é luta: do. Com he: does. (Parte 1)</div></div>
+
+<div class="q" data-answer="a"><p class="qt"><span class="qn">2.</span> They love ___ fishing on weekends.</p><label class="o"><input type="radio" name="iq2" value="a"><span>going</span></label><label class="o"><input type="radio" name="iq2" value="b"><span>go</span></label><label class="o"><input type="radio" name="iq2" value="c"><span>goes</span></label><label class="o"><input type="radio" name="iq2" value="d"><span>to going</span></label><div class="qfb"><b>Resposta: A.</b> Depois de love: verbo-ing. Fishing termina em -ing: go → going. (Parte 1)</div></div>
+
+<div class="q" data-answer="d"><p class="qt"><span class="qn">3.</span> Qual frase está correta?</p><label class="o"><input type="radio" name="iq3" value="a"><span>I go chess on Fridays.</span></label><label class="o"><input type="radio" name="iq3" value="b"><span>She plays yoga.</span></label><label class="o"><input type="radio" name="iq3" value="c"><span>He does stamps.</span></label><label class="o"><input type="radio" name="iq3" value="d"><span>We go swimming every Sunday.</span></label><div class="qfb"><b>Resposta: D.</b> Swimming termina em -ing: go. Chess: play. Yoga: do. Stamps: collect. (Parte 1)</div></div>
+
+<div class="q" data-answer="b"><p class="qt"><span class="qn">4.</span> Qual destes nomes leva <b>the</b>?</p><label class="o"><input type="radio" name="iq4" value="a"><span>___ Brazil</span></label><label class="o"><input type="radio" name="iq4" value="b"><span>___ Atlantic</span></label><label class="o"><input type="radio" name="iq4" value="c"><span>___ Monday</span></label><label class="o"><input type="radio" name="iq4" value="d"><span>___ Paul</span></label><div class="qfb"><b>Resposta: B.</b> Mares e oceanos levam the. Países comuns, dias e nomes de pessoas, não. (Parte 2)</div></div>
+
+<div class="q" data-answer="a"><p class="qt"><span class="qn">5.</span> My birthday is in ___ May and I play ___ guitar.</p><label class="o"><input type="radio" name="iq5" value="a"><span>— / the</span></label><label class="o"><input type="radio" name="iq5" value="b"><span>the / the</span></label><label class="o"><input type="radio" name="iq5" value="c"><span>the / —</span></label><label class="o"><input type="radio" name="iq5" value="d"><span>— / —</span></label><div class="qfb"><b>Resposta: A.</b> Mês sem artigo; instrumento musical com the. (Parte 2)</div></div>
+
+<div class="q" data-answer="c"><p class="qt"><span class="qn">6.</span> Em <i>The Japanese make wonderful cars</i>, por que se usa <b>the</b>?</p><label class="o"><input type="radio" name="iq6" value="a"><span>Porque é o nome de uma língua</span></label><label class="o"><input type="radio" name="iq6" value="b"><span>Porque é o nome de um país</span></label><label class="o"><input type="radio" name="iq6" value="c"><span>Porque fala do povo inteiro</span></label><label class="o"><input type="radio" name="iq6" value="d"><span>A frase está errada</span></label><div class="qfb"><b>Resposta: C.</b> Nacionalidade não leva the, exceto quando fala do grupo inteiro de pessoas. (Parte 2)</div></div>
+
+<div class="q" data-answer="d"><p class="qt"><span class="qn">7.</span> My cousin wants to be ___ actor.</p><label class="o"><input type="radio" name="iq7" value="a"><span>a</span></label><label class="o"><input type="radio" name="iq7" value="b"><span>the</span></label><label class="o"><input type="radio" name="iq7" value="c"><span>(sem artigo)</span></label><label class="o"><input type="radio" name="iq7" value="d"><span>an</span></label><div class="qfb"><b>Resposta: D.</b> Actor começa com som de vogal: an. E profissão leva artigo. (Parte 3)</div></div>
+
+<div class="q" data-answer="b"><p class="qt"><span class="qn">8.</span> Complete: ___ university · ___ hour</p><label class="o"><input type="radio" name="iq8" value="a"><span>an / a</span></label><label class="o"><input type="radio" name="iq8" value="b"><span>a / an</span></label><label class="o"><input type="radio" name="iq8" value="c"><span>an / an</span></label><label class="o"><input type="radio" name="iq8" value="d"><span>a / a</span></label><div class="qfb"><b>Resposta: B.</b> University soa “iu” (consoante): a. Hour tem h mudo: an. (Parte 3)</div></div>
+
+<div class="q" data-answer="a"><p class="qt"><span class="qn">9.</span> I usually don’t take ___ sugar in my tea.</p><label class="o"><input type="radio" name="iq9" value="a"><span>(sem artigo)</span></label><label class="o"><input type="radio" name="iq9" value="b"><span>an</span></label><label class="o"><input type="radio" name="iq9" value="c"><span>the</span></label><label class="o"><input type="radio" name="iq9" value="d"><span>a</span></label><div class="qfb"><b>Resposta: A.</b> Sugar é incontável: não leva a/an. (Parte 3)</div></div>
+
+<div class="q" data-answer="d"><p class="qt"><span class="qn">10.</span> A: What does your mother look like? B: ___</p><label class="o"><input type="radio" name="iq10" value="a"><span>She’s generous and calm.</span></label><label class="o"><input type="radio" name="iq10" value="b"><span>Yes, she does.</span></label><label class="o"><input type="radio" name="iq10" value="c"><span>She likes reading.</span></label><label class="o"><input type="radio" name="iq10" value="d"><span>She’s short and has long wavy brown hair.</span></label><div class="qfb"><b>Resposta: D.</b> Look like pede aparência. Ordem do cabelo: long, wavy, brown. (Parte 4)</div></div>
+
+<div class="q" data-answer="c"><p class="qt"><span class="qn">11.</span> Andrew is a bit fat. Qual é o jeito <b>educado</b> de dizer isso?</p><label class="o"><input type="radio" name="iq11" value="a"><span>He is skinny.</span></label><label class="o"><input type="radio" name="iq11" value="b"><span>He is well-built.</span></label><label class="o"><input type="radio" name="iq11" value="c"><span>He is plump.</span></label><label class="o"><input type="radio" name="iq11" value="d"><span>He is going bald.</span></label><div class="qfb"><b>Resposta: C.</b> Plump é a forma educada de fat. (Parte 4)</div></div>
+
+<div class="q" data-answer="b"><p class="qt"><span class="qn">12.</span> Qual é o oposto de <b>hard-working</b>?</p><label class="o"><input type="radio" name="iq12" value="a"><span>messy</span></label><label class="o"><input type="radio" name="iq12" value="b"><span>lazy</span></label><label class="o"><input type="radio" name="iq12" value="c"><span>rude</span></label><label class="o"><input type="radio" name="iq12" value="d"><span>late</span></label><div class="qfb"><b>Resposta: B.</b> Hard-working (esforçado) × lazy (preguiçoso). (Parte 5)</div></div>
+
+<div class="q" data-answer="d"><p class="qt"><span class="qn">13.</span> Someone who forgets things and is not focused is ___.</p><label class="o"><input type="radio" name="iq13" value="a"><span>stubborn</span></label><label class="o"><input type="radio" name="iq13" value="b"><span>articulate</span></label><label class="o"><input type="radio" name="iq13" value="c"><span>outgoing</span></label><label class="o"><input type="radio" name="iq13" value="d"><span>scatterbrained</span></label><div class="qfb"><b>Resposta: D.</b> Scatterbrained = avoado, desligado. (Parte 5)</div></div>
+
+<div class="q" data-answer="a"><p class="qt"><span class="qn">14.</span> A: What are your parents like? B: ___</p><label class="o"><input type="radio" name="iq14" value="a"><span>They’re generous and easy-going.</span></label><label class="o"><input type="radio" name="iq14" value="b"><span>They’re tall and slim.</span></label><label class="o"><input type="radio" name="iq14" value="c"><span>They like tennis.</span></label><label class="o"><input type="radio" name="iq14" value="d"><span>Yes, they are.</span></label><div class="qfb"><b>Resposta: A.</b> What are they like? pede personalidade. (Parte 5)</div></div>
+
+<div class="q" data-answer="c"><p class="qt"><span class="qn">15.</span> A: ___ you going to study tonight? B: Yes, I am.</p><label class="o"><input type="radio" name="iq15" value="a"><span>Do</span></label><label class="o"><input type="radio" name="iq15" value="b"><span>Will</span></label><label class="o"><input type="radio" name="iq15" value="c"><span>Are</span></label><label class="o"><input type="radio" name="iq15" value="d"><span>Did</span></label><div class="qfb"><b>Resposta: C.</b> Be going to: Are + you + going to. A resposta devolve o auxiliar: I am. (Parte 6)</div></div>
+
+<div class="q" data-answer="b"><p class="qt"><span class="qn">16.</span> A: ___ B: No, she doesn’t. Alice plays the clarinet.</p><label class="o"><input type="radio" name="iq16" value="a"><span>Did Alice play the piano?</span></label><label class="o"><input type="radio" name="iq16" value="b"><span>Does Alice play the piano?</span></label><label class="o"><input type="radio" name="iq16" value="c"><span>Is Alice play the piano?</span></label><label class="o"><input type="radio" name="iq16" value="d"><span>Does Alice plays the piano?</span></label><div class="qfb"><b>Resposta: B.</b> Doesn’t → Does…? com o verbo na forma básica (play). (Parte 6)</div></div>
+
+<div class="q" data-answer="d"><p class="qt"><span class="qn">17.</span> A: ___ did you live in London? B: I lived there in 2018.</p><label class="o"><input type="radio" name="iq17" value="a"><span>Where</span></label><label class="o"><input type="radio" name="iq17" value="b"><span>Why</span></label><label class="o"><input type="radio" name="iq17" value="c"><span>Who</span></label><label class="o"><input type="radio" name="iq17" value="d"><span>When</span></label><div class="qfb"><b>Resposta: D.</b> A resposta é um tempo (2018): when. (Parte 7)</div></div>
+
+<div class="q" data-answer="a"><p class="qt"><span class="qn">18.</span> A: ___ are you going to live abroad? B: Because my father got a job in Canada.</p><label class="o"><input type="radio" name="iq18" value="a"><span>Why</span></label><label class="o"><input type="radio" name="iq18" value="b"><span>Where</span></label><label class="o"><input type="radio" name="iq18" value="c"><span>How</span></label><label class="o"><input type="radio" name="iq18" value="d"><span>Which</span></label><div class="qfb"><b>Resposta: A.</b> Resposta com because: why. (Parte 7)</div></div>
+
+<div class="q" data-answer="b"><p class="qt"><span class="qn">19.</span> <i>My brother helps me with my homework.</i> Pergunte sobre o irmão:</p><label class="o"><input type="radio" name="iq19" value="a"><span>Who does help you with your homework?</span></label><label class="o"><input type="radio" name="iq19" value="b"><span>Who helps you with your homework?</span></label><label class="o"><input type="radio" name="iq19" value="c"><span>Who do you help with your homework?</span></label><label class="o"><input type="radio" name="iq19" value="d"><span>Who did help you with your homework?</span></label><div class="qfb"><b>Resposta: B.</b> O irmão é o sujeito: who + verbo com -s, sem auxiliar. (Parte 8)</div></div>
+
+<div class="q" data-answer="c"><p class="qt"><span class="qn">20.</span> <i>Peter’s cell phone is ringing.</i> Pergunte de quem é o celular:</p><label class="o"><input type="radio" name="iq20" value="a"><span>Whose cell phone does ring?</span></label><label class="o"><input type="radio" name="iq20" value="b"><span>Who’s cell phone is ringing?</span></label><label class="o"><input type="radio" name="iq20" value="c"><span>Whose cell phone is ringing?</span></label><label class="o"><input type="radio" name="iq20" value="d"><span>Whose is cell phone ringing?</span></label><div class="qfb"><b>Resposta: C.</b> Subject question com whose + substantivo, sem inverter. (Parte 8)</div></div>
+
+    </form>
+    <div class="actions">
+      <button class="btn primary" type="button" id="i-grade">Corrigir prova</button>
+      <button class="btn ghost" type="button" id="i-reset">Refazer</button>
+    </div>
+    <div class="result" id="i-result" aria-live="polite">
+      <div><span class="score num"><span class="val">0</span></span> <span class="of">/ 10</span></div>
+      <div class="bar"><i></i></div>
+      <div class="msg"></div>
+      <div class="hits"></div>
+      <div class="best"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>Conteúdo baseado na apostila ETAPA de Inglês, aulas 51 a 58 (págs. 145 a 187): hobbies e esportes, artigo definido <i>the</i>, artigos indefinidos <i>a/an</i>, aparência, personalidade, yes/no questions, object questions e subject questions.</p>
+  <p>Vídeos: links para o YouTube, de canais indicados em cada cartão.</p>
+</footer>
+</main>
+</div>
+
 <script>
 (function(){
   "use strict";
@@ -2270,7 +2678,8 @@ body[data-subj="quimica"]{--accent:var(--lat);--accent-ink:var(--lat-ink);--acce
   ] },
     biologia:  { title:"Biologia sem mistério",  px:"b-", cards: [["O que significam os sinais +, − e 0?", "+ a espécie ganha; − a espécie perde; 0 nem ganha nem perde."], ["Mutualismo × mutualismo não obrigatório?", "Os dois são (+,+). No mutualismo há interdependência; no não obrigatório (protocooperação), cada um vive sozinho."], ["Dois exemplos de mutualismo da apostila.", "Cupim e o protozoário do intestino; algas e fungos dos liquens."], ["Dois exemplos de mutualismo não obrigatório.", "Anu e bois; paguro e anêmona."], ["Comensalismo: sinais e exemplos.", "(+,0). Rêmora e tubarão; orquídeas e árvores."], ["Orquídea na árvore é parasitismo?", "Não. Ela só se apoia; a árvore não é afetada: comensalismo."], ["Predação × parasitismo?", "Os dois são (+,−). O predador mata e come; o parasita vive às custas do hospedeiro."], ["Competição: sinais e o que se disputa.", "(−,−). Água, espaço, luz, minerais: um recurso que não dá para as duas."], ["O que é sociedade? Exemplo.", "Indivíduos da mesma espécie com divisão de trabalho. Abelhas: rainha, operárias, zangão."], ["Juntas (+,+) e separadas (−,−): qual interação?", "Mutualismo: uma depende da outra."], ["Gráfico predador-presa: como são as curvas?", "Ondas: os predadores sobem e descem um pouco depois das presas."], ["Por que as briófitas são pequenas?", "Não têm vasos condutores; a água passa de célula em célula, devagar."], ["Por que briófitas e pteridófitas precisam de água para se reproduzir?", "O anterozoide precisa nadar até a oosfera."], ["Gametófito × esporófito?", "Gametófito produz gametas; esporófito produz esporos."], ["Fase duradoura: musgo e samambaia?", "Musgo: gametófito. Samambaia: esporófito."], ["O que são os soros?", "Pontinhos embaixo das folhas da samambaia que produzem esporos."], ["Xilema e floema levam o quê?", "Xilema: água e minerais das raízes às folhas. Floema: matéria orgânica das folhas para a planta toda."], ["O que as pteridófitas ganharam?", "Vasos condutores e raízes verdadeiras."], ["O que as gimnospermas ganharam?", "Sementes (e fecundação sem água, graças ao tubo polínico)."], ["Como o pólen chega ao cone feminino?", "Pelo vento."], ["Pinhão é fruto ou semente?", "Semente. Gimnospermas não têm fruto."], ["Partes masculina e feminina da flor.", "Estame (filete + antera). Pistilo (estigma + estilete + ovário)."], ["O que é polinização?", "Levar o pólen da antera até o estigma, por insetos, pássaros, vento etc."], ["Monocotiledônea: três marcas.", "Um cotilédone, raiz fasciculada, nervuras paralelas (e peças florais em 3)."], ["Eudicotiledônea: três marcas.", "Dois cotilédones, raiz axial, nervuras ramificadas (e peças florais em 4 ou 5)."], ["Ovário vira? Óvulo vira?", "Ovário → fruto. Óvulo → semente."], ["Partes do pericarpo.", "Epicarpo (casca), mesocarpo e endocarpo (envolve a semente)."], ["Por que caju e maçã são pseudofrutos?", "A parte que comemos não veio do ovário: caju, do pedúnculo; maçã, do receptáculo."], ["Por que os frutos ajudam na dispersão?", "Atraem animais, que comem o fruto e espalham as sementes nas fezes."]] },
     matematica: { title:"Matemática sem mistério", px:"m-", cards: [["O que é uma proporção?", "Uma igualdade entre duas razões: a/b = c/d (a está para b assim como c está para d)."], ["Em a : b = c : d, quem são os extremos e os meios?", "Extremos: a e d (as pontas). Meios: b e c."], ["O que diz a Propriedade 1?", "Produto dos extremos = produto dos meios: a/b = c/d ⇔ a·d = b·c (multiplicar em cruz)."], ["Como verificar se duas razões formam proporção?", "Multiplique em cruz. Produtos iguais: é proporção. Diferentes: não é."], ["12x = 21. Quanto vale x?", "x = 21/12 = 7/4. O 12 multiplica o x, então passa dividindo."], ["Quanto vale 1 polegada?", "2,54 cm = 25,4 mm."], ["Polegadas → cm e cm → polegadas?", "Polegadas → cm: × 2,54. cm → polegadas: ÷ 2,54."], ["Reduzir A 20% × reduzir DE 20%?", "A 20%: fica com 20% do tamanho (× 0,20). DE 20%: tira 20%, fica com 80% (× 0,80)."], ["Na copiadora de 64% a 129%, quais são reduções e ampliações?", "Reduções: 64% a 99%. Ampliações: 101% a 129%. 100% não muda."], ["Como achar o percentual de ajuste de uma cópia?", "Novo ÷ original × 100. Ex.: 10 cm → 14 cm: 14 ÷ 10 = 1,4 → 140%."], ["Média geométrica de a e b?", "√(a · b). Ex.: 4 e 16 → √64 = 8."], ["Propriedade 2?", "a/b = c/d = (a + c)/(b + d). Soma em cima sobre soma embaixo."], ["Propriedade 3?", "a/b = c/d = (a − c)/(b − d). Diferença em cima sobre diferença embaixo."], ["Propriedades 4 e 5?", "4: (a + b)/b = (c + d)/d. 5: (a − b)/b = (c − d)/d."], ["x/y = 6/4. Como deixar pronto para usar a soma x + y?", "Troque os meios: x/6 = y/4. Depois: = (x + y)/(6 + 4)."], ["Explique o truque do k.", "Se a/2 = b/3 = k, então a = 2k e b = 3k. E k = (a + b)/(2 + 3)."], ["Receita da divisão em partes proporcionais?", "Some os pesos, divida o total pela soma (k) e multiplique cada peso por k. Confira somando."], ["Ângulos de um triângulo proporcionais a 1, 3 e 5?", "Soma 180°: k = 180 ÷ 9 = 20°. Ângulos: 20°, 60° e 100°."], ["0,1111… é igual a qual fração?", "1/9."], ["Entre −16 e −12, qual é o menor?", "−16. Entre negativos, o mais longe do zero é o menor."], ["Como racionalizar k/√a?", "Multiplique em cima e embaixo por √a: fica k√a/a."], ["Pelo que multiplicar para racionalizar k / ⁿ√(aᵐ)?", "Por ⁿ√(aⁿ⁻ᵐ): complete o expoente até o índice."], ["⁴√2 · ⁴√2 = 2?", "Não! Dá ⁴√4 (que é √2). Para sumir a raiz, precisa de ⁴√2⁴."], ["O que é o conjugado de √a + √b?", "√a − √b: troca só o sinal do meio."], ["(√a + √b)(√a − √b) = ?", "a − b. As raízes somem."], ["Depois de racionalizar, o denominador ficou negativo. E agora?", "Leve o sinal para a frente da fração (ou troque os sinais de cima)."], ["Desafio: n² + 2n + 1 = ?", "(n + 1)². Por isso a raiz do desafio dá 2 030 + 1 = 2 031."]] },
-    quimica: { title:"Química sem mistério", px:"q-", cards: [["Quais os três gases mais abundantes do ar seco?", "N₂ (78%), O₂ (21%) e argônio (0,94%)."], ["Por que há tanto N₂ no ar?", "Porque é muito estável: quase não reage e vai se acumulando."], ["Por que o O₂ não acaba?", "Porque a fotossíntese o renova o tempo todo."], ["Por que a atmosfera é indispensável à vida?", "Dá O₂ para respirar e CO₂ para a fotossíntese, mantém a Terra aquecida e tem a camada de ozônio que barra a UV."], ["Dois fenômenos naturais que alteram o ar.", "Erupção de vulcões e colisão de asteroides."], ["Defina poluição.", "Modificação no meio ambiente causada pela atividade humana e prejudicial aos seres vivos."], ["O que é smog?", "Fumaça + neblina: gotículas de água poluída e partículas sólidas que deixam o ar opaco."], ["O que é corrente de convecção?", "Circulação do ar: o quente sobe e o frio desce."], ["O que é inversão térmica?", "Ar quente em cima e ar frio parado embaixo. A convecção para e os poluentes ficam presos perto do solo."], ["Consequências da inversão térmica.", "Poluição concentrada: problemas respiratórios, irritação nos olhos, menos visibilidade."], ["Como pode haver smog numa cidade pequena da Amazônia?", "Pela fumaça das queimadas, somada à umidade e à inversão térmica."], ["Para que serve o catalisador?", "Transforma gases muito tóxicos (CO, óxidos de nitrogênio) em menos nocivos (CO₂, N₂, água)."], ["O catalisador elimina toda a poluição?", "Não. Ainda sai CO₂ (gás estufa) e ele não converte 100%."], ["Perigo do motor ligado em garagem fechada.", "Acúmulo de CO, sem cor e sem cheiro: intoxicação e até morte."], ["Cinco medidas contra a poluição numa metrópole.", "Transporte coletivo, rodízio, catalisadores e filtros, biocombustíveis, fiscalização e áreas verdes."], ["Frequência maior significa…", "Mais energia e menor comprimento de onda."], ["Ordem das ondas, da menor para a maior energia.", "Rádio, micro-ondas, infravermelho, luz visível, ultravioleta, raios X, raios gama."], ["Temperatura da Terra sem e com efeito estufa.", "−18 °C sem; 15 °C com (33 °C a mais)."], ["Gases estufa que estão aumentando.", "CO₂, CH₄ (metano), N₂O e halocarbonos (CFCs, HFCs, HCFCs, FCs)."], ["Contribuição dos gases estufa (sem vapor d’água).", "CO₂ 76%, CH₄ 13%, N₂O 6%, halocarbonos 5%."], ["O₂ e N₂ são bons gases estufa?", "Não. Os eficientes são CO₂ e vapor d’água."], ["O que é sequestro de carbono?", "A retirada de CO₂ do ar pela fotossíntese das florestas."], ["De onde vem o metano em excesso?", "Da pecuária (digestão do gado) e do lixo em aterros sanitários."], ["Três consequências do aquecimento global.", "Gelo derrete e o mar sobe; mais umidade no ar; clima muda (regiões mais secas, mais quentes ou com mais tempestades)."], ["Por que biocombustível aquece menos?", "Porque o CO₂ da queima é recapturado pelas plantas replantadas."], ["Qual radiação o ozônio barra?", "A ultravioleta (UV)."], ["Como o CFC destrói o ozônio?", "A UV quebra o CFC e solta cloro; Cl + O₃ → ClO + O₂ e ClO + O → Cl + O₂. O cloro volta e destrói de novo."], ["O que foi o Protocolo de Montreal?", "Acordo de 1987 para eliminar as substâncias que destroem a camada de ozônio, como os CFCs."], ["O que substituiu o CFC nos sprays?", "Butano, isobutano e propano: hidrocarbonetos que não reagem com o ozônio."], ["Efeito estufa × camada de ozônio: qual a diferença?", "Efeito estufa: gases seguram calor (CO₂…). Ozônio: filtro de UV destruído pelo cloro dos CFCs."]] }
+    quimica: { title:"Química sem mistério", px:"q-", cards: [["Quais os três gases mais abundantes do ar seco?", "N₂ (78%), O₂ (21%) e argônio (0,94%)."], ["Por que há tanto N₂ no ar?", "Porque é muito estável: quase não reage e vai se acumulando."], ["Por que o O₂ não acaba?", "Porque a fotossíntese o renova o tempo todo."], ["Por que a atmosfera é indispensável à vida?", "Dá O₂ para respirar e CO₂ para a fotossíntese, mantém a Terra aquecida e tem a camada de ozônio que barra a UV."], ["Dois fenômenos naturais que alteram o ar.", "Erupção de vulcões e colisão de asteroides."], ["Defina poluição.", "Modificação no meio ambiente causada pela atividade humana e prejudicial aos seres vivos."], ["O que é smog?", "Fumaça + neblina: gotículas de água poluída e partículas sólidas que deixam o ar opaco."], ["O que é corrente de convecção?", "Circulação do ar: o quente sobe e o frio desce."], ["O que é inversão térmica?", "Ar quente em cima e ar frio parado embaixo. A convecção para e os poluentes ficam presos perto do solo."], ["Consequências da inversão térmica.", "Poluição concentrada: problemas respiratórios, irritação nos olhos, menos visibilidade."], ["Como pode haver smog numa cidade pequena da Amazônia?", "Pela fumaça das queimadas, somada à umidade e à inversão térmica."], ["Para que serve o catalisador?", "Transforma gases muito tóxicos (CO, óxidos de nitrogênio) em menos nocivos (CO₂, N₂, água)."], ["O catalisador elimina toda a poluição?", "Não. Ainda sai CO₂ (gás estufa) e ele não converte 100%."], ["Perigo do motor ligado em garagem fechada.", "Acúmulo de CO, sem cor e sem cheiro: intoxicação e até morte."], ["Cinco medidas contra a poluição numa metrópole.", "Transporte coletivo, rodízio, catalisadores e filtros, biocombustíveis, fiscalização e áreas verdes."], ["Frequência maior significa…", "Mais energia e menor comprimento de onda."], ["Ordem das ondas, da menor para a maior energia.", "Rádio, micro-ondas, infravermelho, luz visível, ultravioleta, raios X, raios gama."], ["Temperatura da Terra sem e com efeito estufa.", "−18 °C sem; 15 °C com (33 °C a mais)."], ["Gases estufa que estão aumentando.", "CO₂, CH₄ (metano), N₂O e halocarbonos (CFCs, HFCs, HCFCs, FCs)."], ["Contribuição dos gases estufa (sem vapor d’água).", "CO₂ 76%, CH₄ 13%, N₂O 6%, halocarbonos 5%."], ["O₂ e N₂ são bons gases estufa?", "Não. Os eficientes são CO₂ e vapor d’água."], ["O que é sequestro de carbono?", "A retirada de CO₂ do ar pela fotossíntese das florestas."], ["De onde vem o metano em excesso?", "Da pecuária (digestão do gado) e do lixo em aterros sanitários."], ["Três consequências do aquecimento global.", "Gelo derrete e o mar sobe; mais umidade no ar; clima muda (regiões mais secas, mais quentes ou com mais tempestades)."], ["Por que biocombustível aquece menos?", "Porque o CO₂ da queima é recapturado pelas plantas replantadas."], ["Qual radiação o ozônio barra?", "A ultravioleta (UV)."], ["Como o CFC destrói o ozônio?", "A UV quebra o CFC e solta cloro; Cl + O₃ → ClO + O₂ e ClO + O → Cl + O₂. O cloro volta e destrói de novo."], ["O que foi o Protocolo de Montreal?", "Acordo de 1987 para eliminar as substâncias que destroem a camada de ozônio, como os CFCs."], ["O que substituiu o CFC nos sprays?", "Butano, isobutano e propano: hidrocarbonetos que não reagem com o ozônio."], ["Efeito estufa × camada de ozônio: qual a diferença?", "Efeito estufa: gases seguram calor (CO₂…). Ozônio: filtro de UV destruído pelo cloro dos CFCs."]] },
+    ingles: { title:"Inglês sem mistério", px:"i-", cards: [["Qual verbo com karate, yoga e ballet?", "do (atividades sem competição e sem time)."], ["Qual verbo com swimming, hiking e fishing?", "go (atividades terminadas em -ing)."], ["Qual verbo com chess, cards e tennis?", "play (jogos e esportes de competição)."], ["Qual verbo com coins, stamps e comic books?", "collect (objetos que se juntam)."], ["O que vem depois de love, like e hate?", "Verbo com -ing: I love playing chess."], ["Instrumento leva the? E esporte?", "Instrumento sim (play the piano). Esporte não (play volleyball)."], ["Cite três coisas que levam the.", "Coisas únicas (the sun), superlativo (the best), rios e mares (the Amazon, the Atlantic). Também museus, desertos, grupos de ilhas."], ["Cite três coisas que NÃO levam the.", "Nomes de pessoas, línguas, dias e meses, esportes, a maioria dos países e cidades."], ["Exceções de países com the.", "the United States, the United Kingdom, the Republic of Ireland."], ["a ou an: o que decide?", "O som do começo da palavra: som de consoante → a; som de vogal → an."], ["a ou an: hour, university, honest, house?", "an hour, a university, an honest man, a house."], ["Quando NÃO usamos a/an?", "Com plural, com incontáveis (sugar, money) e com adjetivo sozinho (The car is fast)."], ["“Ela é médica” em inglês.", "She is a doctor. Profissão leva a/an."], ["Pergunta sobre aparência.", "What does he/she look like? (plural: What do they look like?)"], ["Pergunta sobre personalidade.", "What’s he/she like? (plural: What are they like?)"], ["Ordem dos adjetivos do cabelo.", "Tamanho → forma → cor: long curly black hair."], ["is ou has: altura, corpo, rosto, cabelo?", "is + altura e corpo; has + rosto e cabelo."], ["mustache, goatee, beard?", "Bigode, cavanhaque, barba."], ["slim × skinny; plump × fat?", "Slim é positivo, skinny é negativo. Plump é educado, fat não."], ["Opostos: calm, generous, polite, punctual.", "nervous, mean, rude, late."], ["Opostos: organized, hard-working, upbeat, easy-going.", "messy, lazy, downbeat, tense."], ["stubborn, moody, scatterbrained?", "Teimoso; de mau humor; avoado."], ["Estrutura da yes/no question.", "Auxiliar + sujeito + verbo: Do you like…? Did she call…? Can he swim…?"], ["Does she ___ (play/plays)?", "play. Depois de does e did, o verbo fica na forma básica."], ["Did you go? Resposta curta positiva e negativa.", "Yes, I did. / No, I didn’t."], ["whose, which, why?", "De quem (dono); qual (entre opções); por quê (resposta com because)."], ["Estrutura da object question.", "Wh + auxiliar + sujeito + verbo: Where did you go?"], ["Estrutura da subject question.", "Wh + verbo, sem auxiliar: Who met Lucy? What makes you happy?"], ["Paul met Lucy. Pergunte sobre Lucy e sobre Paul.", "Sobre Lucy: Who did Paul meet? Sobre Paul: Who met Lucy?"]] }
   };
   var SUBJ = Object.keys(CFG);
   function el(s, n){ return document.getElementById(CFG[s].px + n); }
@@ -2499,6 +2908,21 @@ body[data-subj="quimica"]{--accent:var(--lat);--accent-ink:var(--lat-ink);--acce
   }
   $$(".q-tb").forEach(function(b){ b.addEventListener("click", function(){ qtShow(+b.getAttribute("data-t")); }); });
   qtShow(0);
+
+  // ---------- Inglês: uma frase, quatro perguntas
+  var IH = [
+    { q:"Did Paul meet Lucy at the party?", n:"Yes/no question (Parte 6): did + sujeito + verbo. Resposta: Yes, he did." },
+    { q:"Where did Paul meet Lucy?", n:"Object question (Parte 7): where + did + sujeito + verbo. Resposta: At the party." },
+    { q:"Who did Paul meet at the party?", n:"Object question (Parte 7): a pergunta é sobre Lucy, que vem depois do verbo. Por isso tem did." },
+    { q:"Who met Lucy at the party?", n:"Subject question (Parte 8): a pergunta é sobre Paul, quem fez a ação. Sem did, e o verbo fica no passado: met." }
+  ];
+  function ihShow(i){
+    document.getElementById("i-hq").textContent = IH[i].q;
+    document.getElementById("i-hn").textContent = IH[i].n;
+    $$(".i-hb").forEach(function(b){ b.classList.toggle("on", +b.getAttribute("data-k") === i); });
+  }
+  $$(".i-hb").forEach(function(b){ b.addEventListener("click", function(){ ihShow(+b.getAttribute("data-k")); }); });
+  ihShow(0);
 
   // ---------- matéria inicial
   if(!fromHash()){ var last = store("materia-atual"); show(CFG[last] ? last : "portugues", false); }
